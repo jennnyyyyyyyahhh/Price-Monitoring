@@ -130,7 +130,6 @@
                 <h4>Price Range</h4>
                 <div class="price-inputs">
                     <input type="number" id="minPrice" placeholder="Min ₱" min="0">
-                    <span>-</span>
                     <input type="number" id="maxPrice" placeholder="Max ₱" min="0">
                 </div>
                 <button class="apply-filter-btn" id="applyPriceFilter">Apply</button>
@@ -179,6 +178,17 @@
                 </div>
             </div>
 
+            <!-- Leading Products Section -->
+            <div class="leading-products-section">
+                <div class="section-header">
+                    <h2>Leading Products</h2>
+                    <p class="section-description">Top performing products with significant price movements</p>
+                </div>
+                <div class="leading-products-grid" id="leadingProductsGrid">
+                    <!-- Leading products will be dynamically loaded here -->
+                </div>
+            </div>
+
             <!-- Toolbar -->
             <div class="toolbar">
                 <div class="toolbar-left">
@@ -209,6 +219,26 @@
             <!-- Products Grid -->
             <div class="products-container" id="productsContainer">
                 <!-- Products will be dynamically loaded here -->
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination-container" id="paginationContainer">
+                <div class="pagination">
+                    <button class="page-btn prev-btn" id="prevBtn" disabled>
+                        <i class="fas fa-chevron-left"></i>
+                        Previous
+                    </button>
+                    <div class="page-numbers" id="pageNumbers">
+                        <!-- Page numbers will be generated here -->
+                    </div>
+                    <button class="page-btn next-btn" id="nextBtn">
+                        Next
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div class="pagination-info">
+                    <span id="paginationInfo">Showing 1-20 of 100 products</span>
+                </div>
             </div>
 
             <!-- Loading State -->
