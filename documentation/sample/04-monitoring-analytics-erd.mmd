@@ -1,0 +1,121 @@
+erDiagram
+    SURVEY {
+        int survey_id PK
+        int created_by_user_id FK
+        string survey_title
+        text survey_description
+        enum survey_type "price_feedback, market_satisfaction, vendor_evaluation, customer_experience"
+        json survey_questions
+        enum target_audience "vendors, customers, all_users"
+        int target_market_id FK
+        datetime start_date
+        datetime end_date
+        enum status "draft, active, closed, archived"
+        int response_count
+        datetime created_at
+        datetime updated_at
+    }
+
+    SURVEY_RESPONSE {
+        int response_id PK
+        int survey_id FK
+        int respondent_user_id FK
+        json response_data
+        string respondent_type "vendor, customer, anonymous"
+        string respondent_location
+        decimal completion_percentage
+        datetime started_at
+        datetime completed_at
+        datetime submitted_at
+    }
+
+    PRICE_MONITORING_SESSION {
+        int session_id PK
+        int conducted_by_user_id FK
+        int market_id FK
+        date monitoring_date
+        time start_time
+        time end_time
+        string session_type "daily, weekly, special"
+        text session_notes
+        int products_monitored
+        int vendors_visited
+        enum status "in_progress, completed, cancelled"
+        datetime created_at
+        datetime updated_at
+    }
+
+    PRICE_MONITORING_RECORD {
+        int record_id PK
+        int session_id FK
+        int vendor_id FK
+        int product_id FK
+        decimal recorded_price
+        decimal previous_price
+        string quality_observed
+        string availability_status
+        text monitor_notes
+        string photo_url
+        datetime recorded_at
+    }
+
+    SYSTEM_LOG {
+        int log_id PK
+        int user_id FK
+        string action_type "login, logout, price_update, vendor_registration, admin_action"
+        string table_affected
+        int record_id
+        json old_values
+        json new_values
+        string ip_address
+        string user_agent
+        enum log_level "info, warning, error, critical"
+        text log_message
+        datetime created_at
+    }
+
+    NOTIFICATION {
+        int notification_id PK
+        int recipient_user_id FK
+        int sender_user_id FK
+        string notification_type "price_alert, system_notice, event_reminder, survey_request"
+        string title
+        text message
+        json notification_data
+        string action_url
+        enum status "unread, read, dismissed"
+        enum priority "low, medium, high, urgent"
+        datetime scheduled_at
+        datetime sent_at
+        datetime read_at
+        datetime created_at
+    }
+
+    ANALYTICS_REPORT {
+        int report_id PK
+        int generated_by_user_id FK
+        string report_name
+        string report_type "price_trends, vendor_performance, market_analysis, user_activity"
+        json report_parameters
+        json report_data
+        string file_url
+        enum status "generating, completed, failed"
+        date report_period_start
+        date report_period_end
+        datetime generated_at
+        datetime expires_at
+    }
+
+    USER ||--o{ SURVEY : "creates"
+    MARKET ||--o{ SURVEY : "targets"
+    SURVEY ||--o{ SURVEY_RESPONSE : "receives"
+    USER ||--o{ SURVEY_RESPONSE : "submits"
+    USER ||--o{ PRICE_MONITORING_SESSION : "conducts"
+    MARKET ||--o{ PRICE_MONITORING_SESSION : "monitored_in"
+    PRICE_MONITORING_SESSION ||--o{ PRICE_MONITORING_RECORD : "contains"
+    VENDOR ||--o{ PRICE_MONITORING_RECORD : "monitored"
+    PRODUCT ||--o{ PRICE_MONITORING_RECORD : "price_recorded"
+    USER ||--o{ SYSTEM_LOG : "generates"
+    USER ||--o{ NOTIFICATION : "receives"
+    USER ||--o{ NOTIFICATION : "sends"
+    USER ||--o{ ANALYTICS_REPORT : "generates"

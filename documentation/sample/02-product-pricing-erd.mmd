@@ -1,0 +1,88 @@
+erDiagram
+    PRODUCT_CATEGORY {
+        int category_id PK
+        string category_name UK
+        string category_code UK
+        text description
+        string icon_url
+        string image_url
+        int display_order
+        enum status "active, inactive"
+        datetime created_at
+        datetime updated_at
+    }
+
+    PRODUCT {
+        int product_id PK
+        int category_id FK
+        string product_name
+        string product_code UK
+        text description
+        string unit_of_measure "kg, piece, bundle, sack, etc"
+        string image_url
+        json nutritional_info
+        text storage_tips
+        enum status "active, inactive, seasonal"
+        datetime created_at
+        datetime updated_at
+    }
+
+    VENDOR_PRODUCT {
+        int vendor_product_id PK
+        int vendor_id FK
+        int product_id FK
+        decimal current_price
+        decimal previous_price
+        string quality_grade "premium, standard, economy"
+        int stock_quantity
+        enum availability "in_stock, out_of_stock, limited"
+        text vendor_notes
+        datetime price_updated_at
+        datetime created_at
+        datetime updated_at
+    }
+
+    PRICE_HISTORY {
+        int price_history_id PK
+        int vendor_product_id FK
+        decimal old_price
+        decimal new_price
+        decimal price_change_percentage
+        string change_reason
+        int updated_by_user_id FK
+        datetime recorded_at
+    }
+
+    MARKET_PRICE_AVERAGE {
+        int avg_price_id PK
+        int product_id FK
+        int market_id FK
+        decimal average_price
+        decimal min_price
+        decimal max_price
+        int vendor_count
+        date price_date
+        datetime calculated_at
+    }
+
+    SEASONAL_PRICING {
+        int seasonal_pricing_id PK
+        int product_id FK
+        string season "dry, wet, peak, off_peak"
+        decimal expected_min_price
+        decimal expected_max_price
+        decimal expected_avg_price
+        string month_range
+        text notes
+        datetime created_at
+        datetime updated_at
+    }
+
+    PRODUCT_CATEGORY ||--o{ PRODUCT : "contains"
+    PRODUCT ||--o{ VENDOR_PRODUCT : "sold_by_vendors"
+    VENDOR ||--o{ VENDOR_PRODUCT : "sells"
+    VENDOR_PRODUCT ||--o{ PRICE_HISTORY : "has_price_changes"
+    PRODUCT ||--o{ MARKET_PRICE_AVERAGE : "has_market_average"
+    MARKET ||--o{ MARKET_PRICE_AVERAGE : "tracks_prices"
+    PRODUCT ||--o{ SEASONAL_PRICING : "has_seasonal_trends"
+    USER ||--o{ PRICE_HISTORY : "updated_by"

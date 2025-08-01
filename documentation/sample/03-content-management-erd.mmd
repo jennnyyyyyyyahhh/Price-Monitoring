@@ -1,0 +1,125 @@
+erDiagram
+    BLOG_POST {
+        int blog_id PK
+        int author_id FK
+        string title
+        string slug UK
+        text excerpt
+        text content
+        string featured_image_url
+        json image_gallery
+        string meta_title
+        string meta_description
+        json tags
+        enum status "draft, published, archived"
+        int view_count
+        datetime published_at
+        datetime created_at
+        datetime updated_at
+    }
+
+    BLOG_CATEGORY {
+        int blog_category_id PK
+        string category_name UK
+        string category_slug UK
+        text description
+        string color_code
+        int display_order
+        enum status "active, inactive"
+        datetime created_at
+        datetime updated_at
+    }
+
+    BLOG_POST_CATEGORY {
+        int blog_post_category_id PK
+        int blog_id FK
+        int blog_category_id FK
+        datetime assigned_at
+    }
+
+    EVENT {
+        int event_id PK
+        int organizer_id FK
+        string event_title
+        text event_description
+        string event_type "market_day, promotion, maintenance, training, community"
+        string venue
+        datetime start_date
+        datetime end_date
+        decimal registration_fee
+        int max_participants
+        int current_participants
+        string contact_person
+        string contact_number
+        string banner_image_url
+        enum status "upcoming, ongoing, completed, cancelled"
+        datetime registration_deadline
+        datetime created_at
+        datetime updated_at
+    }
+
+    EVENT_REGISTRATION {
+        int registration_id PK
+        int event_id FK
+        int user_id FK
+        string participant_name
+        string participant_email
+        string participant_phone
+        text special_requirements
+        enum registration_status "pending, confirmed, cancelled"
+        datetime registered_at
+        datetime confirmed_at
+    }
+
+    NOTICE {
+        int notice_id PK
+        int created_by_user_id FK
+        string notice_title
+        text notice_content
+        enum notice_type "general, urgent, maintenance, policy, promotion"
+        enum priority "low, medium, high, critical"
+        enum target_audience "all, vendors, customers, specific_market"
+        int target_market_id FK
+        string attachment_url
+        datetime valid_from
+        datetime valid_until
+        enum status "draft, published, expired, archived"
+        int view_count
+        datetime created_at
+        datetime updated_at
+    }
+
+    NOTICE_READ_STATUS {
+        int read_status_id PK
+        int notice_id FK
+        int user_id FK
+        datetime read_at
+        datetime acknowledged_at
+    }
+
+    SERVICE {
+        int service_id PK
+        string service_name
+        string service_code UK
+        text service_description
+        string service_icon
+        string service_image_url
+        string contact_info
+        string service_url
+        json service_details
+        int display_order
+        enum status "active, inactive, coming_soon"
+        datetime created_at
+        datetime updated_at
+    }
+
+    USER ||--o{ BLOG_POST : "authors"
+    BLOG_CATEGORY ||--o{ BLOG_POST_CATEGORY : "categorizes"
+    BLOG_POST ||--o{ BLOG_POST_CATEGORY : "belongs_to"
+    USER ||--o{ EVENT : "organizes"
+    EVENT ||--o{ EVENT_REGISTRATION : "has_registrations"
+    USER ||--o{ EVENT_REGISTRATION : "registers_for"
+    USER ||--o{ NOTICE : "creates"
+    MARKET ||--o{ NOTICE : "targets"
+    NOTICE ||--o{ NOTICE_READ_STATUS : "read_by"
+    USER ||--o{ NOTICE_READ_STATUS : "reads"

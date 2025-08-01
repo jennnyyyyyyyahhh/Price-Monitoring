@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendor Dashboard - Tanza Market</title>
+    <link rel="stylesheet" href="../css/vendor-dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="header-center">
+                <div class="site-brand">
+                    <i class="fas fa-store"></i>
+                    <h1>Tanza Market</h1>
+                </div>
+            </div>
+            <div class="header-right">
+                <nav class="header-nav">
+                    <a href="../html/landing.html">Home</a>
+                    <a href="../html/landing.html#blog">Blog</a>
+                    <a href="../html/landing.html#services">Services</a>
+                </nav>
+                <div class="vendor-portal-nav">
+                    <a href="#" class="active">Vendor Portal</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="vendor-logo">TANZA MARKET</div>
+                <div class="vendor-name">Vendor Dashboard</div>
+            </div>
+            <div class="sidebar-menu">
+                <a href="#" class="menu-item active" data-section="dashboard">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="menu-item" data-section="vendor-profile">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Vendor Profile</span>
+                </a>
+                <a href="#" class="menu-item" data-section="user-management">
+                    <i class="fas fa-users"></i>
+                    <span>User Management</span>
+                </a>
+                <a href="#" class="menu-item" data-section="events">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Events</span>
+                </a>
+                <a href="#" class="menu-item" data-section="notices">
+                    <i class="fas fa-bell"></i>
+                    <span>Notices</span>
+                </a>
+                <a href="#" class="menu-item" data-section="survey">
+                    <i class="fas fa-clipboard-list"></i>
+                    <span>Submit Survey Response</span>
+                </a>
+                <a href="#" class="menu-item" data-section="price-monitoring">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Price Monitoring</span>
+                </a>
+                <a href="#" class="menu-item" data-section="stall-info">
+                    <i class="fas fa-store"></i>
+                    <span>Stall Information</span>
+                </a>
+            </div>
+            <div class="sidebar-footer">
+                <a href="#" class="logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="topbar">
+                <div class="toggle-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <div class="user-info">
+                    <div class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-count">3</span>
+                    </div>
+                    <div class="user">
+                        <span>Jenny Cordero</span>
+                        <img src="https://via.placeholder.com/32" alt="User" id="topbarUserPhoto">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Section -->
+            <div class="content-section active" id="dashboard-section">
+                <div class="section-header">
+                    <h2>Dashboard Overview</h2>
+                    <p>Welcome back to your vendor dashboard</p>
+                </div>
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-shopping-basket"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>Products</h3>
+                            <p class="stat-number">24</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>Price Updates</h3>
+                            <p class="stat-number">12</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-clipboard-list"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>Surveys</h3>
+                            <p class="stat-number">3</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>Upcoming Events</h3>
+                            <p class="stat-number">2</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="recent-activities">
+                    <h3>Recent Activities</h3>
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="activity-details">
+                                <h4>Price Updated</h4>
+                                <p>You updated prices for 5 products</p>
+                                <small>2 hours ago</small>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-clipboard-check"></i>
+                            </div>
+                            <div class="activity-details">
+                                <h4>Survey Completed</h4>
+                                <p>You submitted the quarterly market survey</p>
+                                <small>Yesterday</small>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-bell"></i>
+                            </div>
+                            <div class="activity-details">
+                                <h4>New Notice</h4>
+                                <p>Market management posted a new notice</p>
+                                <small>2 days ago</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vendor Profile Section -->
+            <div class="content-section" id="vendor-profile-section">
+                <div class="section-header">
+                    <h2>Vendor Profile</h2>
+                    <p>Manage your profile information</p>
+                </div>
+                <div class="profile-content">
+                    <div class="profile-info">
+                        <div class="profile-photo">
+                            <img src="https://via.placeholder.com/150" alt="Vendor Photo" id="vendorPhotoPreview">
+                            <input type="file" id="vendorPhotoInput" accept="image/*" style="display:none;">
+                            <button class="change-photo" id="changePhotoBtn">Change Photo</button>
+                        </div>
+                        <div class="profile-details">
+                            <div class="form-group">
+                                <label>Vendor Name</label>
+                                <input type="text" id="vendorNameInput" value="John Doe">
+                            </div>
+                            <div class="form-group">
+                                <label>Business Name</label>
+                                <input type="text" id="businessNameInput" value="Fresh Harvest">
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" id="emailInput" value="john@example.com">
+                            </div>
+                            <div class="form-group">
+                                <label>Phone</label>
+                                <input type="tel" id="phoneInput" value="+63 912 345 6789">
+                            </div>
+                            <div class="form-group">
+                                <label>Address</label>
+                                <textarea id="addressInput">Stall #45, Tanza Public Market, Tanza, Cavite</textarea>
+                            </div>
+                            <button class="save-profile">Save Changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Other sections would be implemented similarly -->
+            <div class="content-section" id="user-management-section">
+                <div class="section-header">
+                    <h2>User Management</h2>
+                    <p>Manage staff accounts and permissions</p>
+                </div>
+                <!-- User management content -->
+            </div>
+
+            <div class="content-section" id="events-section">
+                <div class="section-header">
+                    <h2>Events</h2>
+                    <p>Upcoming market events and activities</p>
+                </div>
+                <!-- Events content -->
+            </div>
+
+            <div class="content-section" id="notices-section">
+                <div class="section-header">
+                    <h2>Notices</h2>
+                    <p>Important announcements from market management</p>
+                </div>
+                <!-- Notices content -->
+            </div>
+
+            <div class="content-section" id="survey-section">
+                <div class="section-header">
+                    <h2>Submit Survey Response</h2>
+                    <p>Complete required surveys and feedback forms</p>
+                </div>
+                <!-- Survey content -->
+            </div>
+
+            <div class="content-section" id="price-monitoring-section">
+                <div class="section-header">
+                    <h2>Price Monitoring</h2>
+                    <p>Update and monitor product prices</p>
+                </div>
+                <!-- Price monitoring content -->
+            </div>
+
+            <div class="content-section" id="stall-info-section">
+                <div class="section-header">
+                    <h2>Stall Information</h2>
+                    <p>View and update your stall details</p>
+                </div>
+                <!-- Stall information content -->
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/vendor-dashboard.js"></script>
+</body>
+</html>

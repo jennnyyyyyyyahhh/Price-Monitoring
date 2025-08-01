@@ -1,0 +1,206 @@
+erDiagram
+    %% Core Entities
+    USER {
+        int user_id PK
+        string username UK
+        string email UK
+        string password_hash
+        string first_name
+        string last_name
+        string phone_number
+        enum user_type "admin, vendor, customer"
+        enum status "active, inactive, suspended"
+        datetime created_at
+        datetime updated_at
+        datetime last_login
+    }
+
+    MARKET {
+        int market_id PK
+        string market_name
+        string market_code UK
+        string address
+        string city
+        string province
+        string postal_code
+        string contact_number
+        string email
+        text description
+        enum status "active, inactive, under_maintenance"
+        datetime operating_hours_start
+        datetime operating_hours_end
+        datetime created_at
+        datetime updated_at
+    }
+
+    VENDOR {
+        int vendor_id PK
+        int user_id FK
+        int market_id FK
+        string business_name
+        string business_registration_number UK
+        enum business_type "fruits, vegetables, meat_poultry, rice_grains, seafood, dairy, spices, bakery, general, other"
+        string owner_name
+        string contact_number
+        string email
+        string stall_number
+        text business_address
+        enum verification_status "pending, verified, rejected"
+        datetime verification_date
+        text verification_notes
+        enum status "active, inactive, suspended"
+        datetime created_at
+        datetime updated_at
+    }
+
+    %% Product & Pricing
+    PRODUCT_CATEGORY {
+        int category_id PK
+        string category_name UK
+        string category_code UK
+        text description
+        string icon_url
+        string image_url
+        int display_order
+        enum status "active, inactive"
+        datetime created_at
+        datetime updated_at
+    }
+
+    PRODUCT {
+        int product_id PK
+        int category_id FK
+        string product_name
+        string product_code UK
+        text description
+        string unit_of_measure
+        string image_url
+        json nutritional_info
+        text storage_tips
+        enum status "active, inactive, seasonal"
+        datetime created_at
+        datetime updated_at
+    }
+
+    VENDOR_PRODUCT {
+        int vendor_product_id PK
+        int vendor_id FK
+        int product_id FK
+        decimal current_price
+        decimal previous_price
+        string quality_grade
+        int stock_quantity
+        enum availability "in_stock, out_of_stock, limited"
+        text vendor_notes
+        datetime price_updated_at
+        datetime created_at
+        datetime updated_at
+    }
+
+    PRICE_HISTORY {
+        int price_history_id PK
+        int vendor_product_id FK
+        decimal old_price
+        decimal new_price
+        decimal price_change_percentage
+        string change_reason
+        int updated_by_user_id FK
+        datetime recorded_at
+    }
+
+    %% Content Management
+    BLOG_POST {
+        int blog_id PK
+        int author_id FK
+        string title
+        string slug UK
+        text excerpt
+        text content
+        string featured_image_url
+        json image_gallery
+        enum status "draft, published, archived"
+        int view_count
+        datetime published_at
+        datetime created_at
+        datetime updated_at
+    }
+
+    EVENT {
+        int event_id PK
+        int organizer_id FK
+        string event_title
+        text event_description
+        string event_type
+        string venue
+        datetime start_date
+        datetime end_date
+        decimal registration_fee
+        int max_participants
+        int current_participants
+        enum status "upcoming, ongoing, completed, cancelled"
+        datetime created_at
+        datetime updated_at
+    }
+
+    NOTICE {
+        int notice_id PK
+        int created_by_user_id FK
+        string notice_title
+        text notice_content
+        enum notice_type "general, urgent, maintenance, policy, promotion"
+        enum priority "low, medium, high, critical"
+        enum target_audience "all, vendors, customers, specific_market"
+        int target_market_id FK
+        datetime valid_from
+        datetime valid_until
+        enum status "draft, published, expired, archived"
+        datetime created_at
+        datetime updated_at
+    }
+
+    %% Monitoring & Analytics
+    SURVEY {
+        int survey_id PK
+        int created_by_user_id FK
+        string survey_title
+        text survey_description
+        enum survey_type "price_feedback, market_satisfaction, vendor_evaluation"
+        json survey_questions
+        enum target_audience "vendors, customers, all_users"
+        datetime start_date
+        datetime end_date
+        enum status "draft, active, closed, archived"
+        datetime created_at
+        datetime updated_at
+    }
+
+    NOTIFICATION {
+        int notification_id PK
+        int recipient_user_id FK
+        int sender_user_id FK
+        string notification_type "price_alert, system_notice, event_reminder"
+        string title
+        text message
+        json notification_data
+        enum status "unread, read, dismissed"
+        enum priority "low, medium, high, urgent"
+        datetime sent_at
+        datetime read_at
+        datetime created_at
+    }
+
+    %% Relationships
+    USER ||--o{ VENDOR : "can_be"
+    MARKET ||--o{ VENDOR : "hosts"
+    PRODUCT_CATEGORY ||--o{ PRODUCT : "contains"
+    PRODUCT ||--o{ VENDOR_PRODUCT : "sold_by_vendors"
+    VENDOR ||--o{ VENDOR_PRODUCT : "sells"
+    VENDOR_PRODUCT ||--o{ PRICE_HISTORY : "has_price_changes"
+    USER ||--o{ PRICE_HISTORY : "updated_by"
+    USER ||--o{ BLOG_POST : "authors"
+    USER ||--o{ EVENT : "organizes"
+    USER ||--o{ NOTICE : "creates"
+    MARKET ||--o{ NOTICE : "targets"
+    USER ||--o{ SURVEY : "creates"
+    USER ||--o{ NOTIFICATION : "receives"
+    USER ||--o{ NOTIFICATION : "sends"

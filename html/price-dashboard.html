@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Price Monitoring Dashboard - Tanza Market</title>
+    <link rel="stylesheet" href="../css/price-dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-store"></i>
+            <span>Tanza Market</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../html/landing.html">Home</a></li>
+            <li><a href="../html/landing.html#blog" id="blogNav">Blog</a></li>
+            <li><a href="../html/landing.html#services" id="servicesNav">Services</a></li>
+        </ul>
+        <div class="nav-icons">
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <a href="../html/vendor-registration.html" class="icon-user" title="User Profile"></a>
+            <a href="#" class="icon-bell" id="notificationBell" title="Notifications"></a>
+            <a href="../html/vendor-dashboard.html" class="vendor-portal-btn">Vendor Portal</a>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation Menu -->
+    <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+    <div class="mobile-nav-menu" id="mobileNavMenu">
+        <div class="mobile-nav-header">
+            <div class="logo">
+                <i class="fas fa-store"></i>
+                <span>Tanza Market</span>
+            </div>
+            <button class="mobile-close-btn" id="mobileCloseBtn">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <ul class="mobile-nav-links">
+            <li><a href="../html/landing.html" id="mobileHome">Home</a></li>
+            <li><a href="../html/landing.html#blog" id="mobileBlog">Blog</a></li>
+            <li><a href="../html/landing.html#services" id="mobileServices">Services</a></li>
+            <li><a href="../html/vendor-registration.html" id="mobileProfile">User Profile</a></li>
+            <li><a href="../html/vendor-dashboard.html" id="mobileVendorPortal">Vendor Portal</a></li>
+        </ul>
+    </div>
+
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <div class="nav-brand">
+            <i class="fas fa-chart-line"></i>
+            <span>Price Monitor</span>
+        </div>
+        <div class="nav-controls">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search products...">
+            </div>
+            <div class="nav-actions">
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" title="Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <button class="refresh-btn" id="refreshBtn" title="Refresh Data">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+                <button class="filter-btn" id="filterBtn" title="Filter Options">
+                    <i class="fas fa-filter"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Sidebar Overlay -->
+    <div class="mobile-sidebar-overlay" id="mobileSidebarOverlay"></div>
+
+    <!-- Main Dashboard Container -->
+    <div class="dashboard-container">
+        <!-- Sidebar Category Filter -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h3>Categories</h3>
+                <button class="collapse-btn" id="collapseSidebar">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+            </div>
+            <div class="category-filters" id="categoryFilters">
+                <div class="filter-item active" data-category="all">
+                    <i class="fas fa-th-large"></i>
+                    <span>All Products</span>
+                    <span class="count" id="allCount">0</span>
+                </div>
+                <div class="filter-item" data-category="fruits">
+                    <i class="fas fa-apple-alt"></i>
+                    <span>Fruits</span>
+                    <span class="count" id="fruitsCount">0</span>
+                </div>
+                <div class="filter-item" data-category="vegetables">
+                    <i class="fas fa-carrot"></i>
+                    <span>Vegetables</span>
+                    <span class="count" id="vegetablesCount">0</span>
+                </div>
+                <div class="filter-item" data-category="meat">
+                    <i class="fas fa-drumstick-bite"></i>
+                    <span>Meat & Poultry</span>
+                    <span class="count" id="meatCount">0</span>
+                </div>
+                <div class="filter-item" data-category="grains">
+                    <i class="fas fa-seedling"></i>
+                    <span>Rice & Grains</span>
+                    <span class="count" id="grainsCount">0</span>
+                </div>
+                <div class="filter-item" data-category="dairy">
+                    <i class="fas fa-cheese"></i>
+                    <span>Dairy Products</span>
+                    <span class="count" id="dairyCount">0</span>
+                </div>
+                <div class="filter-item" data-category="seafood">
+                    <i class="fas fa-fish"></i>
+                    <span>Seafood</span>
+                    <span class="count" id="seafoodCount">0</span>
+                </div>
+            </div>
+            
+            <!-- Price Range Filter -->
+            <div class="price-filter">
+                <h4>Price Range</h4>
+                <div class="price-inputs">
+                    <input type="number" id="minPrice" placeholder="Min ₱" min="0">
+                    <span>-</span>
+                    <input type="number" id="maxPrice" placeholder="Max ₱" min="0">
+                </div>
+                <button class="apply-filter-btn" id="applyPriceFilter">Apply</button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Dashboard Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-shopping-basket"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalProducts">0</h3>
+                        <p>Total Products</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon trending-up">
+                        <i class="fas fa-arrow-up"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="priceIncreases">0</h3>
+                        <p>Price Increases</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon trending-down">
+                        <i class="fas fa-arrow-down"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="priceDecreases">0</h3>
+                        <p>Price Decreases</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="lastUpdate">Now</h3>
+                        <p>Last Updated</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Toolbar -->
+            <div class="toolbar">
+                <div class="toolbar-left">
+                    <h2 id="categoryTitle">All Products</h2>
+                    <span class="product-count" id="productCount">0 products found</span>
+                </div>
+                <div class="toolbar-right">
+                    <div class="sort-options">
+                        <select id="sortSelect">
+                            <option value="name">Sort by Name</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="change">Price Change</option>
+                            <option value="updated">Last Updated</option>
+                        </select>
+                    </div>
+                    <div class="view-toggle">
+                        <button class="view-btn active" data-view="grid" title="Grid View">
+                            <i class="fas fa-th"></i>
+                        </button>
+                        <button class="view-btn" data-view="list" title="List View">
+                            <i class="fas fa-list"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="products-container" id="productsContainer">
+                <!-- Products will be dynamically loaded here -->
+            </div>
+
+            <!-- Loading State -->
+            <div class="loading-state" id="loadingState" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p>Loading products...</p>
+            </div>
+
+            <!-- Empty State -->
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <i class="fas fa-search"></i>
+                <h3>No products found</h3>
+                <p>Try adjusting your search criteria or filters</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Product Detail Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modalTitle">Product Details</h3>
+                <button class="close-modal" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Product details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/price-dashboard.js"></script>
+</body>
+</html>

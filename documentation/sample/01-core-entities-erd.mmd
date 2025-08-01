@@ -1,0 +1,66 @@
+erDiagram
+    USER {
+        int user_id PK
+        string username UK
+        string email UK
+        string password_hash
+        string first_name
+        string last_name
+        string phone_number
+        enum user_type "admin, vendor, customer"
+        enum status "active, inactive, suspended"
+        datetime created_at
+        datetime updated_at
+        datetime last_login
+    }
+
+    MARKET {
+        int market_id PK
+        string market_name
+        string market_code UK
+        string address
+        string city
+        string province
+        string postal_code
+        string contact_number
+        string email
+        text description
+        enum status "active, inactive, under_maintenance"
+        datetime operating_hours_start
+        datetime operating_hours_end
+        datetime created_at
+        datetime updated_at
+    }
+
+    VENDOR {
+        int vendor_id PK
+        int user_id FK
+        int market_id FK
+        string business_name
+        string business_registration_number UK
+        enum business_type "fruits, vegetables, meat_poultry, rice_grains, seafood, dairy, spices, bakery, general, other"
+        string owner_name
+        string contact_number
+        string email
+        string stall_number
+        text business_address
+        enum verification_status "pending, verified, rejected"
+        datetime verification_date
+        text verification_notes
+        enum status "active, inactive, suspended"
+        datetime created_at
+        datetime updated_at
+    }
+
+    ADMIN {
+        int admin_id PK
+        int user_id FK
+        enum admin_level "super_admin, market_admin, content_admin"
+        json permissions
+        datetime created_at
+        datetime updated_at
+    }
+
+    USER ||--o{ VENDOR : "can_be"
+    USER ||--o{ ADMIN : "can_be"
+    MARKET ||--o{ VENDOR : "hosts"

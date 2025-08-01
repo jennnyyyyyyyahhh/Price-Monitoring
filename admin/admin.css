@@ -1,0 +1,133 @@
+body {
+    margin: 0;
+    font-family: 'Montserrat', Arial, sans-serif;
+    background: #f8f9fa;
+    color: #222;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    color: #222;
+    padding: 0 40px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+    height: 60px;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    color: #2e9c6a;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 32px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #222;
+    font-size: 1rem;
+    transition: color 0.2s;
+    padding: 4px 0;
+}
+
+.nav-links a.active,
+.nav-links a:hover {
+    color: #2e9c6a;
+    border-bottom: 2px solid #2e9c6a;
+}
+
+main {
+    padding: 48px 0 32px 0;
+    background: #f8f9fa;
+}
+
+.admin-section {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(46,156,106,0.07);
+    padding: 40px 32px;
+    margin-bottom: 40px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.admin-section h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 18px;
+    color: #2e9c6a;
+}
+
+.admin-section p {
+    color: #444;
+    font-size: 1.08rem;
+    margin-bottom: 18px;
+}
+
+
+/* Admin input and button styles */
+.admin-section input[type="text"],
+.admin-section input[type="url"],
+.admin-section input[type="number"],
+.admin-section input[type="email"],
+.admin-section input[type="password"],
+.admin-section input,
+.admin-section textarea {
+    padding: 10px 12px;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    margin: 4px 8px 12px 0;
+    outline: none;
+    background: #f8f9fa;
+    transition: border 0.2s;
+}
+.admin-section input:focus,
+.admin-section textarea:focus {
+    border-color: #2e9c6a;
+}
+.admin-section button {
+    background: #2e9c6a;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 22px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 4px 0 12px 0;
+    transition: background 0.2s;
+}
+.admin-section button:hover {
+    background: #217a52;
+}
+
+/* Admin item row */
+.admin-section > div > div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+@media (max-width: 900px) {
+    .admin-section {
+        padding: 24px 8px;
+    }
+    main {
+        padding: 24px 0 16px 0;
+    }
+}
