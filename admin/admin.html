@@ -2,38 +2,405 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Tanza Market</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Tanza Market Admin Dashboard - Manage vendors, products, and market analytics">
+    <meta name="theme-color" content="#2e9c6a">
+    <title>Admin Dashboard - Tanza Market</title>
     <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="logo">ADMIN PANEL</div>
-        <ul class="nav-links">
-            <li><a href="#" class="active">Dashboard</a></li>
-            <li><a href="#" id="manageCategoriesNav">Categories</a></li>
-            <li><a href="#" id="manageBlogsNav">Blogs</a></li>
-            <li><a href="#" id="manageServicesNav">Services</a></li>
-        </ul>
+    <!-- Top Navigation -->
+    <nav class="top-navbar">
+        <div class="nav-left">
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <span>Tanza Market Admin</span>
+            </div>
+        </div>
+        <div class="nav-right">
+            <div class="admin-profile">
+                <i class="fas fa-user-shield"></i>
+                <span>Administrator</span>
+                <button class="logout-btn" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </div>
     </nav>
-    <main>
-        <section class="admin-section" id="dashboardSection">
-            <h2>Welcome, Admin!</h2>
-            <p>Use the navigation to manage content.</p>
+
+    <!-- Mobile Sidebar Overlay -->
+    <div class="mobile-sidebar-overlay" id="mobileSidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <span>Admin Panel</span>
+            </div>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active" data-section="dashboard" data-tooltip="Dashboard">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-section="survey-form" data-tooltip="Survey Form">
+                        <i class="fas fa-poll"></i>
+                        <span>Survey Form</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-section="vendor-management" data-tooltip="Vendor Management">
+                        <i class="fas fa-store"></i>
+                        <span>Vendor Management</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-section="stall-management" data-tooltip="Stall Management">
+                        <i class="fas fa-warehouse"></i>
+                        <span>Stall Management</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-section="vendor-requests" data-tooltip="Vendor Registration">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Vendor Registration Request</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-section="survey-management" data-tooltip="Survey Management">
+                        <i class="fas fa-clipboard-list"></i>
+                        <span>Survey Management</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-section="calamity-event" data-tooltip="Calamity Event">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>Calamity Event</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-section="user-management" data-tooltip="User Management">
+                        <i class="fas fa-users"></i>
+                        <span>User Management</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-section="reports" data-tooltip="Reports">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Reports</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+        <!-- Dashboard Section -->
+        <section class="content-section active" id="dashboard">
+            <div class="section-header">
+                <h1>Admin Dashboard</h1>
+                <p>Overview of Tanza Market analytics and statistics</p>
+            </div>
+
+            <!-- Summary Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon fruits">
+                        <i class="fas fa-apple-alt"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="fruitsTotal">245</h3>
+                        <p>Fruits Products</p>
+                        <span class="stat-trend positive">+12% this week</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon vegetables">
+                        <i class="fas fa-carrot"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="vegetablesTotal">189</h3>
+                        <p>Vegetables Products</p>
+                        <span class="stat-trend positive">+8% this week</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon seafood">
+                        <i class="fas fa-fish"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="seafoodTotal">167</h3>
+                        <p>Seafood Products</p>
+                        <span class="stat-trend negative">-3% this week</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon poultry">
+                        <i class="fas fa-drumstick-bite"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="poultryTotal">123</h3>
+                        <p>Poultry Products</p>
+                        <span class="stat-trend positive">+15% this week</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon meat">
+                        <i class="fas fa-ham"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="meatTotal">98</h3>
+                        <p>Meat Products</p>
+                        <span class="stat-trend positive">+5% this week</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon rice">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="riceTotal">76</h3>
+                        <p>Rice Products</p>
+                        <span class="stat-trend positive">+20% this week</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Individual Category Price Trends -->
+            <div class="section-header" style="margin-top: 3rem;">
+                <div class="section-title">
+                    <h2>Category Price Trends</h2>
+                    <p>Individual price trend analysis for each product category</p>
+                </div>
+                <div class="section-controls">
+                    <div class="filter-group">
+                        <label for="categoryFilter">Time Period:</label>
+                        <select id="categoryFilter" class="filter-select">
+                            <option value="7">7 Days</option>
+                            <option value="14">14 Days</option>
+                            <option value="21">21 Days</option>
+                            <option value="30">1 Month</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category Trends Grid -->
+            <div class="category-trends-grid">
+                <!-- Fruits Trend -->
+                <div class="category-trend-container">
+                    <div class="category-trend-header fruits-theme">
+                        <div class="category-icon">
+                            <i class="fas fa-apple-alt"></i>
+                        </div>
+                        <div class="category-info">
+                            <h3>Fruits</h3>
+                            <span class="trend-value">₱45.67</span>
+                            <span class="trend-change positive">+12.3%</span>
+                        </div>
+                    </div>
+                    <div class="category-chart-square">
+                        <canvas id="fruitsChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Vegetables Trend -->
+                <div class="category-trend-container">
+                    <div class="category-trend-header vegetables-theme">
+                        <div class="category-icon">
+                            <i class="fas fa-carrot"></i>
+                        </div>
+                        <div class="category-info">
+                            <h3>Vegetables</h3>
+                            <span class="trend-value">₱32.45</span>
+                            <span class="trend-change positive">+8.1%</span>
+                        </div>
+                    </div>
+                    <div class="category-chart-square">
+                        <canvas id="vegetablesChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Seafood Trend -->
+                <div class="category-trend-container">
+                    <div class="category-trend-header seafood-theme">
+                        <div class="category-icon">
+                            <i class="fas fa-fish"></i>
+                        </div>
+                        <div class="category-info">
+                            <h3>Seafood</h3>
+                            <span class="trend-value">₱180.99</span>
+                            <span class="trend-change negative">-3.2%</span>
+                        </div>
+                    </div>
+                    <div class="category-chart-square">
+                        <canvas id="seafoodChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Poultry Trend -->
+                <div class="category-trend-container">
+                    <div class="category-trend-header poultry-theme">
+                        <div class="category-icon">
+                            <i class="fas fa-drumstick-bite"></i>
+                        </div>
+                        <div class="category-info">
+                            <h3>Poultry</h3>
+                            <span class="trend-value">₱165.50</span>
+                            <span class="trend-change positive">+15.7%</span>
+                        </div>
+                    </div>
+                    <div class="category-chart-square">
+                        <canvas id="poultryChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Meat Trend -->
+                <div class="category-trend-container">
+                    <div class="category-trend-header meat-theme">
+                        <div class="category-icon">
+                            <i class="fas fa-ham"></i>
+                        </div>
+                        <div class="category-info">
+                            <h3>Meat</h3>
+                            <span class="trend-value">₱280.75</span>
+                            <span class="trend-change positive">+5.4%</span>
+                        </div>
+                    </div>
+                    <div class="category-chart-square">
+                        <canvas id="meatChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Rice Trend -->
+                <div class="category-trend-container">
+                    <div class="category-trend-header rice-theme">
+                        <div class="category-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <div class="category-info">
+                            <h3>Rice</h3>
+                            <span class="trend-value">₱52.30</span>
+                            <span class="trend-change positive">+20.1%</span>
+                        </div>
+                    </div>
+                    <div class="category-chart-square">
+                        <canvas id="riceChart"></canvas>
+                    </div>
+                </div>
+            </div>
         </section>
-        <section class="admin-section" id="categoriesSection" style="display:none;">
-            <h2>Manage Categories</h2>
-            <div id="adminCategories"></div>
+
+        <!-- Survey Form Section -->
+        <section class="content-section" id="survey-form">
+            <div class="section-header">
+                <h1>Survey Form</h1>
+                <p>Create and manage customer surveys</p>
+            </div>
+            <div class="form-container">
+                <h3>Create New Survey</h3>
+                <!-- Survey form content will be added here -->
+                <p>Survey form functionality coming soon...</p>
+            </div>
         </section>
-        <section class="admin-section" id="blogsSection" style="display:none;">
-            <h2>Manage Blogs</h2>
-            <div id="adminBlogs"></div>
+
+        <!-- Vendor Management Section -->
+        <section class="content-section" id="vendor-management">
+            <div class="section-header">
+                <h1>Vendor Management</h1>
+                <p>Manage registered vendors and their details</p>
+            </div>
+            <div class="table-container">
+                <!-- Vendor management content will be added here -->
+                <p>Vendor management functionality coming soon...</p>
+            </div>
         </section>
-        <section class="admin-section" id="servicesSection" style="display:none;">
-            <h2>Manage Services</h2>
-            <div id="adminServices"></div>
+
+        <!-- Stall Management Section -->
+        <section class="content-section" id="stall-management">
+            <div class="section-header">
+                <h1>Stall Management</h1>
+                <p>Manage market stalls and assignments</p>
+            </div>
+            <div class="table-container">
+                <!-- Stall management content will be added here -->
+                <p>Stall management functionality coming soon...</p>
+            </div>
+        </section>
+
+        <!-- Vendor Requests Section -->
+        <section class="content-section" id="vendor-requests">
+            <div class="section-header">
+                <h1>Vendor Registration Requests</h1>
+                <p>Review and approve new vendor applications</p>
+            </div>
+            <div class="table-container">
+                <!-- Vendor requests content will be added here -->
+                <p>Vendor registration requests functionality coming soon...</p>
+            </div>
+        </section>
+
+        <!-- Survey Management Section -->
+        <section class="content-section" id="survey-management">
+            <div class="section-header">
+                <h1>Survey Management</h1>
+                <p>Manage existing surveys and view responses</p>
+            </div>
+            <div class="table-container">
+                <!-- Survey management content will be added here -->
+                <p>Survey management functionality coming soon...</p>
+            </div>
+        </section>
+
+        <!-- Calamity Event Section -->
+        <section class="content-section" id="calamity-event">
+            <div class="section-header">
+                <h1>Calamity Event Management</h1>
+                <p>Manage emergency alerts and calamity events</p>
+            </div>
+            <div class="alert-container">
+                <!-- Calamity event content will be added here -->
+                <p>Calamity event management functionality coming soon...</p>
+            </div>
+        </section>
+
+        <!-- User Management Section -->
+        <section class="content-section" id="user-management">
+            <div class="section-header">
+                <h1>User Management</h1>
+                <p>Manage system users and permissions</p>
+            </div>
+            <div class="table-container">
+                <!-- User management content will be added here -->
+                <p>User management functionality coming soon...</p>
+            </div>
+        </section>
+
+        <!-- Reports Section -->
+        <section class="content-section" id="reports">
+            <div class="section-header">
+                <h1>Reports</h1>
+                <p>Generate and view system reports</p>
+            </div>
+            <div class="reports-container">
+                <!-- Reports content will be added here -->
+                <p>Reports functionality coming soon...</p>
+            </div>
         </section>
     </main>
+
     <script src="admin.js"></script>
 </body>
 </html>
