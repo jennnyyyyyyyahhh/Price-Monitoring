@@ -27,6 +27,11 @@ class PriceDashboard {
         this.priceRange = { min: null, max: null };
         this.isRendering = false; // Add rendering guard
         
+        // Pagination properties
+        this.currentPage = 1;
+        this.itemsPerPage = 12;
+        this.totalPages = 1;
+        
         this.init();
     }
 
@@ -313,6 +318,37 @@ class PriceDashboard {
             this.refreshData();
         });
 
+        // Report generation events
+        document.getElementById('generateReportBtn').addEventListener('click', () => {
+            this.openReportModal();
+        });
+
+        document.getElementById('closeReportModal').addEventListener('click', () => {
+            this.closeReportModal();
+        });
+
+        document.getElementById('reportModalOverlay').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) {
+                this.closeReportModal();
+            }
+        });
+
+        // Report type change
+        document.querySelectorAll('input[name="reportType"]').forEach(radio => {
+            radio.addEventListener('change', () => {
+                this.handleReportTypeChange();
+            });
+        });
+
+        // Report buttons
+        document.getElementById('previewReportBtn').addEventListener('click', () => {
+            this.previewReport();
+        });
+
+        document.getElementById('generatePDFBtn').addEventListener('click', () => {
+            this.generatePDFReport();
+        });
+
         // Sidebar collapse
         document.getElementById('collapseSidebar').addEventListener('click', () => {
             this.toggleSidebar();
@@ -364,6 +400,22 @@ class PriceDashboard {
         window.addEventListener('resize', () => {
             this.handleWindowResize();
         });
+
+        // Pagination events
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                this.goToPage(this.currentPage - 1);
+            });
+        }
+        
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                this.goToPage(this.currentPage + 1);
+            });
+        }
 
         // Touch events for mobile optimization
         this.addTouchOptimizations();
@@ -436,6 +488,9 @@ class PriceDashboard {
             return categoryMatch && searchMatch && priceMatch;
         });
 
+        // Reset to first page when filtering
+        this.currentPage = 1;
+        
         this.sortProducts();
         this.renderProducts();
         this.updateProductCount();
@@ -486,22 +541,29 @@ class PriceDashboard {
         if (loadingState) loadingState.style.display = 'block';
         if (emptyState) emptyState.style.display = 'none';
 
+        // Calculate pagination
+        this.totalPages = Math.ceil(this.filteredProducts.length / this.itemsPerPage);
+        const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+        const endIndex = startIndex + this.itemsPerPage;
+        const currentPageProducts = this.filteredProducts.slice(startIndex, endIndex);
+
         // Simulate loading delay
         setTimeout(() => {
             if (loadingState) loadingState.style.display = 'none';
 
             if (this.filteredProducts.length === 0) {
                 if (emptyState) emptyState.style.display = 'block';
+                this.hidePagination();
                 this.isRendering = false;
                 return;
             }
 
-            this.filteredProducts.forEach(product => {
+            currentPageProducts.forEach(product => {
                 const productCard = this.createProductCard(product);
                 container.appendChild(productCard);
             });
             
-            // Reset rendering guard
+            this.renderPagination();
             this.isRendering = false;
         }, 500);
     }
@@ -599,6 +661,93 @@ class PriceDashboard {
 
     closeModal() {
         document.getElementById('modalOverlay').style.display = 'none';
+    }
+
+    renderPagination() {
+        const paginationContainer = document.getElementById('paginationContainer');
+        const pageNumbers = document.getElementById('pageNumbers');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const paginationInfo = document.getElementById('paginationInfo');
+
+        if (!paginationContainer || this.totalPages <= 1) {
+            this.hidePagination();
+            return;
+        }
+
+        // Show pagination container
+        paginationContainer.style.display = 'block';
+
+        // Update pagination info
+        const startItem = (this.currentPage - 1) * this.itemsPerPage + 1;
+        const endItem = Math.min(this.currentPage * this.itemsPerPage, this.filteredProducts.length);
+        paginationInfo.textContent = `Showing ${startItem}-${endItem} of ${this.filteredProducts.length} products`;
+
+        // Update prev/next buttons
+        prevBtn.disabled = this.currentPage === 1;
+        nextBtn.disabled = this.currentPage === this.totalPages;
+
+        // Generate page numbers
+        pageNumbers.innerHTML = '';
+        const maxVisiblePages = 7;
+        let startPage = Math.max(1, this.currentPage - Math.floor(maxVisiblePages / 2));
+        let endPage = Math.min(this.totalPages, startPage + maxVisiblePages - 1);
+
+        // Adjust start page if we're near the end
+        if (endPage - startPage + 1 < maxVisiblePages) {
+            startPage = Math.max(1, endPage - maxVisiblePages + 1);
+        }
+
+        // Add first page if not visible
+        if (startPage > 1) {
+            this.createPageButton(1, pageNumbers);
+            if (startPage > 2) {
+                this.createPageDots(pageNumbers);
+            }
+        }
+
+        // Add visible page numbers
+        for (let i = startPage; i <= endPage; i++) {
+            this.createPageButton(i, pageNumbers);
+        }
+
+        // Add last page if not visible
+        if (endPage < this.totalPages) {
+            if (endPage < this.totalPages - 1) {
+                this.createPageDots(pageNumbers);
+            }
+            this.createPageButton(this.totalPages, pageNumbers);
+        }
+    }
+
+    createPageButton(pageNum, container) {
+        const button = document.createElement('button');
+        button.className = `page-number ${pageNum === this.currentPage ? 'active' : ''}`;
+        button.textContent = pageNum;
+        button.addEventListener('click', () => this.goToPage(pageNum));
+        container.appendChild(button);
+    }
+
+    createPageDots(container) {
+        const dots = document.createElement('span');
+        dots.className = 'page-dots';
+        dots.textContent = '...';
+        container.appendChild(dots);
+    }
+
+    goToPage(page) {
+        if (page < 1 || page > this.totalPages || page === this.currentPage) {
+            return;
+        }
+        this.currentPage = page;
+        this.renderProducts();
+    }
+
+    hidePagination() {
+        const paginationContainer = document.getElementById('paginationContainer');
+        if (paginationContainer) {
+            paginationContainer.style.display = 'none';
+        }
     }
 
     applyPriceFilter() {
@@ -762,6 +911,269 @@ class PriceDashboard {
     addMobileMenuToggle() {
         // This method is now handled in bindEvents for better organization
         // Keeping for backward compatibility
+    }
+
+    // Report Generation Methods
+    openReportModal() {
+        const modal = document.getElementById('reportModalOverlay');
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        
+        // Set default date range (last 30 days)
+        const endDate = new Date();
+        const startDate = new Date();
+        startDate.setDate(startDate.getDate() - 30);
+        
+        document.getElementById('reportEndDate').value = endDate.toISOString().split('T')[0];
+        document.getElementById('reportStartDate').value = startDate.toISOString().split('T')[0];
+        
+        // Initialize report type
+        this.handleReportTypeChange();
+    }
+
+    closeReportModal() {
+        document.getElementById('reportModalOverlay').style.display = 'none';
+        document.body.style.overflow = 'auto';
+        
+        // Reset form
+        document.querySelector('input[name="reportType"][value="all"]').checked = true;
+        document.getElementById('categorySelection').style.display = 'none';
+        document.getElementById('reportPreview').style.display = 'none';
+    }
+
+    handleReportTypeChange() {
+        const selectedType = document.querySelector('input[name="reportType"]:checked').value;
+        const categorySelection = document.getElementById('categorySelection');
+        
+        if (selectedType === 'category') {
+            categorySelection.style.display = 'block';
+        } else {
+            categorySelection.style.display = 'none';
+        }
+    }
+
+    previewReport() {
+        const reportType = document.querySelector('input[name="reportType"]:checked').value;
+        const category = document.getElementById('reportCategorySelect').value;
+        const startDate = document.getElementById('reportStartDate').value;
+        const endDate = document.getElementById('reportEndDate').value;
+        
+        // Generate preview data
+        const previewData = this.generateReportData(reportType, category);
+        
+        // Show preview
+        const preview = document.getElementById('reportPreview');
+        const previewTitle = document.getElementById('previewTitle');
+        const previewSubtitle = document.getElementById('previewSubtitle');
+        const previewDate = document.getElementById('previewDate');
+        const previewStats = document.getElementById('previewStats');
+        
+        // Update preview content
+        let title = 'Price Report';
+        if (reportType === 'category') {
+            title = `${category.charAt(0).toUpperCase() + category.slice(1)} Category Report`;
+        } else if (reportType === 'summary') {
+            title = 'Price Summary Report';
+        }
+        
+        previewTitle.textContent = title;
+        previewDate.textContent = new Date().toLocaleDateString();
+        
+        // Generate preview statistics
+        previewStats.innerHTML = `
+            <div class="preview-stat">
+                <div class="preview-stat-value">${previewData.totalProducts}</div>
+                <div class="preview-stat-label">Total Products</div>
+            </div>
+            <div class="preview-stat">
+                <div class="preview-stat-value">${previewData.priceIncreases}</div>
+                <div class="preview-stat-label">Price Increases</div>
+            </div>
+            <div class="preview-stat">
+                <div class="preview-stat-value">${previewData.priceDecreases}</div>
+                <div class="preview-stat-label">Price Decreases</div>
+            </div>
+            <div class="preview-stat">
+                <div class="preview-stat-value">₱${previewData.avgPrice}</div>
+                <div class="preview-stat-label">Average Price</div>
+            </div>
+        `;
+        
+        preview.style.display = 'block';
+        this.showNotification('Report preview generated successfully!');
+    }
+
+    generateReportData(reportType, category = null) {
+        let filteredProducts = this.products;
+        
+        if (reportType === 'category' && category) {
+            filteredProducts = this.products.filter(p => p.category === category);
+        }
+        
+        const totalProducts = filteredProducts.length;
+        const priceIncreases = filteredProducts.filter(p => p.change > 0).length;
+        const priceDecreases = filteredProducts.filter(p => p.change < 0).length;
+        const avgPrice = filteredProducts.reduce((sum, p) => sum + p.currentPrice, 0) / totalProducts || 0;
+        
+        return {
+            totalProducts,
+            priceIncreases,
+            priceDecreases,
+            avgPrice: avgPrice.toFixed(2),
+            products: filteredProducts
+        };
+    }
+
+    generatePDFReport() {
+        const reportType = document.querySelector('input[name="reportType"]:checked').value;
+        const category = document.getElementById('reportCategorySelect').value;
+        const startDate = document.getElementById('reportStartDate').value;
+        const endDate = document.getElementById('reportEndDate').value;
+        const includeCharts = document.getElementById('includePriceCharts').checked;
+        const includeTrends = document.getElementById('includePriceTrends').checked;
+        const includeStats = document.getElementById('includeStatistics').checked;
+        
+        // Generate report data
+        const reportData = this.generateReportData(reportType, category);
+        
+        // Create report content
+        const reportContent = this.createReportHTML(reportData, reportType, category, {
+            includeCharts,
+            includeTrends,
+            includeStats,
+            startDate,
+            endDate
+        });
+        
+        // Open report in new window for printing/saving as PDF
+        const reportWindow = window.open('', '_blank');
+        reportWindow.document.write(reportContent);
+        reportWindow.document.close();
+        
+        // Auto-trigger print dialog
+        reportWindow.focus();
+        setTimeout(() => {
+            reportWindow.print();
+        }, 1000);
+        
+        this.showNotification('PDF report generated! Please check your browser\'s print dialog.');
+        this.closeReportModal();
+    }
+
+    createReportHTML(data, reportType, category, options) {
+        const { includeCharts, includeTrends, includeStats, startDate, endDate } = options;
+        
+        let title = 'Price Monitoring Report';
+        if (reportType === 'category') {
+            title = `${category.charAt(0).toUpperCase() + category.slice(1)} Category Report`;
+        } else if (reportType === 'summary') {
+            title = 'Price Summary Report';
+        }
+        
+        let productsTable = '';
+        if (reportType !== 'summary') {
+            productsTable = `
+                <div class="report-section">
+                    <h2>Product Details</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Category</th>
+                                <th>Current Price</th>
+                                <th>Previous Price</th>
+                                <th>Change</th>
+                                <th>Last Updated</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${data.products.map(product => `
+                                <tr>
+                                    <td>${product.name}</td>
+                                    <td>${product.category}</td>
+                                    <td>₱${product.currentPrice.toFixed(2)}</td>
+                                    <td>₱${product.previousPrice.toFixed(2)}</td>
+                                    <td class="${product.change > 0 ? 'positive' : product.change < 0 ? 'negative' : 'neutral'}">
+                                        ${product.change > 0 ? '+' : ''}${product.changePercent.toFixed(1)}%
+                                    </td>
+                                    <td>${product.lastUpdated}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+        
+        return `
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>${title}</title>
+                <style>
+                    body { font-family: Arial, sans-serif; margin: 40px; color: #333; }
+                    .report-header { text-align: center; margin-bottom: 40px; border-bottom: 2px solid #2e9c6a; padding-bottom: 20px; }
+                    .report-header h1 { color: #2e9c6a; margin-bottom: 10px; }
+                    .report-info { color: #666; }
+                    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin: 30px 0; }
+                    .stat-card { background: #f8f9fa; padding: 20px; border-radius: 8px; text-align: center; }
+                    .stat-value { font-size: 2rem; font-weight: bold; color: #2e9c6a; }
+                    .stat-label { color: #666; font-size: 0.9rem; }
+                    .report-section { margin: 30px 0; }
+                    .report-section h2 { color: #2c3e50; border-bottom: 1px solid #ddd; padding-bottom: 10px; }
+                    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+                    th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+                    th { background: #f8f9fa; font-weight: bold; }
+                    .positive { color: #27ae60; font-weight: bold; }
+                    .negative { color: #e74c3c; font-weight: bold; }
+                    .neutral { color: #7f8c8d; }
+                    @media print { body { margin: 20px; } }
+                </style>
+            </head>
+            <body>
+                <div class="report-header">
+                    <h1>${title}</h1>
+                    <div class="report-info">
+                        <p>Generated on: ${new Date().toLocaleDateString()}</p>
+                        <p>Date Range: ${startDate} to ${endDate}</p>
+                        <p>Tanza Market Price Monitoring System</p>
+                    </div>
+                </div>
+                
+                ${includeStats ? `
+                <div class="report-section">
+                    <h2>Summary Statistics</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value">${data.totalProducts}</div>
+                            <div class="stat-label">Total Products</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">${data.priceIncreases}</div>
+                            <div class="stat-label">Price Increases</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">${data.priceDecreases}</div>
+                            <div class="stat-label">Price Decreases</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">₱${data.avgPrice}</div>
+                            <div class="stat-label">Average Price</div>
+                        </div>
+                    </div>
+                </div>
+                ` : ''}
+                
+                ${productsTable}
+                
+                <div class="report-section">
+                    <p style="text-align: center; color: #666; font-size: 0.9rem; margin-top: 40px;">
+                        This report was generated by Tanza Market Price Monitoring System
+                    </p>
+                </div>
+            </body>
+            </html>
+        `;
     }
 
     showNotification(message) {
