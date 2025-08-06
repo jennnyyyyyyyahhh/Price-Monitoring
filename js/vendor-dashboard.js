@@ -1,55 +1,31 @@
 // Vendor Dashboard JS
 
-// Toggle sidebar on mobile
-const toggleMenu = document.querySelector('.toggle-menu');
-const sidebar = document.querySelector('.sidebar');
-const mainContent = document.querySelector('.main-content');
-
-toggleMenu.addEventListener('click', () => {
-    sidebar.classList.toggle('expanded');
-});
-
-// Close sidebar when clicking outside of it on mobile
-document.addEventListener('click', (e) => {
-    const isSidebar = e.target.closest('.sidebar');
-    const isToggleMenu = e.target.closest('.toggle-menu');
-    
-    if (!isSidebar && !isToggleMenu && window.innerWidth <= 768 && sidebar.classList.contains('expanded')) {
-        sidebar.classList.remove('expanded');
-    }
-});
-
-// Handle window resize events
-window.addEventListener('resize', () => {
-    // If window becomes larger than mobile breakpoint, ensure proper sidebar state
-    if (window.innerWidth > 768) {
-        sidebar.classList.remove('expanded');
-    }
-});
-
 // Handle menu navigation
 const menuItems = document.querySelectorAll('.menu-item');
 const contentSections = document.querySelectorAll('.content-section');
 
 menuItems.forEach(item => {
     item.addEventListener('click', function(e) {
-        e.preventDefault();
+        // Only handle dashboard section, let other links work naturally
+        const sectionName = this.getAttribute('data-section');
         
-        // Update active menu item
-        menuItems.forEach(i => i.classList.remove('active'));
-        this.classList.add('active');
-        
-        // Show corresponding section
-        const sectionId = this.getAttribute('data-section') + '-section';
-        contentSections.forEach(section => {
-            section.classList.remove('active');
-        });
-        document.getElementById(sectionId).classList.add('active');
-        
-        // On mobile, collapse sidebar after selection
-        if (window.innerWidth <= 768) {
-            sidebar.classList.remove('expanded');
+        if (sectionName === 'dashboard') {
+            e.preventDefault();
+            
+            // Update active menu item
+            menuItems.forEach(i => i.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Show dashboard section
+            contentSections.forEach(section => {
+                section.classList.remove('active');
+            });
+            const targetSection = document.getElementById('dashboard-section');
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
         }
+        // For other menu items (with href), let the browser handle navigation naturally
     });
 });
 
@@ -149,7 +125,7 @@ if (changePhotoBtn && vendorPhotoInput && vendorPhotoPreview) {
     });
 }
 
-// Example: Save profile changes
+// Save profile changes
 const saveProfileBtn = document.querySelector('.save-profile');
 if (saveProfileBtn) {
     saveProfileBtn.addEventListener('click', function() {
@@ -187,7 +163,7 @@ if (saveProfileBtn) {
     });
 }
 
-// Example: Toggle notifications
+// Toggle notifications
 const notifications = document.querySelector('.notifications');
 if (notifications) {
     notifications.addEventListener('click', function() {

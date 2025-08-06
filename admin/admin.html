@@ -14,9 +14,6 @@
     <!-- Top Navigation -->
     <nav class="top-navbar">
         <div class="nav-left">
-            <button class="sidebar-toggle" id="sidebarToggle">
-                <i class="fas fa-bars"></i>
-            </button>
             <div class="logo">
                 <i class="fas fa-shield-alt"></i>
                 <span>Tanza Market Admin</span>
@@ -38,12 +35,6 @@
 
     <!-- Sidebar -->
     <aside class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <div class="logo">
-                <i class="fas fa-shield-alt"></i>
-                <span>Admin Panel</span>
-            </div>
-        </div>
         
         <nav class="sidebar-nav">
             <ul class="nav-menu">
@@ -322,11 +313,312 @@
                 <h1>Vendor Management</h1>
                 <p>Manage registered vendors and their details</p>
             </div>
+            
+            <!-- Vendor Management Controls -->
+            <div class="vendor-management-controls">
+                <div class="controls-left">
+                    <div class="search-container">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="vendorSearchInput" placeholder="Search vendors...">
+                    </div>
+                </div>
+                <div class="controls-right">
+                    <div class="filter-container">
+                        <select id="vendorStatusFilter" class="filter-select">
+                            <option value="">All Status</option>
+                            <option value="active">Active</option>
+                            <option value="pending">Pending</option>
+                            <option value="suspended">Suspended</option>
+                        </select>
+                        <select id="vendorCategoryFilter" class="filter-select">
+                            <option value="">All Categories</option>
+                            <option value="fruits">Fruits</option>
+                            <option value="vegetables">Vegetables</option>
+                            <option value="seafood">Seafood</option>
+                            <option value="meat">Meat</option>
+                            <option value="poultry">Poultry</option>
+                            <option value="rice">Rice</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vendors Table -->
             <div class="table-container">
-                <!-- Vendor management content will be added here -->
-                <p>Vendor management functionality coming soon...</p>
+                <table class="vendors-table" id="vendorsTable">
+                    <thead>
+                        <tr>
+                            <th width="20%">Vendor</th>
+                            <th width="22%">Business</th>
+                            <th width="12%">Category</th>
+                            <th width="16%">Phone</th>
+                            <th width="10%">Status</th>
+                            <th width="8%">Stall</th>
+                            <th width="12%">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="vendorsTableBody">
+                        <tr data-vendor-id="1">
+                            <td>
+                                <div class="vendor-details">
+                                    <span class="vendor-name">Maria Santos</span>
+                                    <span class="vendor-id">#V001</span>
+                                </div>
+                            </td>
+                            <td>Fresh Fruits Paradise</td>
+                            <td><span class="category-badge fruits">Fruits</span></td>
+                            <td>+63 912 345 6789</td>
+                            <td><span class="status-badge active">Active</span></td>
+                            <td>A-12</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon edit-vendor" data-vendor-id="1" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon view-vendor" data-vendor-id="1" title="View">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon suspend-vendor" data-vendor-id="1" title="Suspend">
+                                        <i class="fas fa-ban"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr data-vendor-id="2">
+                            <td>
+                                <div class="vendor-details">
+                                    <span class="vendor-name">Juan dela Cruz</span>
+                                    <span class="vendor-id">#V002</span>
+                                </div>
+                            </td>
+                            <td>Fresh Vegetable Store</td>
+                            <td><span class="category-badge vegetables">Vegetables</span></td>
+                            <td>+63 918 123 4567</td>
+                            <td><span class="status-badge active">Active</span></td>
+                            <td>B-08</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon edit-vendor" data-vendor-id="2" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon view-vendor" data-vendor-id="2" title="View">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon suspend-vendor" data-vendor-id="2" title="Suspend">
+                                        <i class="fas fa-ban"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr data-vendor-id="3">
+                            <td>
+                                <div class="vendor-details">
+                                    <span class="vendor-name">Roberto Fish</span>
+                                    <span class="vendor-id">#V003</span>
+                                </div>
+                            </td>
+                            <td>Ocean Fresh Seafood</td>
+                            <td><span class="category-badge seafood">Seafood</span></td>
+                            <td>+63 915 987 6543</td>
+                            <td><span class="status-badge pending">Pending</span></td>
+                            <td>C-15</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon edit-vendor" data-vendor-id="3" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon view-vendor" data-vendor-id="3" title="View">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon approve-vendor" data-vendor-id="3" title="Approve">
+                                        <i class="fas fa-check"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr data-vendor-id="4">
+                            <td>
+                                <div class="vendor-details">
+                                    <span class="vendor-name">Ana Meat Shop</span>
+                                    <span class="vendor-id">#V004</span>
+                                </div>
+                            </td>
+                            <td>Prime Meat Market</td>
+                            <td><span class="category-badge meat">Meat</span></td>
+                            <td>+63 917 456 7890</td>
+                            <td><span class="status-badge suspended">Suspended</span></td>
+                            <td>D-03</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon edit-vendor" data-vendor-id="4" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon view-vendor" data-vendor-id="4" title="View">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon reactivate-vendor" data-vendor-id="4" title="Reactivate">
+                                        <i class="fas fa-undo"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr data-vendor-id="5">
+                            <td>
+                                <div class="vendor-details">
+                                    <span class="vendor-name">Pedro Chicken</span>
+                                    <span class="vendor-id">#V005</span>
+                                </div>
+                            </td>
+                            <td>Golden Poultry</td>
+                            <td><span class="category-badge poultry">Poultry</span></td>
+                            <td>+63 920 234 5678</td>
+                            <td><span class="status-badge active">Active</span></td>
+                            <td>E-07</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon edit-vendor" data-vendor-id="5" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon view-vendor" data-vendor-id="5" title="View">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon suspend-vendor" data-vendor-id="5" title="Suspend">
+                                        <i class="fas fa-ban"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination-container">
+                <div class="pagination-info">
+                    Showing 1-5 of 5 vendors
+                </div>
+                <div class="pagination">
+                    <button class="pagination-btn" disabled>
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <span class="pagination-numbers">
+                        <button class="pagination-number active">1</button>
+                    </span>
+                    <button class="pagination-btn" disabled>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
             </div>
         </section>
+
+        <!-- Add/Edit Vendor Modal -->
+        <div class="modal" id="vendorModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="vendorModalTitle">Add New Vendor</h2>
+                    <button class="modal-close" id="closeVendorModal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="vendorForm">
+                        <div class="form-section">
+                            <h3>Basic Information</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="vendorFirstName">First Name *</label>
+                                    <input type="text" id="vendorFirstName" name="firstName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="vendorLastName">Last Name *</label>
+                                    <input type="text" id="vendorLastName" name="lastName" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="businessName">Business Name *</label>
+                                <input type="text" id="businessName" name="businessName" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h3>Business Details</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="vendorCategory">Category *</label>
+                                    <select id="vendorCategory" name="category" required>
+                                        <option value="">Select Category</option>
+                                        <option value="fruits">Fruits</option>
+                                        <option value="vegetables">Vegetables</option>
+                                        <option value="seafood">Seafood</option>
+                                        <option value="meat">Meat</option>
+                                        <option value="poultry">Poultry</option>
+                                        <option value="rice">Rice</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="vendorStatus">Status *</label>
+                                    <select id="vendorStatus" name="status" required>
+                                        <option value="active">Active</option>
+                                        <option value="pending">Pending</option>
+                                        <option value="suspended">Suspended</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="vendorPhone">Phone Number *</label>
+                                    <input type="tel" id="vendorPhone" name="phone" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="vendorStall">Stall Number</label>
+                                    <input type="text" id="vendorStall" name="stall">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h3>Contact Information</h3>
+                            <div class="form-group">
+                                <label for="vendorEmail">Email Address</label>
+                                <input type="email" id="vendorEmail" name="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="vendorAddress">Address</label>
+                                <textarea id="vendorAddress" name="address" rows="2"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="vendorNotes">Notes</label>
+                                <textarea id="vendorNotes" name="notes" rows="2" placeholder="Additional notes"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancelVendorBtn">Cancel</button>
+                    <button type="submit" form="vendorForm" class="btn btn-primary" id="saveVendorBtn">Save Vendor</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vendor Details Modal -->
+        <div class="modal" id="vendorDetailsModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Vendor Details</h2>
+                    <button class="modal-close" id="closeVendorDetailsModal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="vendor-details-content" id="vendorDetailsContent">
+                        <!-- Vendor details will be populated here -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="closeVendorDetailsBtn">Close</button>
+                </div>
+            </div>
+        </div>
 
         <!-- Stall Management Section -->
         <section class="content-section" id="stall-management">
@@ -382,11 +674,269 @@
                 <h1>User Management</h1>
                 <p>Manage system users and permissions</p>
             </div>
+            
+            <!-- User Management Controls -->
+            <div class="user-management-controls">
+                <div class="controls-left">
+                    <div class="search-container">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="userSearchInput" placeholder="Search users...">
+                    </div>
+                </div>
+                <div class="controls-right">
+                    <div class="filter-container">
+                        <select id="roleFilter" class="filter-select">
+                            <option value="">All Roles</option>
+                            <option value="admin">Admin</option>
+                            <option value="vendor">Vendor</option>
+                        </select>
+                        <select id="statusFilter" class="filter-select">
+                            <option value="">All Status</option>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                            <option value="pending">Pending</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Users Table -->
             <div class="table-container">
-                <!-- User management content will be added here -->
-                <p>User management functionality coming soon...</p>
+                <table class="users-table" id="usersTable">
+                    <thead>
+                        <tr>
+                            <th width="20%">User</th>
+                            <th width="25%">Email</th>
+                            <th width="12%">Role</th>
+                            <th width="10%">Status</th>
+                            <th width="15%">Last Login</th>
+                            <th width="18%">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersTableBody">
+                        <tr data-user-id="1">
+                            <td>
+                                <div class="user-details">
+                                    <span class="user-name">John Admin</span>
+                                    <span class="user-id">#001</span>
+                                </div>
+                            </td>
+                            <td>john.admin@tanzamarket.com</td>
+                            <td><span class="role-badge admin">Admin</span></td>
+                            <td><span class="status-badge active">Active</span></td>
+                            <td>2 hours ago</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon edit-user" data-user-id="1" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon view-user" data-user-id="1" title="View">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon delete-user" data-user-id="1" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr data-user-id="2">
+                            <td>
+                                <div class="user-details">
+                                    <span class="user-name">Maria Santos</span>
+                                    <span class="user-id">#002</span>
+                                </div>
+                            </td>
+                            <td>maria.santos@gmail.com</td>
+                            <td><span class="role-badge vendor">Vendor</span></td>
+                            <td><span class="status-badge active">Active</span></td>
+                            <td>1 day ago</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon edit-user" data-user-id="2" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon view-user" data-user-id="2" title="View">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon delete-user" data-user-id="2" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr data-user-id="3">
+                            <td>
+                                <div class="user-details">
+                                    <span class="user-name">Carlos Manager</span>
+                                    <span class="user-id">#003</span>
+                                </div>
+                            </td>
+                            <td>carlos.manager@tanzamarket.com</td>
+                            <td><span class="role-badge manager">Manager</span></td>
+                            <td><span class="status-badge inactive">Inactive</span></td>
+                            <td>1 week ago</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon edit-user" data-user-id="3" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon view-user" data-user-id="3" title="View">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon delete-user" data-user-id="3" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr data-user-id="4">
+                            <td>
+                                <div class="user-details">
+                                    <span class="user-name">Ana Staff</span>
+                                    <span class="user-id">#004</span>
+                                </div>
+                            </td>
+                            <td>ana.staff@tanzamarket.com</td>
+                            <td><span class="role-badge staff">Staff</span></td>
+                            <td><span class="status-badge pending">Pending</span></td>
+                            <td>Never</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon edit-user" data-user-id="4" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon view-user" data-user-id="4" title="View">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon delete-user" data-user-id="4" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr data-user-id="5">
+                            <td>
+                                <div class="user-details">
+                                    <span class="user-name">Pedro Vendor</span>
+                                    <span class="user-id">#005</span>
+                                </div>
+                            </td>
+                            <td>pedro.vendor@gmail.com</td>
+                            <td><span class="role-badge vendor">Vendor</span></td>
+                            <td><span class="status-badge active">Active</span></td>
+                            <td>3 days ago</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon edit-user" data-user-id="5" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon view-user" data-user-id="5" title="View">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon delete-user" data-user-id="5" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination-container">
+                <div class="pagination-info">
+                    Showing 1-5 of 5 users
+                </div>
+                <div class="pagination">
+                    <button class="pagination-btn" disabled>
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <span class="pagination-numbers">
+                        <button class="pagination-number active">1</button>
+                    </span>
+                    <button class="pagination-btn" disabled>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
             </div>
         </section>
+
+        <!-- Edit User Modal -->
+        <div class="modal" id="userModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="modalTitle">Edit User</h2>
+                    <button class="modal-close" id="closeModal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="userForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name *</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name *</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="role">Role *</label>
+                                <select id="role" name="role" required>
+                                    <option value="">Select Role</option>
+                                    <option value="admin">Admin</option>
+                                    <option value="vendor">Vendor</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="status">Status *</label>
+                                <select id="status" name="status" required>
+                                    <option value="active">Active</option>
+                                    <option value="inactive">Inactive</option>
+                                    <option value="pending">Pending</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancelBtn">Cancel</button>
+                    <button type="submit" form="userForm" class="btn btn-primary" id="saveUserBtn">Save User</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- User Details Modal -->
+        <div class="modal" id="userDetailsModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>User Details</h2>
+                    <button class="modal-close" id="closeDetailsModal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="user-details-content" id="userDetailsContent">
+                        <!-- User details will be populated here -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="closeDetailsBtn">Close</button>
+                </div>
+            </div>
+        </div>
 
         <!-- Reports Section -->
         <section class="content-section" id="reports">
