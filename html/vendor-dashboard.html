@@ -172,39 +172,290 @@
             <!-- Vendor Profile Section -->
             <div class="content-section" id="vendor-profile-section">
                 <div class="section-header">
-                    <h2>Vendor Profile</h2>
-                    <p>Manage your profile information</p>
+                    <h2>Profile Management</h2>
+                    <p>Manage your profile information and account settings</p>
                 </div>
+                
                 <div class="profile-content">
-                    <div class="profile-info">
-                        <div class="profile-photo">
-                            <img src="https://via.placeholder.com/150" alt="Vendor Photo" id="vendorPhotoPreview">
-                            <input type="file" id="vendorPhotoInput" accept="image/*" style="display:none;">
-                            <button class="change-photo" id="changePhotoBtn">Change Photo</button>
+                    <!-- Profile Photo Section -->
+                    <div class="profile-photo-section">
+                        <div class="profile-photo-container">
+                            <div class="profile-photo">
+                                <img src="https://via.placeholder.com/150/2e9c6a/ffffff?text=JD" alt="Vendor Photo" id="vendorPhotoPreview">
+                                <div class="photo-overlay">
+                                    <i class="fas fa-camera"></i>
+                                    <span>Change Photo</span>
+                                </div>
+                                <input type="file" id="vendorPhotoInput" accept="image/*" style="display:none;">
+                            </div>
+                            <div class="photo-actions">
+                                <button class="btn-photo change-photo" id="changePhotoBtn">
+                                    <i class="fas fa-camera"></i>
+                                    Upload Photo
+                                </button>
+                                <button class="btn-photo remove-photo" id="removePhotoBtn">
+                                    <i class="fas fa-trash"></i>
+                                    Remove
+                                </button>
+                            </div>
                         </div>
-                        <div class="profile-details">
-                            <div class="form-group">
-                                <label>Vendor Name</label>
-                                <input type="text" id="vendorNameInput" value="John Doe">
+                    </div>
+
+                    <!-- Profile Form -->
+                    <div class="profile-form-container">
+                        <form class="profile-form" id="profileForm">
+                            <!-- Personal Information Section -->
+                            <div class="form-section">
+                                <h3 class="section-title">
+                                    <i class="fas fa-user"></i>
+                                    Personal Information
+                                </h3>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="firstName">First Name *</label>
+                                        <input type="text" id="firstName" name="firstName" value="John" required>
+                                        <small class="field-hint">Enter your first name</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="lastName">Last Name *</label>
+                                        <input type="text" id="lastName" name="lastName" value="Doe" required>
+                                        <small class="field-hint">Enter your last name</small>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="dateOfBirth">Date of Birth</label>
+                                        <input type="date" id="dateOfBirth" name="dateOfBirth" value="1985-06-15">
+                                        <small class="field-hint">Your date of birth</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="gender">Gender</label>
+                                        <select id="gender" name="gender">
+                                            <option value="">Select Gender</option>
+                                            <option value="male" selected>Male</option>
+                                            <option value="female">Female</option>
+                                            <option value="other">Other</option>
+                                            <option value="prefer-not-to-say">Prefer not to say</option>
+                                        </select>
+                                        <small class="field-hint">Optional</small>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label>Business Name</label>
-                                <input type="text" id="businessNameInput" value="Fresh Harvest">
+
+                            <!-- Business Information Section -->
+                            <div class="form-section">
+                                <h3 class="section-title">
+                                    <i class="fas fa-store"></i>
+                                    Business Information
+                                </h3>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="businessName">Business Name *</label>
+                                        <input type="text" id="businessName" name="businessName" value="Fresh Harvest Market" required>
+                                        <small class="field-hint">Your business or store name</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="businessCategory">Business Category *</label>
+                                        <select id="businessCategory" name="businessCategory" required>
+                                            <option value="">Select Category</option>
+                                            <option value="fruits" selected>Fruits</option>
+                                            <option value="vegetables">Vegetables</option>
+                                            <option value="meat">Meat & Poultry</option>
+                                            <option value="seafood">Seafood</option>
+                                            <option value="dairy">Dairy Products</option>
+                                            <option value="grains">Rice & Grains</option>
+                                            <option value="spices">Spices & Condiments</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                        <small class="field-hint">Primary business category</small>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="stallNumber">Stall Number</label>
+                                        <input type="text" id="stallNumber" name="stallNumber" value="A-45" readonly>
+                                        <small class="field-hint">Assigned by market management</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="businessLicense">Business License</label>
+                                        <input type="text" id="businessLicense" name="businessLicense" value="BL-2024-001">
+                                        <small class="field-hint">Business license number</small>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label>Email</label>
-                                <input type="email" id="emailInput" value="john@example.com">
+
+                            <!-- Contact Information Section -->
+                            <div class="form-section">
+                                <h3 class="section-title">
+                                    <i class="fas fa-address-card"></i>
+                                    Contact Information
+                                </h3>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="email">Email Address *</label>
+                                        <input type="email" id="email" name="email" value="john.doe@example.com" required>
+                                        <small class="field-hint">Your primary email address</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="alternateEmail">Alternate Email</label>
+                                        <input type="email" id="alternateEmail" name="alternateEmail" value="">
+                                        <small class="field-hint">Secondary email (optional)</small>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="phone">Phone Number *</label>
+                                        <input type="tel" id="phone" name="phone" value="+63 912 345 6789" required>
+                                        <small class="field-hint">Your primary contact number</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="alternatePhone">Alternate Phone</label>
+                                        <input type="tel" id="alternatePhone" name="alternatePhone" value="">
+                                        <small class="field-hint">Secondary contact (optional)</small>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label>Phone</label>
-                                <input type="tel" id="phoneInput" value="+63 912 345 6789">
+
+                            <!-- Address Information Section -->
+                            <div class="form-section">
+                                <h3 class="section-title">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Address Information
+                                </h3>
+                                <div class="form-group">
+                                    <label for="address">Complete Address *</label>
+                                    <textarea id="address" name="address" rows="3" required>Stall #A-45, Tanza Public Market, Tanza, Cavite, Philippines</textarea>
+                                    <small class="field-hint">Your complete business address</small>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="city">City/Municipality *</label>
+                                        <input type="text" id="city" name="city" value="Tanza" required>
+                                        <small class="field-hint">City or municipality</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="province">Province/State *</label>
+                                        <input type="text" id="province" name="province" value="Cavite" required>
+                                        <small class="field-hint">Province or state</small>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="zipCode">ZIP/Postal Code</label>
+                                        <input type="text" id="zipCode" name="zipCode" value="4113">
+                                        <small class="field-hint">ZIP or postal code</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="country">Country</label>
+                                        <select id="country" name="country">
+                                            <option value="philippines" selected>Philippines</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                        <small class="field-hint">Country</small>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label>Address</label>
-                                <textarea id="addressInput">Stall #45, Tanza Public Market, Tanza, Cavite</textarea>
+
+                            <!-- Emergency Contact Section -->
+                            <div class="form-section">
+                                <h3 class="section-title">
+                                    <i class="fas fa-phone-alt"></i>
+                                    Emergency Contact
+                                </h3>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="emergencyContactName">Contact Name</label>
+                                        <input type="text" id="emergencyContactName" name="emergencyContactName" value="Jane Doe">
+                                        <small class="field-hint">Emergency contact person</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="emergencyContactRelation">Relationship</label>
+                                        <select id="emergencyContactRelation" name="emergencyContactRelation">
+                                            <option value="">Select Relationship</option>
+                                            <option value="spouse" selected>Spouse</option>
+                                            <option value="parent">Parent</option>
+                                            <option value="child">Child</option>
+                                            <option value="sibling">Sibling</option>
+                                            <option value="friend">Friend</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                        <small class="field-hint">Relationship to contact</small>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="emergencyContactPhone">Contact Phone</label>
+                                        <input type="tel" id="emergencyContactPhone" name="emergencyContactPhone" value="+63 917 123 4567">
+                                        <small class="field-hint">Emergency contact number</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="emergencyContactEmail">Contact Email</label>
+                                        <input type="email" id="emergencyContactEmail" name="emergencyContactEmail" value="jane.doe@example.com">
+                                        <small class="field-hint">Emergency contact email</small>
+                                    </div>
+                                </div>
                             </div>
-                            <button class="save-profile">Save Changes</button>
-                        </div>
+
+                            <!-- Account Settings Section -->
+                            <div class="form-section">
+                                <h3 class="section-title">
+                                    <i class="fas fa-cog"></i>
+                                    Account Settings
+                                </h3>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="username">Username</label>
+                                        <input type="text" id="username" name="username" value="johndoe_vendor" readonly>
+                                        <small class="field-hint">Username cannot be changed</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="accountStatus">Account Status</label>
+                                        <select id="accountStatus" name="accountStatus" disabled>
+                                            <option value="active" selected>Active</option>
+                                            <option value="inactive">Inactive</option>
+                                            <option value="suspended">Suspended</option>
+                                        </select>
+                                        <small class="field-hint">Managed by admin</small>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="memberSince">Member Since</label>
+                                        <input type="text" id="memberSince" name="memberSince" value="January 15, 2024" readonly>
+                                        <small class="field-hint">Account registration date</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="lastLogin">Last Login</label>
+                                        <input type="text" id="lastLogin" name="lastLogin" value="August 7, 2025 - 2:30 PM" readonly>
+                                        <small class="field-hint">Your last login time</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Form Actions -->
+                            <div class="form-actions">
+                                <button type="button" class="btn-secondary" id="resetFormBtn">
+                                    <i class="fas fa-undo"></i>
+                                    Reset Changes
+                                </button>
+                                <button type="submit" class="btn-primary" id="saveProfileBtn">
+                                    <i class="fas fa-save"></i>
+                                    Save Profile
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Success/Error Messages -->
+                <div class="message-container" id="messageContainer" style="display: none;">
+                    <div class="message success" id="successMessage">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Profile updated successfully!</span>
+                    </div>
+                    <div class="message error" id="errorMessage">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span>Error updating profile. Please try again.</span>
                     </div>
                 </div>
             </div>
@@ -252,6 +503,6 @@
         </div>
     </div>
 
-    <script src="../js/vendor-dashboard.js"></script>
+    <script src="../js/vendor-dashboard-new.js"></script>
 </body>
 </html>
