@@ -325,4 +325,223 @@ if ('ontouchstart' in window) {
     });
 }
 
+// Login Modal Functionality
+const loginIcon = document.getElementById('loginIcon');
+const loginModalOverlay = document.getElementById('loginModalOverlay');
+const loginModal = document.getElementById('loginModal');
+const modalCloseBtn = document.getElementById('modalCloseBtn');
+const modalLoginForm = document.getElementById('modalLoginForm');
+const modalUsername = document.getElementById('modalUsername');
+const modalPassword = document.getElementById('modalPassword');
+const modalTogglePassword = document.getElementById('modalTogglePassword');
+const modalLoginBtn = document.getElementById('modalLoginBtn');
+const modalErrorMessage = document.getElementById('modalErrorMessage');
+const modalRememberMe = document.getElementById('modalRememberMe');
+
+// Open login modal
+function openLoginModal() {
+    loginModalOverlay.classList.add('show');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => {
+        modalUsername.focus();
+    }, 300);
+}
+
+// Close login modal
+function closeLoginModal() {
+    loginModalOverlay.classList.remove('show');
+    document.body.style.overflow = '';
+    hideModalError();
+    modalLoginForm.reset();
+    hideModalLoading();
+}
+
+// Show modal loading state
+function showModalLoading() {
+    modalLoginBtn.classList.add('loading');
+    modalLoginBtn.disabled = true;
+    document.querySelector('#modalLoginBtn .btn-text').style.opacity = '0';
+    document.querySelector('#modalLoginBtn .btn-loader').style.display = 'flex';
+}
+
+// Hide modal loading state
+function hideModalLoading() {
+    modalLoginBtn.classList.remove('loading');
+    modalLoginBtn.disabled = false;
+    document.querySelector('#modalLoginBtn .btn-text').style.opacity = '1';
+    document.querySelector('#modalLoginBtn .btn-loader').style.display = 'none';
+    document.querySelector('#modalLoginBtn .btn-text').textContent = 'Sign In';
+    modalLoginBtn.style.background = 'linear-gradient(135deg, #2e9c6a 0%, #27ae60 100%)';
+}
+
+// Show modal success state
+function showModalSuccess() {
+    modalLoginBtn.style.background = 'linear-gradient(135deg, #27ae60 0%, #2ecc71 100%)';
+    document.querySelector('#modalLoginBtn .btn-text').textContent = 'Success!';
+    document.querySelector('#modalLoginBtn .btn-loader').innerHTML = '<i class="fas fa-check"></i>';
+}
+
+// Show modal error message
+function showModalError(message) {
+    document.getElementById('modalErrorText').textContent = message;
+    modalErrorMessage.style.display = 'flex';
+    
+    // Auto-hide after 5 seconds
+    setTimeout(() => {
+        hideModalError();
+    }, 5000);
+}
+
+// Hide modal error message
+function hideModalError() {
+    modalErrorMessage.style.display = 'none';
+}
+
+// Modal authentication function
+function authenticateModalUser(username, password) {
+    // Demo credentials - replace with actual authentication logic
+    const validCredentials = [
+        { username: 'admin', password: 'admin123' },
+        { username: 'administrator', password: 'admin@2025' },
+        { username: 'tanzaadmin', password: 'tanza123' }
+    ];
+    
+    const isValid = validCredentials.some(cred => 
+        cred.username === username && cred.password === password
+    );
+    
+    if (isValid) {
+        // Success - save login state if remember me is checked
+        if (modalRememberMe.checked) {
+            localStorage.setItem('rememberLogin', 'true');
+            localStorage.setItem('username', username);
+        }
+        
+        // Show success animation
+        showModalSuccess();
+        
+        // Redirect to admin dashboard after success animation
+        setTimeout(() => {
+            window.location.href = '../admin/admin.html';
+        }, 1000);
+    } else {
+        hideModalLoading();
+        showModalError('Invalid username or password. Please try again.');
+        
+        // Add shake animation to modal
+        loginModal.style.animation = 'shake 0.5s ease-in-out, modalSlideIn 0.4s ease-out';
+        setTimeout(() => {
+            loginModal.style.animation = 'modalSlideIn 0.4s ease-out';
+        }, 500);
+    }
+}
+
+// Event listeners for login modal
+if (loginIcon) {
+    loginIcon.addEventListener('click', function(e) {
+        e.preventDefault();
+        openLoginModal();
+    });
+}
+
+if (modalCloseBtn) {
+    modalCloseBtn.addEventListener('click', closeLoginModal);
+}
+
+if (loginModalOverlay) {
+    loginModalOverlay.addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeLoginModal();
+        }
+    });
+}
+
+// Password toggle for modal
+if (modalTogglePassword) {
+    modalTogglePassword.addEventListener('click', function() {
+        const type = modalPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+        modalPassword.setAttribute('type', type);
+        
+        const icon = this.querySelector('i');
+        if (type === 'text') {
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        } else {
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        }
+    });
+}
+
+// Modal form submission
+if (modalLoginForm) {
+    modalLoginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const username = modalUsername.value.trim();
+        const password = modalPassword.value.trim();
+        
+        // Hide previous error messages
+        hideModalError();
+        
+        // Basic validation
+        if (!username || !password) {
+            showModalError('Please fill in all fields');
+            return;
+        }
+        
+        // Show loading state
+        showModalLoading();
+        
+        // Simulate login process
+        setTimeout(() => {
+            authenticateModalUser(username, password);
+        }, 1500);
+    });
+}
+
+// Modal input focus effects
+const modalInputs = document.querySelectorAll('.login-modal .input-container input');
+modalInputs.forEach(input => {
+    input.addEventListener('focus', function() {
+        this.parentElement.style.transform = 'translateY(-2px)';
+        this.parentElement.style.boxShadow = '0 4px 15px rgba(46, 156, 106, 0.1)';
+    });
+    
+    input.addEventListener('blur', function() {
+        this.parentElement.style.transform = 'translateY(0)';
+        this.parentElement.style.boxShadow = 'none';
+    });
+    
+    input.addEventListener('input', function() {
+        hideModalError(); // Hide error on input
+    });
+});
+
+// Check for remembered login in modal
+if (localStorage.getItem('rememberLogin') === 'true') {
+    const savedUsername = localStorage.getItem('username');
+    if (savedUsername && modalUsername) {
+        modalUsername.value = savedUsername;
+        if (modalRememberMe) {
+            modalRememberMe.checked = true;
+        }
+    }
+}
+
+// Keyboard shortcuts for modal
+document.addEventListener('keydown', function(e) {
+    // Escape key to close modal
+    if (e.key === 'Escape' && loginModalOverlay.classList.contains('show')) {
+        closeLoginModal();
+    }
+    
+    // Enter key to submit form when modal is open
+    if (e.key === 'Enter' && loginModalOverlay.classList.contains('show') && !modalLoginBtn.disabled) {
+        if (document.activeElement.tagName !== 'BUTTON') {
+            modalLoginForm.dispatchEvent(new Event('submit'));
+        }
+    }
+});
+
 } // End of guard condition
