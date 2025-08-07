@@ -424,3 +424,52 @@ if (logoutBtn) {
         }
     });
 }
+
+// Events Tab Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+    
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const tabId = this.getAttribute('data-tab');
+            
+            // Remove active class from all tabs and contents
+            tabBtns.forEach(b => b.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            
+            // Add active class to clicked tab and corresponding content
+            this.classList.add('active');
+            const targetContent = document.getElementById(tabId + '-tab');
+            if (targetContent) {
+                targetContent.classList.add('active');
+            }
+        });
+    });
+    
+    // Event actions functionality
+    const eventCards = document.querySelectorAll('.event-card');
+    eventCards.forEach(card => {
+        const registerBtns = card.querySelectorAll('.btn-primary');
+        registerBtns.forEach(btn => {
+            if (!btn.href && btn.textContent.includes('Register') || btn.textContent.includes('Join') || btn.textContent.includes('RSVP') || btn.textContent.includes('Enroll')) {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const eventTitle = card.querySelector('h3').textContent;
+                    alert(`Registration successful for: ${eventTitle}\n\nYou will receive a confirmation email shortly.`);
+                });
+            }
+        });
+        
+        // Add to calendar functionality
+        const calendarBtns = card.querySelectorAll('.btn-secondary');
+        calendarBtns.forEach(btn => {
+            if (btn.textContent.includes('Add to Calendar')) {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('Calendar event added! Check your default calendar application.');
+                });
+            }
+        });
+    });
+});
