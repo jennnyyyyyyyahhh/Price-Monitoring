@@ -65,10 +65,6 @@
                     <i class="fas fa-clipboard-list"></i>
                     <span>Submit Survey Response</span>
                 </a>
-                <a href="#" class="menu-item" data-section="stall-info">
-                    <i class="fas fa-store"></i>
-                    <span>Stall Information</span>
-                </a>
             </div>
             <div class="sidebar-footer">
                 <a href="#" class="logout">
@@ -780,10 +776,344 @@
 
             <div class="content-section" id="notices-section">
                 <div class="section-header">
-                    <h2>Notices</h2>
-                    <p>Important announcements from market management</p>
+                    <h2>Notices & Reports</h2>
+                    <p>Important announcements, compliance reports, and alerts from market management</p>
                 </div>
-                <!-- Notices content -->
+                
+                <div class="notices-content">
+                    <!-- Notice Filter Tabs -->
+                    <div class="notice-tabs">
+                        <button class="notice-tab-btn active" data-tab="all">All Notices</button>
+                        <button class="notice-tab-btn" data-tab="reports">Compliance Reports</button>
+                        <button class="notice-tab-btn" data-tab="alerts">Alerts & Warnings</button>
+                        <button class="notice-tab-btn" data-tab="announcements">Announcements</button>
+                        <button class="notice-tab-btn" data-tab="archived">Archived</button>
+                    </div>
+
+                    <!-- Notice Search and Filter -->
+                    <div class="notice-controls">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" placeholder="Search notices..." id="noticeSearch">
+                        </div>
+                        <div class="filter-controls">
+                            <select id="noticeTypeFilter">
+                                <option value="">All Types</option>
+                                <option value="overprice">Overprice Reports</option>
+                                <option value="weight">Weight Accuracy</option>
+                                <option value="due-date">Due Date Reminders</option>
+                                <option value="violation">Violation Notices</option>
+                                <option value="announcement">General Announcements</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- All Notices Tab -->
+                    <div class="notice-tab-content active" id="all-tab">
+                        <div class="notices-list">
+                            <!-- Critical Alert -->
+                            <div class="notice-card critical" data-type="overprice">
+                                <div class="notice-header">
+                                    <div class="notice-type critical-type">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                        CRITICAL - Overprice Report
+                                    </div>
+                                    <div class="notice-date">Aug 7, 2025 - 10:30 AM</div>
+                                </div>
+                                <div class="notice-content">
+                                    <h3>Price Violation Alert - Stall A-45</h3>
+                                    <p>Your recent price submission for <strong>Tomatoes (Premium)</strong> exceeds the maximum allowed markup by 35%. Current price: ₱85/kg vs Maximum allowed: ₱65/kg.</p>
+                                    <div class="notice-details">
+                                        <div class="detail-row">
+                                            <span class="label">Product:</span>
+                                            <span class="value">Tomatoes (Premium Grade)</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="label">Your Price:</span>
+                                            <span class="value price-violation">₱85.00/kg</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="label">Max Allowed:</span>
+                                            <span class="value">₱65.00/kg</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="label">Deadline to Fix:</span>
+                                            <span class="value deadline">Aug 8, 2025 - 5:00 PM</span>
+                                        </div>
+                                    </div>
+                                    <div class="notice-actions">
+                                        <button class="btn-primary">Update Price Now</button>
+                                        <button class="btn-secondary">View Details</button>
+                                        <button class="btn-secondary">Appeal Decision</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Weight Accuracy Warning -->
+                            <div class="notice-card warning" data-type="weight">
+                                <div class="notice-header">
+                                    <div class="notice-type warning-type">
+                                        <i class="fas fa-balance-scale"></i>
+                                        WARNING - Weight Accuracy Report
+                                    </div>
+                                    <div class="notice-date">Aug 6, 2025 - 2:15 PM</div>
+                                </div>
+                                <div class="notice-content">
+                                    <h3>Weight Measurement Discrepancy Detected</h3>
+                                    <p>Random weight verification conducted on <strong>Aug 6, 2025</strong> found discrepancies in your product measurements. Multiple items were underweight by significant margins.</p>
+                                    <div class="notice-details">
+                                        <div class="detail-row">
+                                            <span class="label">Inspection Date:</span>
+                                            <span class="value">August 6, 2025 - 11:30 AM</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="label">Inspector:</span>
+                                            <span class="value">Maria Santos - Market Inspector #12</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="label">Items Checked:</span>
+                                            <span class="value">12 products</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="label">Violations Found:</span>
+                                            <span class="value violation-count">4 items underweight</span>
+                                        </div>
+                                    </div>
+                                    <div class="violation-items">
+                                        <h4>Affected Products:</h4>
+                                        <ul>
+                                            <li><strong>Rice (5kg bag):</strong> Actual weight 4.7kg (-300g)</li>
+                                            <li><strong>Onions (1kg):</strong> Actual weight 950g (-50g)</li>
+                                            <li><strong>Potatoes (2kg):</strong> Actual weight 1.85kg (-150g)</li>
+                                            <li><strong>Carrots (1kg):</strong> Actual weight 920g (-80g)</li>
+                                        </ul>
+                                    </div>
+                                    <div class="notice-actions">
+                                        <button class="btn-primary">Schedule Re-inspection</button>
+                                        <button class="btn-secondary">View Full Report</button>
+                                        <button class="btn-secondary">Submit Response</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Due Date Reminder -->
+                            <div class="notice-card reminder" data-type="due-date">
+                                <div class="notice-header">
+                                    <div class="notice-type reminder-type">
+                                        <i class="fas fa-calendar-exclamation"></i>
+                                        REMINDER - Due Date Alert
+                                    </div>
+                                    <div class="notice-date">Aug 7, 2025 - 8:00 AM</div>
+                                </div>
+                                <div class="notice-content">
+                                    <h3>Multiple Deadlines Approaching</h3>
+                                    <p>You have several important deadlines coming up that require your immediate attention. Please review and take necessary actions.</p>
+                                    <div class="deadline-items">
+                                        <div class="deadline-item urgent">
+                                            <div class="deadline-info">
+                                                <h4>Monthly Sales Report Submission</h4>
+                                                <p>Submit your detailed sales report for July 2025</p>
+                                            </div>
+                                            <div class="deadline-time urgent">
+                                                <i class="fas fa-clock"></i>
+                                                Due: Aug 8, 2025
+                                            </div>
+                                        </div>
+                                        <div class="deadline-item warning">
+                                            <div class="deadline-info">
+                                                <h4>Business Permit Renewal</h4>
+                                                <p>Annual business permit renewal required</p>
+                                            </div>
+                                            <div class="deadline-time warning">
+                                                <i class="fas fa-clock"></i>
+                                                Due: Aug 15, 2025
+                                            </div>
+                                        </div>
+                                        <div class="deadline-item normal">
+                                            <div class="deadline-info">
+                                                <h4>Food Safety Training Certificate</h4>
+                                                <p>Complete mandatory food safety training</p>
+                                            </div>
+                                            <div class="deadline-time normal">
+                                                <i class="fas fa-clock"></i>
+                                                Due: Aug 20, 2025
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="notice-actions">
+                                        <button class="btn-primary">Submit Reports</button>
+                                        <button class="btn-secondary">Request Extension</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- General Announcement -->
+                            <div class="notice-card info" data-type="announcement">
+                                <div class="notice-header">
+                                    <div class="notice-type info-type">
+                                        <i class="fas fa-bullhorn"></i>
+                                        ANNOUNCEMENT - Market Policy Update
+                                    </div>
+                                    <div class="notice-date">Aug 5, 2025 - 9:00 AM</div>
+                                </div>
+                                <div class="notice-content">
+                                    <h3>New Operating Hours Effective August 15, 2025</h3>
+                                    <p>The Tanza Public Market will be implementing new operating hours to better serve our customers and optimize vendor operations.</p>
+                                    <div class="notice-details">
+                                        <div class="detail-row">
+                                            <span class="label">Current Hours:</span>
+                                            <span class="value">5:00 AM - 7:00 PM</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="label">New Hours:</span>
+                                            <span class="value highlight">4:30 AM - 8:00 PM</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="label">Effective Date:</span>
+                                            <span class="value">August 15, 2025</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="label">Reason:</span>
+                                            <span class="value">Increased customer demand for early morning and evening shopping</span>
+                                        </div>
+                                    </div>
+                                    <div class="notice-actions">
+                                        <button class="btn-secondary">Download Full Notice</button>
+                                        <button class="btn-secondary">Mark as Read</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Violation Notice -->
+                            <div class="notice-card violation" data-type="violation">
+                                <div class="notice-header">
+                                    <div class="notice-type violation-type">
+                                        <i class="fas fa-gavel"></i>
+                                        VIOLATION - Sanitation Notice
+                                    </div>
+                                    <div class="notice-date">Aug 4, 2025 - 3:45 PM</div>
+                                </div>
+                                <div class="notice-content">
+                                    <h3>Sanitation Standards Violation - First Warning</h3>
+                                    <p>During the routine sanitation inspection, several violations were observed in your stall area. Immediate corrective action is required.</p>
+                                    <div class="violation-details">
+                                        <h4>Violations Found:</h4>
+                                        <ul class="violation-list">
+                                            <li><i class="fas fa-times-circle"></i> Improper food storage containers</li>
+                                            <li><i class="fas fa-times-circle"></i> Inadequate cleaning of display area</li>
+                                            <li><i class="fas fa-times-circle"></i> Missing hand sanitizer station</li>
+                                        </ul>
+                                    </div>
+                                    <div class="notice-details">
+                                        <div class="detail-row">
+                                            <span class="label">Inspection Officer:</span>
+                                            <span class="value">Dr. Elena Rodriguez - Health Inspector</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="label">Re-inspection Date:</span>
+                                            <span class="value">August 10, 2025 - 10:00 AM</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="label">Fine if Not Corrected:</span>
+                                            <span class="value fine-amount">₱2,500.00</span>
+                                        </div>
+                                    </div>
+                                    <div class="notice-actions">
+                                        <button class="btn-primary">Schedule Correction</button>
+                                        <button class="btn-secondary">View Guidelines</button>
+                                        <button class="btn-secondary">Contact Inspector</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Success Notice -->
+                            <div class="notice-card success" data-type="announcement">
+                                <div class="notice-header">
+                                    <div class="notice-type success-type">
+                                        <i class="fas fa-check-circle"></i>
+                                        SUCCESS - Compliance Achievement
+                                    </div>
+                                    <div class="notice-date">Aug 3, 2025 - 11:20 AM</div>
+                                </div>
+                                <div class="notice-content">
+                                    <h3>Perfect Compliance Score - July 2025</h3>
+                                    <p>Congratulations! Your stall has achieved a perfect compliance score for the month of July 2025. Your dedication to quality and standards is commendable.</p>
+                                    <div class="achievement-details">
+                                        <div class="score-display">
+                                            <div class="score">100%</div>
+                                            <div class="score-label">Compliance Score</div>
+                                        </div>
+                                        <div class="achievement-breakdown">
+                                            <div class="metric">
+                                                <span class="metric-label">Price Compliance:</span>
+                                                <span class="metric-value perfect">100%</span>
+                                            </div>
+                                            <div class="metric">
+                                                <span class="metric-label">Weight Accuracy:</span>
+                                                <span class="metric-value perfect">100%</span>
+                                            </div>
+                                            <div class="metric">
+                                                <span class="metric-label">Sanitation Standards:</span>
+                                                <span class="metric-value perfect">100%</span>
+                                            </div>
+                                            <div class="metric">
+                                                <span class="metric-label">Documentation:</span>
+                                                <span class="metric-value perfect">100%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="notice-actions">
+                                        <button class="btn-primary">Download Certificate</button>
+                                        <button class="btn-secondary">Share Achievement</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Action Panel -->
+                    <div class="quick-actions-panel">
+                        <h3>Quick Actions</h3>
+                        <div class="quick-actions">
+                            <button class="quick-action-btn price-update">
+                                <i class="fas fa-tag"></i>
+                                <span>Update Prices</span>
+                            </button>
+                            <button class="quick-action-btn report-submit">
+                                <i class="fas fa-file-upload"></i>
+                                <span>Submit Report</span>
+                            </button>
+                            <button class="quick-action-btn schedule-inspection">
+                                <i class="fas fa-calendar-check"></i>
+                                <span>Schedule Inspection</span>
+                            </button>
+                            <button class="quick-action-btn contact-admin">
+                                <i class="fas fa-phone"></i>
+                                <span>Contact Admin</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Notice Statistics -->
+                    <div class="notice-stats">
+                        <div class="stat-item">
+                            <div class="stat-number critical">2</div>
+                            <div class="stat-label">Critical Issues</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number warning">3</div>
+                            <div class="stat-label">Warnings</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number success">15</div>
+                            <div class="stat-label">Resolved</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number info">8</div>
+                            <div class="stat-label">Announcements</div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="content-section" id="survey-section">

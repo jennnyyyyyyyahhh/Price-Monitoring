@@ -54,6 +54,40 @@ body {
     flex: 1;
 }
 
+.sidebar-toggle {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: #666;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    position: relative;
+}
+
+.sidebar-toggle:hover {
+    background: #f0f0f0;
+    color: #333;
+    transform: scale(1.05);
+}
+
+.sidebar-toggle:active {
+    transform: scale(0.95);
+}
+
+/* Show sidebar toggle on mobile */
+@media (max-width: 768px) {
+    .sidebar-toggle {
+        display: flex;
+    }
+}
+
 .nav-right {
     display: flex;
     align-items: center;
@@ -465,6 +499,9 @@ body {
     height: calc(100vh - 64px);
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 800;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
 }
 
 /* Main Content */
@@ -475,10 +512,21 @@ body {
     min-height: calc(100vh - 64px);
     background: #f5f6fa;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 1;
 }
 
 .main-content.expanded {
     margin-left: 50px;
+}
+
+/* Ensure mobile overlay is hidden on desktop */
+@media (min-width: 769px) {
+    .mobile-sidebar-overlay {
+        display: none !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+    }
 }
 
 @media (max-width: 768px) {
@@ -848,6 +896,17 @@ body {
         grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
         gap: 1.5rem;
     }
+    
+    /* Responsive table adjustments */
+    .table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .vendors-table,
+    .users-table {
+        min-width: 800px;
+    }
 }
 
 @media (max-width: 992px) {
@@ -879,6 +938,30 @@ body {
     .filter-select {
         min-width: 140px;
     }
+    
+    /* Management controls responsive */
+    .vendor-management-controls,
+    .user-management-controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1.5rem;
+    }
+    
+    .controls-left,
+    .controls-right {
+        justify-content: space-between;
+        width: 100%;
+    }
+    
+    .search-container input {
+        width: 220px;
+    }
+    
+    .filter-container {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
 }
 
 @media (max-width: 768px) {
@@ -903,6 +986,8 @@ body {
     
     .mobile-sidebar-overlay {
         display: block;
+        opacity: 0;
+        pointer-events: none;
     }
     
     .mobile-sidebar-overlay.active {
@@ -1003,11 +1088,140 @@ body {
         min-width: unset;
         max-width: 200px;
     }
+    
+    /* Enhanced table responsiveness */
+    .table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 12px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    }
+    
+    .vendors-table,
+    .users-table {
+        min-width: 700px;
+        font-size: 14px;
+    }
+    
+    .vendors-table th,
+    .vendors-table td,
+    .users-table th,
+    .users-table td {
+        padding: 12px 8px;
+        white-space: nowrap;
+    }
+    
+    .vendor-details,
+    .user-details {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        min-width: 120px;
+    }
+    
+    .vendor-name,
+    .user-name {
+        font-size: 13px;
+        font-weight: 600;
+    }
+    
+    .vendor-id,
+    .user-id {
+        font-size: 11px;
+        opacity: 0.7;
+    }
+    
+    .action-buttons {
+        display: flex;
+        gap: 4px;
+        flex-wrap: nowrap;
+    }
+    
+    .btn-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 12px;
+    }
+    
+    /* Management controls */
+    .vendor-management-controls,
+    .user-management-controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+    }
+    
+    .controls-left,
+    .controls-right {
+        justify-content: space-between;
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    
+    .search-container {
+        flex: 1;
+        min-width: 200px;
+    }
+    
+    .search-container input {
+        width: 100%;
+        min-width: 200px;
+    }
+    
+    .filter-container {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        flex-shrink: 0;
+    }
+    
+    .filter-select {
+        min-width: 120px;
+        flex: 1;
+    }
+    
+    /* Modal responsiveness */
+    .modal-content {
+        width: 90%;
+        max-width: 500px;
+        margin: 2rem auto;
+        max-height: calc(100vh - 4rem);
+        overflow-y: auto;
+    }
+    
+    .modal-body {
+        max-height: calc(100vh - 200px);
+        overflow-y: auto;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .form-section h3 {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+    }
+    
+    /* Pagination responsiveness */
+    .pagination-container {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .pagination {
+        justify-content: center;
+    }
 }
 
 @media (max-width: 480px) {
     .top-navbar {
         padding: 0 10px;
+        height: 56px;
     }
     
     .nav-left .logo {
@@ -1020,6 +1234,7 @@ body {
     
     .main-content {
         padding: 0.75rem;
+        margin-top: 56px;
     }
     
     .section-header h1 {
@@ -1137,6 +1352,191 @@ body {
     .nav-link i {
         font-size: 1rem;
     }
+    
+    /* Enhanced mobile table styles */
+    .table-container {
+        margin: 0 -0.75rem;
+        border-radius: 0;
+        box-shadow: none;
+        border-top: 1px solid #e0e0e0;
+        border-bottom: 1px solid #e0e0e0;
+    }
+    
+    .vendors-table,
+    .users-table {
+        min-width: 600px;
+        font-size: 12px;
+        border-radius: 0;
+    }
+    
+    .vendors-table th,
+    .vendors-table td,
+    .users-table th,
+    .users-table td {
+        padding: 8px 6px;
+        font-size: 11px;
+    }
+    
+    .vendor-details,
+    .user-details {
+        min-width: 100px;
+        gap: 2px;
+    }
+    
+    .vendor-name,
+    .user-name {
+        font-size: 12px;
+    }
+    
+    .vendor-id,
+    .user-id {
+        font-size: 10px;
+    }
+    
+    .category-badge,
+    .role-badge,
+    .status-badge {
+        font-size: 9px;
+        padding: 2px 6px;
+        border-radius: 12px;
+    }
+    
+    .btn-icon {
+        width: 28px;
+        height: 28px;
+        font-size: 10px;
+    }
+    
+    .action-buttons {
+        gap: 2px;
+        flex-direction: row;
+        justify-content: center;
+    }
+    
+    /* Mobile management controls */
+    .vendor-management-controls,
+    .user-management-controls {
+        margin-bottom: 1rem;
+        padding: 1rem;
+        background: #f8f9fa;
+        border-radius: 8px;
+        margin-left: -0.75rem;
+        margin-right: -0.75rem;
+    }
+    
+    .controls-left,
+    .controls-right {
+        flex-direction: column;
+        gap: 0.75rem;
+        width: 100%;
+    }
+    
+    .search-container {
+        width: 100%;
+    }
+    
+    .search-container input {
+        width: 100%;
+        min-width: unset;
+        font-size: 14px;
+        padding: 10px 10px 10px 35px;
+    }
+    
+    .filter-container {
+        width: 100%;
+        gap: 0.5rem;
+    }
+    
+    .filter-select {
+        font-size: 14px;
+        padding: 10px 12px;
+    }
+    
+    /* Mobile modal styles */
+    .modal {
+        padding: 0;
+    }
+    
+    .modal-content {
+        width: 100%;
+        max-width: none;
+        margin: 0;
+        border-radius: 0;
+        max-height: 100vh;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .modal-header {
+        padding: 1rem;
+        border-bottom: 1px solid #e0e0e0;
+        flex-shrink: 0;
+    }
+    
+    .modal-body {
+        padding: 1rem;
+        flex: 1;
+        overflow-y: auto;
+        max-height: none;
+    }
+    
+    .modal-footer {
+        padding: 1rem;
+        border-top: 1px solid #e0e0e0;
+        flex-shrink: 0;
+    }
+    
+    .form-section {
+        margin-bottom: 1.5rem;
+    }
+    
+    .form-section h3 {
+        font-size: 1rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .form-group label {
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        font-size: 14px;
+        padding: 12px;
+    }
+    
+    /* Mobile pagination */
+    .pagination-container {
+        padding: 1rem;
+        margin: 0 -0.75rem;
+        background: #f8f9fa;
+        border-radius: 0;
+        border-top: 1px solid #e0e0e0;
+    }
+    
+    .pagination-info {
+        font-size: 0.85rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .pagination-btn,
+    .pagination-number {
+        width: 36px;
+        height: 36px;
+        font-size: 12px;
+    }
+    
+    /* Touch improvements */
+    .btn-icon,
+    .nav-link,
+    .pagination-btn,
+    .pagination-number {
+        min-height: 44px;
+        min-width: 44px;
+    }
 }
 
 /* Landscape orientation adjustments for mobile */
@@ -1198,6 +1598,298 @@ body {
 button, .nav-link, .filter-select {
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal.active {
+    display: flex;
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.modal-header h2 {
+    margin: 0;
+    color: #333;
+    font-size: 1.5rem;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #666;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.modal-close:hover {
+    background: #f0f0f0;
+    color: #333;
+}
+
+.modal-body {
+    padding: 2rem;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding: 1.5rem 2rem;
+    border-top: 1px solid #e0e0e0;
+}
+
+/* Form Styles */
+.form-section {
+    margin-bottom: 2rem;
+}
+
+.form-section h3 {
+    margin: 0 0 1.5rem 0;
+    color: #333;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 0.5rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #555;
+    font-size: 14px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 12px 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #2e9c6a;
+    box-shadow: 0 0 0 3px rgba(46, 156, 106, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Button Styles */
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    min-height: 44px;
+}
+
+.btn-primary {
+    background: #2e9c6a;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #27855a;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(46, 156, 106, 0.3);
+}
+
+.btn-secondary {
+    background: #f8f9fa;
+    color: #666;
+    border: 1px solid #ddd;
+}
+
+.btn-secondary:hover {
+    background: #e9ecef;
+    color: #333;
+    border-color: #bbb;
+}
+
+/* Additional responsive improvements for very small screens */
+@media (max-width: 320px) {
+    .top-navbar {
+        padding: 0 8px;
+    }
+    
+    .main-content {
+        padding: 0.5rem;
+    }
+    
+    .sidebar {
+        width: 240px;
+    }
+    
+    .vendors-table,
+    .users-table {
+        min-width: 500px;
+        font-size: 10px;
+    }
+    
+    .vendors-table th,
+    .vendors-table td,
+    .users-table th,
+    .users-table td {
+        padding: 6px 4px;
+        font-size: 10px;
+    }
+    
+    .btn-icon {
+        width: 24px;
+        height: 24px;
+        font-size: 9px;
+    }
+    
+    .category-badge,
+    .role-badge,
+    .status-badge {
+        font-size: 8px;
+        padding: 1px 4px;
+    }
+}
+
+/* Landscape tablet optimizations */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    .stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .category-trends-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .vendor-management-controls,
+    .user-management-controls {
+        flex-direction: row;
+        align-items: center;
+    }
+    
+    .controls-left,
+    .controls-right {
+        flex-direction: row;
+        width: auto;
+    }
+}
+
+/* High DPI display optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .stat-icon,
+    .category-icon {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+/* Prevent grayish overlay effects during transitions */
+html, body {
+    overflow-x: hidden;
+    background-color: #f5f6fa;
+}
+
+/* Ensure clean state management */
+.sidebar {
+    will-change: transform;
+}
+
+.main-content {
+    will-change: margin-left;
+}
+
+/* Force hardware acceleration for smooth transitions */
+.mobile-sidebar-overlay,
+.modal,
+.sidebar,
+.main-content {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+/* Fix for webkit overflow issues */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    .main-content {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+/* Prevent overlay bleeding on modern browsers */
+@supports (backdrop-filter: blur(10px)) {
+    .mobile-sidebar-overlay.active {
+        backdrop-filter: blur(2px);
+    }
+    
+    .modal.active {
+        backdrop-filter: blur(3px);
+    }
 }
 
 /* Improve touch targets */
@@ -1303,6 +1995,194 @@ button:focus,
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+/* Vendor Management Styles */
+.vendor-management-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.vendors-table {
+    width: 100%;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    border-collapse: collapse;
+}
+
+.vendors-table thead {
+    background: #f8f9fa;
+}
+
+.vendors-table th,
+.vendors-table td {
+    padding: 16px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.vendors-table th {
+    font-weight: 600;
+    color: #555;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.vendors-table tbody tr {
+    transition: all 0.3s ease;
+}
+
+.vendors-table tbody tr:hover {
+    background: #f8f9fa;
+}
+
+.vendor-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.vendor-name {
+    font-weight: 600;
+    color: #333;
+    font-size: 14px;
+}
+
+.vendor-id {
+    font-size: 12px;
+    color: #666;
+}
+
+/* Category Badges */
+.category-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.category-badge.fruits {
+    background: #e8f5e8;
+    color: #4caf50;
+}
+
+.category-badge.vegetables {
+    background: #e3f2fd;
+    color: #1976d2;
+}
+
+.category-badge.seafood {
+    background: #e1f5fe;
+    color: #0277bd;
+}
+
+.category-badge.meat {
+    background: #fce4ec;
+    color: #c2185b;
+}
+
+.category-badge.poultry {
+    background: #fff3e0;
+    color: #f57c00;
+}
+
+.category-badge.rice {
+    background: #f3e5f5;
+    color: #7b1fa2;
+}
+
+/* Edit Vendor Buttons */
+.btn-icon.edit-vendor {
+    background: #e3f2fd;
+    color: #1976d2;
+}
+
+.btn-icon.view-vendor {
+    background: #e8f5e8;
+    color: #4caf50;
+}
+
+.btn-icon.suspend-vendor {
+    background: #ffebee;
+    color: #f44336;
+}
+
+.btn-icon.approve-vendor {
+    background: #e8f5e8;
+    color: #4caf50;
+}
+
+.btn-icon.reactivate-vendor {
+    background: #fff3e0;
+    color: #f57c00;
+}
+
+.btn-icon:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Pagination Styles */
+.pagination-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+    padding: 1rem 0;
+}
+
+.pagination-info {
+    color: #666;
+    font-size: 14px;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.pagination-btn,
+.pagination-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #ddd;
+    background: white;
+    color: #666;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.pagination-btn:hover:not([disabled]),
+.pagination-number:hover {
+    background: #f8f9fa;
+    border-color: #2e9c6a;
+    color: #2e9c6a;
+}
+
+.pagination-number.active {
+    background: #2e9c6a;
+    border-color: #2e9c6a;
+    color: white;
+}
+
+.pagination-btn[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 /* User Management Styles */

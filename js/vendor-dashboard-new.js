@@ -472,4 +472,132 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+    
+    // Notices Tab Functionality
+    const noticeTabBtns = document.querySelectorAll('.notice-tab-btn');
+    const noticeTabContents = document.querySelectorAll('.notice-tab-content');
+    
+    noticeTabBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const tabId = this.getAttribute('data-tab');
+            
+            // Remove active class from all tabs and contents
+            noticeTabBtns.forEach(b => b.classList.remove('active'));
+            noticeTabContents.forEach(content => content.classList.remove('active'));
+            
+            // Add active class to clicked tab and corresponding content
+            this.classList.add('active');
+            const targetContent = document.getElementById(tabId + '-tab');
+            if (targetContent) {
+                targetContent.classList.add('active');
+            }
+        });
+    });
+    
+    // Notice Search Functionality
+    const noticeSearch = document.getElementById('noticeSearch');
+    const noticeTypeFilter = document.getElementById('noticeTypeFilter');
+    const noticeCards = document.querySelectorAll('.notice-card');
+    
+    function filterNotices() {
+        const searchTerm = noticeSearch?.value.toLowerCase() || '';
+        const selectedType = noticeTypeFilter?.value || '';
+        
+        noticeCards.forEach(card => {
+            const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
+            const content = card.querySelector('p')?.textContent.toLowerCase() || '';
+            const cardType = card.getAttribute('data-type') || '';
+            
+            const matchesSearch = title.includes(searchTerm) || content.includes(searchTerm);
+            const matchesType = !selectedType || cardType === selectedType;
+            
+            if (matchesSearch && matchesType) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+    
+    if (noticeSearch) {
+        noticeSearch.addEventListener('input', filterNotices);
+    }
+    
+    if (noticeTypeFilter) {
+        noticeTypeFilter.addEventListener('change', filterNotices);
+    }
+    
+    // Notice Actions Functionality
+    const noticeActionBtns = document.querySelectorAll('.notice-actions .btn-primary, .notice-actions .btn-secondary');
+    noticeActionBtns.forEach(btn => {
+        if (!btn.href) {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const action = this.textContent.trim();
+                const noticeTitle = this.closest('.notice-card').querySelector('h3').textContent;
+                
+                switch(action) {
+                    case 'Update Price Now':
+                        alert(`Redirecting to price update form for the reported item...`);
+                        break;
+                    case 'Schedule Re-inspection':
+                        alert(`Re-inspection scheduled successfully!\n\nInspection Date: August 10, 2025\nTime: 10:00 AM\nInspector: Maria Santos`);
+                        break;
+                    case 'Submit Reports':
+                        alert(`Opening report submission portal...`);
+                        break;
+                    case 'Request Extension':
+                        alert(`Extension request form opened. Please provide justification for the delay.`);
+                        break;
+                    case 'Schedule Correction':
+                        alert(`Correction schedule created. You have 3 days to address all violations.`);
+                        break;
+                    case 'Download Certificate':
+                        alert(`Downloading compliance certificate...`);
+                        break;
+                    case 'Mark as Read':
+                        this.closest('.notice-card').style.opacity = '0.7';
+                        this.textContent = 'Marked as Read';
+                        this.disabled = true;
+                        break;
+                    case 'View Details':
+                    case 'View Full Report':
+                    case 'View Guidelines':
+                        alert(`Opening detailed view for: ${noticeTitle}`);
+                        break;
+                    case 'Submit Response':
+                    case 'Appeal Decision':
+                    case 'Contact Inspector':
+                    case 'Contact Admin':
+                        alert(`Opening contact form...`);
+                        break;
+                    default:
+                        alert(`Action: ${action} - Feature coming soon!`);
+                }
+            });
+        }
+    });
+    
+    // Quick Actions Functionality
+    const quickActionBtns = document.querySelectorAll('.quick-action-btn');
+    quickActionBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const action = this.querySelector('span').textContent.trim();
+            
+            switch(action) {
+                case 'Update Prices':
+                    alert('Redirecting to price management dashboard...');
+                    break;
+                case 'Submit Report':
+                    alert('Opening report submission portal...');
+                    break;
+                case 'Schedule Inspection':
+                    alert('Opening inspection scheduling system...');
+                    break;
+                case 'Contact Admin':
+                    alert('Opening admin contact form...');
+                    break;
+            }
+        });
+    });
 });
