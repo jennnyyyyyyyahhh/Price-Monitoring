@@ -589,4 +589,31 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('Facebook login would be implemented here!');
         });
     }
+
+    // Floating Submit Report Button functionality
+    const submitReportBtn = document.getElementById('submitReportBtn');
+
+    if (submitReportBtn) {
+        submitReportBtn.addEventListener('click', function() {
+            // Handle submit report action
+            console.log('Submit Report button clicked from landing page');
+            
+            // You can add your submit report functionality here
+            // For now, show a simple alert
+            alert('Submit Report functionality!\n\nThis could:\n• Open a report submission form\n• Redirect to vendor dashboard\n• Open a modal for quick reporting');
+            
+            // Example: Redirect to vendor dashboard
+            // window.location.href = 'vendor-dashboard.html';
+            // or showReportModal();
+        });
+        
+        // Add some visual feedback on hover
+        submitReportBtn.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-2px) scale(1.05)';
+        });
+        
+        submitReportBtn.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+    }
 });

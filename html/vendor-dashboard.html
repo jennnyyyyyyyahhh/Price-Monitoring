@@ -3,86 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vendor Dashboard - Tanza Public Market</title>
-    <link rel="stylesheet" href="../css/landing-new.css">
+    <title>Vendor Dashboard - Tanza Market</title>
     <link rel="stylesheet" href="../css/vendor-dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <!-- Navigation Header -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">
-                <i class="fas fa-shopping-cart"></i>
-                <span class="logo-text">
-                    <strong>TANZA PUBLIC MARKET</strong>
-                    <small>VENDOR DASHBOARD</small>
-                </span>
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="header-center">
+                <div class="site-brand">
+                    <i class="fas fa-store"></i>
+                    <h1>Tanza Market</h1>
+                </div>
             </div>
-            <ul class="nav-menu">
-                <li><a href="../html/landing-new.html" class="nav-link">Home</a></li>
-                <li><a href="../html/landing-new.html#about" class="nav-link">About</a></li>
-                <li><a href="../html/landing-new.html#services" class="nav-link">Services</a></li>
-                <li><a href="../html/landing-new.html#contact" class="nav-link">Contact</a></li>
-            </ul>
-            <div class="nav-buttons">
-                <div class="notification-container">
-                    <button class="notification-btn" id="notificationBtn" title="Notifications">
+            <div class="header-right">
+                <nav class="header-nav">
+                    <a href="../html/landing.html">Home</a>
+                    <a href="../html/landing.html#blog">Blog</a>
+                    <a href="../html/landing.html#services">Services</a>
+                </nav>
+                <div class="header-user-info">
+                    <div class="notifications">
                         <i class="fas fa-bell"></i>
-                        <span class="notification-badge" id="notificationBadge">3</span>
-                    </button>
-                    <div class="notification-dropdown" id="notificationDropdown">
-                        <div class="notification-header">
-                            <h3>Notifications</h3>
-                            <button class="mark-all-read" id="markAllRead">Mark all as read</button>
-                        </div>
-                        <div class="notification-list">
-                            <div class="notification-item unread" data-id="1">
-                                <div class="notification-icon price-alert">
-                                    <i class="fas fa-arrow-up"></i>
-                                </div>
-                                <div class="notification-content">
-                                    <h4>Price Alert: Tomatoes</h4>
-                                    <p>Price increased by 15% in the last hour</p>
-                                    <span class="notification-time">2 minutes ago</span>
-                                </div>
-                            </div>
-                            <div class="notification-item unread" data-id="2">
-                                <div class="notification-icon supply-alert">
-                                    <i class="fas fa-exclamation-triangle"></i>
-                                </div>
-                                <div class="notification-content">
-                                    <h4>New Order: Rice</h4>
-                                    <p>Customer ordered 5kg of rice</p>
-                                    <span class="notification-time">15 minutes ago</span>
-                                </div>
-                            </div>
-                            <div class="notification-item unread" data-id="3">
-                                <div class="notification-icon market-update">
-                                    <i class="fas fa-info-circle"></i>
-                                </div>
-                                <div class="notification-content">
-                                    <h4>Vendor Update</h4>
-                                    <p>New vendor guidelines available</p>
-                                    <span class="notification-time">1 hour ago</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="notification-footer">
-                            <a href="#" class="view-all-notifications">View All Notifications</a>
-                        </div>
+                        <span class="notification-count">3</span>
+                    </div>
+                    <div class="user">
+                        <span>Jenny Cordero</span>
+                        <img src="https://via.placeholder.com/32" alt="User" id="topbarUserPhoto">
                     </div>
                 </div>
-                <a href="../html/price-dashboard.html" class="btn btn-outline">Price Monitor</a>
-                <button class="btn btn-outline" id="loginSignupBtn">Login / Sign Up</button>
-            </div>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
             </div>
         </div>
-    </nav>
+    </header>
 
     <div class="dashboard-container">
         <!-- Sidebar -->
@@ -90,25 +43,28 @@
             <div class="sidebar-header">
                 <div class="vendor-logo">TANZA MARKET</div>
                 <div class="vendor-name">Vendor Dashboard</div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
             </div>
             <div class="sidebar-menu">
-                <a href="#" class="menu-item active" data-section="dashboard">
+                <a href="#" class="menu-item active" data-section="dashboard" data-tooltip="Dashboard">
                     <i class="fas fa-tachometer-alt"></i>
                     <span>Dashboard</span>
                 </a>
-                <a href="#" class="menu-item" data-section="vendor-profile">
+                <a href="#" class="menu-item" data-section="vendor-profile" data-tooltip="Vendor Profile">
                     <i class="fas fa-user-circle"></i>
                     <span>Vendor Profile</span>
                 </a>
-                <a href="#" class="menu-item" data-section="events">
+                <a href="#" class="menu-item" data-section="events" data-tooltip="Events">
                     <i class="fas fa-calendar-alt"></i>
                     <span>Events</span>
                 </a>
-                <a href="#" class="menu-item" data-section="notices">
+                <a href="#" class="menu-item" data-section="notices" data-tooltip="Notices">
                     <i class="fas fa-bell"></i>
                     <span>Notices</span>
                 </a>
-                <a href="#" class="menu-item" data-section="survey-response">
+                <a href="#" class="menu-item" data-section="survey-response" data-tooltip="Submit Survey Response">
                     <i class="fas fa-clipboard-list"></i>
                     <span>Submit Survey Response</span>
                 </a>
@@ -1181,7 +1137,6 @@
         </div>
     </div>
 
-    <script src="../js/landing-new.js"></script>
-    <script src="../js/vendor-dashboard-new.js"></script>
+    <script src="../js/vendor-dashboard.js"></script>
 </body>
 </html>

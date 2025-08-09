@@ -1,31 +1,93 @@
 // Vendor Dashboard JS
 
+// Sidebar toggle functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const sidebar = document.querySelector('.sidebar');
+
+    // Initialize sidebar toggle functionality
+    if (sidebarToggle && sidebar) {
+        // Add click event listener
+        sidebarToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            console.log('Toggle button clicked'); // Debug log
+            
+            // Toggle the collapsed class
+            sidebar.classList.toggle('collapsed');
+            
+            // Save collapsed state to localStorage
+            const isCollapsed = sidebar.classList.contains('collapsed');
+            localStorage.setItem('sidebarCollapsed', isCollapsed);
+            
+            console.log('Sidebar collapsed:', isCollapsed); // Debug log
+        });
+
+        // Add visual feedback on mousedown
+        sidebarToggle.addEventListener('mousedown', function() {
+            this.style.transform = 'translateY(-50%) scale(0.9)';
+        });
+
+        // Reset visual feedback on mouseup
+        sidebarToggle.addEventListener('mouseup', function() {
+            this.style.transform = 'translateY(-50%) scale(1)';
+        });
+
+        // Reset visual feedback on mouse leave
+        sidebarToggle.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(-50%) scale(1)';
+        });
+
+        // Load saved sidebar state - Force expanded mode initially
+        // Clear any stored collapsed state to ensure content is visible
+        localStorage.removeItem('sidebarCollapsed');
+        
+        // Ensure sidebar starts expanded
+        sidebar.classList.remove('collapsed');
+        
+        // Optional: If you want to restore saved state later, uncomment below
+        // const isCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
+        // if (isCollapsed) {
+        //     sidebar.classList.add('collapsed');
+        // }
+    } else {
+        console.error('Sidebar toggle elements not found'); // Debug log
+    }
+});
+
 // Handle menu navigation
 const menuItems = document.querySelectorAll('.menu-item');
 const contentSections = document.querySelectorAll('.content-section');
 
 menuItems.forEach(item => {
     item.addEventListener('click', function(e) {
-        // Only handle dashboard section, let other links work naturally
-        const sectionName = this.getAttribute('data-section');
+        e.preventDefault(); // Prevent default for all menu items
         
-        if (sectionName === 'dashboard') {
-            e.preventDefault();
-            
+        const sectionName = this.getAttribute('data-section');
+        console.log('Menu item clicked:', sectionName); // Debug log
+        
+        if (sectionName) {
             // Update active menu item
             menuItems.forEach(i => i.classList.remove('active'));
             this.classList.add('active');
             
-            // Show dashboard section
+            // Hide all content sections
             contentSections.forEach(section => {
                 section.classList.remove('active');
             });
-            const targetSection = document.getElementById('dashboard-section');
+            
+            // Show the target section with a small delay for smooth transition
+            const targetSection = document.getElementById(sectionName + '-section');
             if (targetSection) {
-                targetSection.classList.add('active');
+                setTimeout(() => {
+                    targetSection.classList.add('active');
+                }, 50);
+                console.log('Showing section:', sectionName + '-section'); // Debug log
+            } else {
+                console.error('Section not found:', sectionName + '-section'); // Debug log
             }
         }
-        // For other menu items (with href), let the browser handle navigation naturally
     });
 });
 
@@ -169,5 +231,32 @@ if (notifications) {
     notifications.addEventListener('click', function() {
         // Toggle notifications panel (would be implemented)
         alert('Notifications would open here!');
+    });
+}
+
+// Floating Submit Report Button functionality
+const submitReportBtn = document.getElementById('submitReportBtn');
+
+if (submitReportBtn) {
+    submitReportBtn.addEventListener('click', function() {
+        // Handle submit report action
+        console.log('Submit Report button clicked');
+        
+        // You can add your submit report functionality here
+        // For now, show a simple alert
+        alert('Submit Report functionality would be implemented here!\n\nThis could open a form modal or navigate to a report submission page.');
+        
+        // Example: Open a modal or redirect to report form
+        // window.location.href = 'submit-report.html';
+        // or showReportModal();
+    });
+    
+    // Add some visual feedback on hover
+    submitReportBtn.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-2px) scale(1.05)';
+    });
+    
+    submitReportBtn.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0) scale(1)';
     });
 }
