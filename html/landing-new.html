@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tanza Public Market - Price Monitoring</title>
+    <link rel="stylesheet" href="../css/landing-new.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="logo-text">
+                    <strong>TANZA PUBLIC MARKET</strong>
+                    <small>PRICE MONITORING</small>
+                </span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <div class="notification-container">
+                    <button class="notification-btn" id="notificationBtn" title="Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge" id="notificationBadge">3</span>
+                    </button>
+                    <div class="notification-dropdown" id="notificationDropdown">
+                        <div class="notification-header">
+                            <h3>Notifications</h3>
+                            <button class="mark-all-read" id="markAllRead">Mark all as read</button>
+                        </div>
+                        <div class="notification-list">
+                            <div class="notification-item unread" data-id="1">
+                                <div class="notification-icon price-alert">
+                                    <i class="fas fa-arrow-up"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <h4>Price Alert: Tomatoes</h4>
+                                    <p>Price increased by 15% in the last hour</p>
+                                    <span class="notification-time">2 minutes ago</span>
+                                </div>
+                            </div>
+                            <div class="notification-item unread" data-id="2">
+                                <div class="notification-icon supply-alert">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <h4>Low Supply Alert: Rice</h4>
+                                    <p>Only 5 vendors have rice available</p>
+                                    <span class="notification-time">15 minutes ago</span>
+                                </div>
+                            </div>
+                            <div class="notification-item unread" data-id="3">
+                                <div class="notification-icon market-update">
+                                    <i class="fas fa-info-circle"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <h4>Market Update</h4>
+                                    <p>New pricing data available for vegetables</p>
+                                    <span class="notification-time">1 hour ago</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="notification-footer">
+                            <a href="#" class="view-all-notifications">View All Notifications</a>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-outline" id="loginSignupBtn">Login / Sign Up</button>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">Real-Time Price Monitoring<br>& Complaint Reporting</h1>
+                <p class="hero-subtitle">
+                    Empowering vendors and consumers<br>
+                    with transparency and fair pricing
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="location.href='../html/price-dashboard.html'">
+                        <i class="fas fa-chart-line"></i>
+                        View Today's Prices
+                    </button>
+                    <button class="btn btn-secondary">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Submit a Complaint
+                    </button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="grocery-illustration">
+                    <div class="grocery-bag">
+                        <div class="vegetables">
+                            <div class="carrot"></div>
+                            <div class="lettuce"></div>
+                            <div class="tomato"></div>
+                        </div>
+                        <div class="price-tags">
+                            <div class="price-tag yellow">$ 20</div>
+                            <div class="price-tag orange">$ 30</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Weather Forecast Section -->
+    <section class="weather-section">
+        <div class="container">
+            <h2 class="section-title">Weather Forecast (5 Days)</h2>
+            <div class="weather-grid">
+                <div class="weather-card">
+                    <div class="day">Mon</div>
+                    <div class="weather-icon">
+                        <i class="fas fa-cloud-sun"></i>
+                    </div>
+                    <div class="temp-range">
+                        <span class="temp-low">24°</span>
+                        <span class="temp-high">33°</span>
+                    </div>
+                    <div class="weather-desc">Partly cloudy</div>
+                </div>
+                <div class="weather-card">
+                    <div class="day">Tue</div>
+                    <div class="weather-icon">
+                        <i class="fas fa-cloud-rain"></i>
+                    </div>
+                    <div class="temp-range">
+                        <span class="temp-low">26°</span>
+                        <span class="temp-high">36°</span>
+                    </div>
+                    <div class="weather-desc">Rain-storm</div>
+                </div>
+                <div class="weather-card">
+                    <div class="day">Wed</div>
+                    <div class="weather-icon">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <div class="temp-range">
+                        <span class="temp-low">35°</span>
+                        <span class="temp-high">29°</span>
+                    </div>
+                    <div class="weather-desc">Sunny</div>
+                </div>
+                <div class="weather-card">
+                    <div class="day">Thu</div>
+                    <div class="weather-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="temp-range">
+                        <span class="temp-low">25°</span>
+                        <span class="temp-high">29°</span>
+                    </div>
+                    <div class="weather-desc">Thunderstorms</div>
+                </div>
+                <div class="weather-card">
+                    <div class="day">Fri</div>
+                    <div class="weather-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <div class="temp-range">
+                        <span class="temp-low">27°</span>
+                        <span class="temp-high">32°</span>
+                    </div>
+                    <div class="weather-desc">Cloudy</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="services">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Real-Time Price Monitoring</h3>
+                    <p>Get up-to-date prices for all market commodities with live updates throughout the day.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h3>Complaint Reporting</h3>
+                    <p>Report price discrepancies and market issues directly to authorities for quick resolution.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile Friendly</h3>
+                    <p>Access market information anytime, anywhere with our responsive mobile design.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Fair Trade</h3>
+                    <p>Promoting transparency and fair pricing for both vendors and consumers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>About Tanza Public Market</h2>
+                    <p>
+                        Tanza Public Market is committed to providing a transparent and fair marketplace for all. 
+                        Our price monitoring system ensures that both vendors and consumers have access to real-time 
+                        pricing information, promoting fair trade practices and market transparency.
+                    </p>
+                    <p>
+                        With our digital platform, we bridge the gap between traditional market practices and 
+                        modern technology, creating a more efficient and trustworthy marketplace for everyone.
+                    </p>
+                    <div class="stats">
+                        <div class="stat">
+                            <span class="stat-number">500+</span>
+                            <span class="stat-label">Daily Users</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">50+</span>
+                            <span class="stat-label">Vendors</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">100+</span>
+                            <span class="stat-label">Products Monitored</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="../img/market.jpg" alt="Tanza Public Market" onerror="this.src='https://via.placeholder.com/500x400/4CAF50/white?text=Market'">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Address</h4>
+                            <p>Tanza Public Market, Tanza, Cavite, Philippines</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Phone</h4>
+                            <p>+63 917 123 4567</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <p>info@tanzamarket.gov.ph</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <input type="text" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Your Message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="logo-text">
+                            <strong>TANZA PUBLIC MARKET</strong>
+                            <small>PRICE MONITORING</small>
+                        </span>
+                    </div>
+                    <p>Empowering vendors and consumers with transparency and fair pricing.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="../html/price-dashboard.html">Price Monitoring</a></li>
+                        <li><a href="#">Complaint Reporting</a></li>
+                        <li><a href="../html/vendor-dashboard.html">Vendor Portal</a></li>
+                        <li><a href="#">Market Updates</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Tanza Public Market. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login/Sign Up Modal -->
+    <div class="modal-overlay" id="authModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2 id="modalTitle">Login to Your Account</h2>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Login Form -->
+                <form id="loginForm" class="auth-form active">
+                    <div class="form-group">
+                        <label for="loginEmail">Email Address</label>
+                        <div class="input-container">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <div class="input-container">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                            <button type="button" class="password-toggle" id="loginPasswordToggle">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-options">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="rememberMe">
+                            <span class="checkmark"></span>
+                            Remember me
+                        </label>
+                        <a href="#" class="forgot-link">Forgot Password?</a>
+                    </div>
+                    <button type="submit" class="btn btn-primary auth-btn">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Login
+                    </button>
+                </form>
+
+                <!-- Sign Up Form -->
+                <form id="signupForm" class="auth-form">
+                    <div class="form-group">
+                        <label for="signupName">Full Name</label>
+                        <div class="input-container">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="signupName" placeholder="Enter your full name" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupEmail">Email Address</label>
+                        <div class="input-container">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="signupEmail" placeholder="Enter your email" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupPhone">Phone Number</label>
+                        <div class="input-container">
+                            <i class="fas fa-phone"></i>
+                            <input type="tel" id="signupPhone" placeholder="Enter your phone number" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupPassword">Password</label>
+                        <div class="input-container">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="signupPassword" placeholder="Create a password" required>
+                            <button type="button" class="password-toggle" id="signupPasswordToggle">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <div class="input-container">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+                            <button type="button" class="password-toggle" id="confirmPasswordToggle">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="userType">I am a:</label>
+                        <div class="input-container">
+                            <i class="fas fa-user-tag"></i>
+                            <select id="userType" required>
+                                <option value="">Select user type</option>
+                                <option value="consumer">Consumer</option>
+                                <option value="vendor">Vendor</option>
+                                <option value="admin">Market Administrator</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-options">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="agreeTerms" required>
+                            <span class="checkmark"></span>
+                            I agree to the <a href="#" class="terms-link">Terms and Conditions</a>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary auth-btn">
+                        <i class="fas fa-user-plus"></i>
+                        Sign Up
+                    </button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="auth-switch">
+                    <span id="switchText">Don't have an account?</span>
+                    <button type="button" id="switchForm" class="switch-btn">Sign Up</button>
+                </div>
+                <div class="social-login">
+                    <p>Or continue with:</p>
+                    <div class="social-buttons">
+                        <button class="social-btn google-btn">
+                            <i class="fab fa-google"></i>
+                            Google
+                        </button>
+                        <button class="social-btn facebook-btn">
+                            <i class="fab fa-facebook-f"></i>
+                            Facebook
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/landing-new.js"></script>
+</body>
+</html>

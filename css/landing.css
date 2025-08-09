@@ -1,3 +1,6 @@
+/* Import header styles from landing-new.css */
+@import url('landing-new.css');
+
 body {
     margin: 0;
     font-family: 'Montserrat', Arial, sans-serif;

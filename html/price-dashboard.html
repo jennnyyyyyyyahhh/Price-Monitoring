@@ -3,57 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Price Monitoring Dashboard - Tanza Market</title>
+    <title>Price Monitoring Dashboard - Tanza Public Market</title>
+    <link rel="stylesheet" href="../css/landing-new.css">
     <link rel="stylesheet" href="../css/price-dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <!-- Navigation Header -->
     <nav class="navbar">
-        <div class="logo">
-            <i class="fas fa-store"></i>
-            <span>Tanza Market</span>
-        </div>
-        <ul class="nav-links">
-            <li><a href="../html/landing.html">Home</a></li>
-            <li><a href="../html/landing.html#blog" id="blogNav">Blog</a></li>
-            <li><a href="../html/landing.html#services" id="servicesNav">Services</a></li>
-        </ul>
-        <div class="nav-icons">
-            <button class="mobile-menu-toggle" id="mobileMenuToggle">
-                <i class="fas fa-bars"></i>
-            </button>
-            <a href="../html/vendor-registration.html" class="icon-user" title="User Profile"></a>
-            <a href="#" class="icon-bell" id="notificationBell" title="Notifications"></a>
-            <a href="../html/vendor-dashboard.html" class="vendor-portal-btn">Vendor Portal</a>
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="logo-text">
+                    <strong>TANZA PUBLIC MARKET</strong>
+                    <small>PRICE MONITORING</small>
+                </span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../html/landing-new.html" class="nav-link">Home</a></li>
+                <li><a href="../html/landing-new.html#about" class="nav-link">About</a></li>
+                <li><a href="../html/landing-new.html#services" class="nav-link">Services</a></li>
+                <li><a href="../html/landing-new.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <div class="notification-container">
+                    <button class="notification-btn" id="notificationBtn" title="Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge" id="notificationBadge">3</span>
+                    </button>
+                    <div class="notification-dropdown" id="notificationDropdown">
+                        <div class="notification-header">
+                            <h3>Notifications</h3>
+                            <button class="mark-all-read" id="markAllRead">Mark all as read</button>
+                        </div>
+                        <div class="notification-list">
+                            <div class="notification-item unread" data-id="1">
+                                <div class="notification-icon price-alert">
+                                    <i class="fas fa-arrow-up"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <h4>Price Alert: Tomatoes</h4>
+                                    <p>Price increased by 15% in the last hour</p>
+                                    <span class="notification-time">2 minutes ago</span>
+                                </div>
+                            </div>
+                            <div class="notification-item unread" data-id="2">
+                                <div class="notification-icon supply-alert">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <h4>Low Supply Alert: Rice</h4>
+                                    <p>Only 5 vendors have rice available</p>
+                                    <span class="notification-time">15 minutes ago</span>
+                                </div>
+                            </div>
+                            <div class="notification-item unread" data-id="3">
+                                <div class="notification-icon market-update">
+                                    <i class="fas fa-info-circle"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <h4>Market Update</h4>
+                                    <p>New pricing data available for vegetables</p>
+                                    <span class="notification-time">1 hour ago</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="notification-footer">
+                            <a href="#" class="view-all-notifications">View All Notifications</a>
+                        </div>
+                    </div>
+                </div>
+                <a href="../html/vendor-dashboard.html" class="btn btn-outline">Vendor Portal</a>
+                <button class="btn btn-outline" id="loginSignupBtn">Login / Sign Up</button>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </nav>
-
-    <!-- Mobile Navigation Menu -->
-    <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
-    <div class="mobile-nav-menu" id="mobileNavMenu">
-        <div class="mobile-nav-header">
-            <div class="logo">
-                <i class="fas fa-store"></i>
-                <span>Tanza Market</span>
-            </div>
-            <button class="mobile-close-btn" id="mobileCloseBtn">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <ul class="mobile-nav-links">
-            <li><a href="../html/landing.html" id="mobileHome">Home</a></li>
-            <li><a href="../html/landing.html#blog" id="mobileBlog">Blog</a></li>
-            <li><a href="../html/landing.html#services" id="mobileServices">Services</a></li>
-            <li><a href="../html/vendor-registration.html" id="mobileProfile">User Profile</a></li>
-            <li><a href="../html/vendor-dashboard.html" id="mobileVendorPortal">Vendor Portal</a></li>
-        </ul>
-    </div>
 
     <!-- Top Navigation -->
     <nav class="top-nav">
         <div class="nav-brand">
             <i class="fas fa-chart-line"></i>
-            <span>Price Monitor</span>
+            <button id="priceMonitorBtn" style="background:none;border:none;color:inherit;font:inherit;cursor:pointer;padding:0;margin:0;font-weight:600;font-size:1.1em;display:inline;">Price Monitor</button>
+    <script>
+    // Scroll to commodity list when Price Monitor is clicked
+    document.addEventListener('DOMContentLoaded', function() {
+        var btn = document.getElementById('priceMonitorBtn');
+        var catList = document.getElementById('commodityCategoryList');
+        if (btn && catList) {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                catList.scrollIntoView({behavior:'smooth', block:'center'});
+                // Optionally, focus the first card for accessibility
+                var firstCard = catList.querySelector('.clickable-commodity');
+                if (firstCard) firstCard.focus();
+            });
+        }
+    });
+    </script>
         </div>
         <div class="nav-controls">
             <div class="search-box">
@@ -88,11 +139,7 @@
                 </button>
             </div>
             <div class="category-filters" id="categoryFilters">
-                <div class="filter-item active" data-category="all">
-                    <i class="fas fa-th-large"></i>
-                    <span>All Products</span>
-                    <span class="count" id="allCount">0</span>
-                </div>
+                <!-- Removed All Products filter -->
                 <div class="filter-item" data-category="fruits">
                     <i class="fas fa-apple-alt"></i>
                     <span>Fruits</span>
@@ -146,48 +193,94 @@
 
         <!-- Main Content Area -->
         <main class="main-content">
-            <!-- Dashboard Stats -->
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-shopping-basket"></i>
+
+            <!-- Commodity Category List (centered, clickable) -->
+            <div id="commodityCategoryList" style="display:flex;justify-content:center;align-items:center;min-height:320px;">
+                <div style="display:flex;gap:3.5rem;flex-wrap:wrap;justify-content:center;">
+                    <div class="commodity-category-card clickable-commodity" data-category="fruits">
+                        <img src="../img/fruits.png" alt="Fruits" style="width:140px;height:140px;border-radius:50%;object-fit:cover;margin-bottom:1.2rem;box-shadow:0 4px 16px rgba(44,62,80,0.10);">
+                        <div class="commodity-category-label" style="font-size:1.35rem;font-weight:600;">Fruits</div>
                     </div>
-                    <div class="stat-info">
-                        <h3 id="totalProducts">0</h3>
-                        <p>Total Products</p>
+                    <div class="commodity-category-card clickable-commodity" data-category="vegetables">
+                        <img src="../img/veggies.jpg" alt="Vegetables" style="width:140px;height:140px;border-radius:50%;object-fit:cover;margin-bottom:1.2rem;box-shadow:0 4px 16px rgba(44,62,80,0.10);">
+                        <div class="commodity-category-label" style="font-size:1.35rem;font-weight:600;">Vegetables</div>
                     </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon trending-up">
-                        <i class="fas fa-arrow-up"></i>
+                    <div class="commodity-category-card clickable-commodity" data-category="meat">
+                        <img src="../img/meat.jpg" alt="Meat & Poultry" style="width:140px;height:140px;border-radius:50%;object-fit:cover;margin-bottom:1.2rem;box-shadow:0 4px 16px rgba(44,62,80,0.10);">
+                        <div class="commodity-category-label" style="font-size:1.35rem;font-weight:600;">Meat & Poultry</div>
                     </div>
-                    <div class="stat-info">
-                        <h3 id="priceIncreases">0</h3>
-                        <p>Price Increases</p>
+                    <div class="commodity-category-card clickable-commodity" data-category="grains">
+                        <img src="../img/rice.jpg" alt="Rice & Grains" style="width:140px;height:140px;border-radius:50%;object-fit:cover;margin-bottom:1.2rem;box-shadow:0 4px 16px rgba(44,62,80,0.10);">
+                        <div class="commodity-category-label" style="font-size:1.35rem;font-weight:600;">Rice & Grains</div>
                     </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon trending-down">
-                        <i class="fas fa-arrow-down"></i>
+                    <div class="commodity-category-card clickable-commodity" data-category="dairy">
+                        <img src="../img/milk.jpg" alt="Dairy Products" style="width:140px;height:140px;border-radius:50%;object-fit:cover;margin-bottom:1.2rem;box-shadow:0 4px 16px rgba(44,62,80,0.10);">
+                        <div class="commodity-category-label" style="font-size:1.35rem;font-weight:600;">Dairy Products</div>
                     </div>
-                    <div class="stat-info">
-                        <h3 id="priceDecreases">0</h3>
-                        <p>Price Decreases</p>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <div class="stat-info">
-                        <h3 id="lastUpdate">Now</h3>
-                        <p>Last Updated</p>
+                    <div class="commodity-category-card clickable-commodity" data-category="seafood">
+                        <img src="../img/fish.jpg" alt="Seafood" style="width:140px;height:140px;border-radius:50%;object-fit:cover;margin-bottom:1.2rem;box-shadow:0 4px 16px rgba(44,62,80,0.10);">
+                        <div class="commodity-category-label" style="font-size:1.35rem;font-weight:600;">Seafood</div>
                     </div>
                 </div>
+    <style>
+    .clickable-commodity {
+        cursor: pointer;
+        transition: transform 0.18s, box-shadow 0.18s;
+        border-radius: 1.2rem;
+        background: #fff;
+        box-shadow: 0 2px 12px rgba(44,62,80,0.06);
+        padding: 2.2rem 2.2rem 1.2rem 2.2rem;
+        margin-bottom: 1.5rem;
+    }
+    .clickable-commodity:hover {
+        transform: translateY(-8px) scale(1.04);
+        box-shadow: 0 8px 32px rgba(44,62,80,0.16);
+        background: #f5f6fa;
+    }
+    </style>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const commodityCards = document.querySelectorAll('.clickable-commodity');
+        const categoryList = document.getElementById('commodityCategoryList');
+        const toolbar = document.getElementById('toolbar');
+        const productsContainer = document.getElementById('productsContainer');
+        const sidebarFilters = document.querySelectorAll('.filter-item');
+        
+        // Handle commodity card clicks
+        commodityCards.forEach(card => {
+            card.addEventListener('click', function() {
+                const cat = card.getAttribute('data-category');
+                // Hide category list, show toolbar and products
+                if (categoryList) categoryList.style.display = 'none';
+                if (toolbar) toolbar.style.display = '';
+                if (productsContainer) productsContainer.style.display = '';
+                // Set the filter in JS (if dashboard class exists)
+                if (window.dashboardInstance && typeof window.dashboardInstance.updateCategoryFilter === 'function') {
+                    window.dashboardInstance.updateCategoryFilter(cat);
+                }
+            });
+        });
+        
+        // Handle sidebar category filter clicks
+        sidebarFilters.forEach(filter => {
+            filter.addEventListener('click', function() {
+                const cat = filter.getAttribute('data-category');
+                // Hide category list, show toolbar and products
+                if (categoryList) categoryList.style.display = 'none';
+                if (toolbar) toolbar.style.display = '';
+                if (productsContainer) productsContainer.style.display = '';
+                // Set the filter in JS (if dashboard class exists)
+                if (window.dashboardInstance && typeof window.dashboardInstance.updateCategoryFilter === 'function') {
+                    window.dashboardInstance.updateCategoryFilter(cat);
+                }
+            });
+        });
+    });
+    </script>
             </div>
 
-            <!-- Toolbar -->
-            <div class="toolbar">
+            <!-- Products Grid (hidden by default, shown on category click) -->
+            <div class="toolbar" id="toolbar" style="display:none;">
                 <div class="toolbar-left">
                     <h2 id="categoryTitle">All Products</h2>
                     <span class="product-count" id="productCount">0 products found</span>
@@ -212,9 +305,7 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Products Grid -->
-            <div class="products-container" id="productsContainer">
+            <div class="products-container" id="productsContainer" style="display:none;">
                 <!-- Products will be dynamically loaded here -->
             </div>
 
@@ -380,6 +471,7 @@
         </div>
     </div>
 
+    <script src="../js/landing-new.js"></script>
     <script src="../js/price-dashboard.js"></script>
 </body>
 </html>  
