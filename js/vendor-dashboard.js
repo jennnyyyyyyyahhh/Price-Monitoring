@@ -260,3 +260,32 @@ if (submitReportBtn) {
         this.style.transform = 'translateY(0) scale(1)';
     });
 }
+
+// Floating Submit Survey Button functionality
+const submitSurveyBtn = document.querySelector('.submit-survey-btn');
+if (submitSurveyBtn) {
+    submitSurveyBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        console.log('Submit Survey button clicked');
+        
+        // Add button click animation
+        this.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+            this.style.transform = '';
+        }, 150);
+        
+        // Navigate to survey form or open modal
+        alert('Survey form would open here!');
+        // window.location.href = 'survey-form.html';
+        // or showSurveyModal();
+    });
+    
+    // Add some visual feedback on hover
+    submitSurveyBtn.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-2px) scale(1.05)';
+    });
+    
+    submitSurveyBtn.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0) scale(1)';
+    });
+}
