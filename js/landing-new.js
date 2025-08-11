@@ -194,62 +194,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // });
 });
 
-// Utility function for smooth scrolling to top
-function scrollToTop() {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-}
-
-// Add scroll to top button
 document.addEventListener('DOMContentLoaded', function() {
-    const scrollButton = document.createElement('button');
-    scrollButton.innerHTML = '<i class="fas fa-arrow-up"></i>';
-    scrollButton.className = 'scroll-to-top';
-    scrollButton.onclick = scrollToTop;
-    
-    const style = document.createElement('style');
-    style.textContent = `
-        .scroll-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.2rem;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s;
-            z-index: 1000;
-        }
-        
-        .scroll-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .scroll-to-top:hover {
-            background: #45a049;
-            transform: translateY(-3px);
-        }
-    `;
-    document.head.appendChild(style);
-    document.body.appendChild(scrollButton);
-    
-    window.addEventListener('scroll', function() {
-        if (window.pageYOffset > 300) {
-            scrollButton.classList.add('visible');
-        } else {
-            scrollButton.classList.remove('visible');
-        }
-    });
-
     // Notification System
     const notificationBtn = document.getElementById('notificationBtn');
     const notificationDropdown = document.getElementById('notificationDropdown');
