@@ -4228,3 +4228,311 @@ body {
         border: 1px solid #ddd;
     }
 }
+
+
+/* ==============================================
+   Vendor Dashboard Header Styles 
+   ============================================== */
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-text strong {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #2c5aa0;
+    line-height: 1;
+}
+
+.logo-text small {
+    font-size: 1rem;
+    color: #666;
+    font-weight: 400;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    color: #222;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s;
+    font-size: 1.2rem;
+}
+
+.nav-link:hover {
+    color: #4CAF50;
+}
+
+.nav-buttons {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.notification-container {
+    position: relative;
+}
+
+.notification-btn {
+    background: none;
+    border: none;
+    color: #333;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.notification-btn:hover {
+    background: rgba(0,0,0,0.05);
+}
+
+.notification-badge {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    background: #ff4757;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-name {
+    color: #333;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #4CAF50;
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.hamburger span {
+    width: 30px;
+    height: 4px;
+    background: #333;
+    margin: 3px 0;
+    transition: 0.3s;
+}
+
+/* Mobile responsive styles for vendor dashboard header */
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none;
+    }
+    
+    .hamburger {
+        display: flex;
+    }
+    
+    .nav-buttons {
+        gap: 0.5rem;
+    }
+    
+    .user-name {
+        display: none;
+    }
+    
+    .logo-text strong {
+        font-size: 1.1rem;
+    }
+    
+    .logo-text small {
+        font-size: 0.85rem;
+    }
+}
+/* Vendor Dashboard Header Styles */
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-text strong {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #2c5aa0;
+    line-height: 1;
+}
+
+.logo-text small {
+    font-size: 1rem;
+    color: #666;
+    font-weight: 400;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    color: #222;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s;
+    font-size: 1.2rem;
+}
+
+.nav-link:hover {
+    color: #4CAF50;
+}
+
+.nav-buttons {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.notification-container {
+    position: relative;
+}
+
+.notification-btn {
+    background: none;
+    border: none;
+    color: #333;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.notification-btn:hover {
+    background: rgba(0,0,0,0.05);
+}
+
+.notification-badge {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    background: #ff4757;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-name {
+    color: #333;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #4CAF50;
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.hamburger span {
+    width: 30px;
+    height: 4px;
+    background: #333;
+    margin: 3px 0;
+    transition: 0.3s;
+}
+
+/* Mobile responsive styles for vendor dashboard header */
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none;
+    }
+    
+    .hamburger {
+        display: flex;
+    }
+    
+    .nav-buttons {
+        gap: 0.5rem;
+    }
+    
+    .user-name {
+        display: none;
+    }
+    
+    .logo-text strong {
+        font-size: 1.1rem;
+    }
+    
+    .logo-text small {
+        font-size: 0.85rem;
+    }
+}

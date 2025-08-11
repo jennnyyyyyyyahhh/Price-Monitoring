@@ -8,34 +8,41 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <!-- Main Header -->
-    <header class="main-header">
-        <div class="header-container">
-            <div class="header-center">
-                <div class="site-brand">
-                    <i class="fas fa-store"></i>
-                    <h1>Tanza Market</h1>
+    <!-- Navigation Header -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-store"></i>
+                <span class="logo-text">
+                    <strong>VENDOR DASHBOARD</strong>
+                    <small>TANZA PUBLIC MARKET</small>
+                </span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../html/landing-new.html" class="nav-link">Home</a></li>
+                <li><a href="../html/landing-new.html#about" class="nav-link">About</a></li>
+                <li><a href="../html/landing-new.html#services" class="nav-link">Services</a></li>
+                <li><a href="../html/landing-new.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <div class="notification-container">
+                    <button class="notification-btn" id="notificationBtn" title="Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge" id="notificationBadge">3</span>
+                    </button>
+                </div>
+                <div class="user-profile">
+                    <span class="user-name">Jenny Cordero</span>
+                    <img src="https://via.placeholder.com/32" alt="User" class="user-avatar">
                 </div>
             </div>
-            <div class="header-right">
-                <nav class="header-nav">
-                    <a href="../html/landing.html">Home</a>
-                    <a href="../html/landing.html#blog">Blog</a>
-                    <a href="../html/landing.html#services">Services</a>
-                </nav>
-                <div class="header-user-info">
-                    <div class="notifications">
-                        <i class="fas fa-bell"></i>
-                        <span class="notification-count">3</span>
-                    </div>
-                    <div class="user">
-                        <span>Jenny Cordero</span>
-                        <img src="https://via.placeholder.com/32" alt="User" id="topbarUserPhoto">
-                    </div>
-                </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
         </div>
-    </header>
+    </nav>
 
     <div class="dashboard-container">
         <!-- Sidebar -->

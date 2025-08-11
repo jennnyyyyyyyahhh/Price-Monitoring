@@ -8,23 +8,39 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <!-- Navigation Header -->
     <nav class="navbar">
-        <div class="logo">
-            <i class="fas fa-store"></i>
-            <span>Tanza Market</span>
-        </div>
-        <ul class="nav-links">
-            <li><a href="../html/landing.html">Home</a></li>
-            <li><a href="../html/landing.html#blog" id="blogNav">Blog</a></li>
-            <li><a href="../html/landing.html#services" id="servicesNav">Services</a></li>
-        </ul>
-        <div class="nav-icons">
-            <button class="mobile-menu-toggle" id="mobileMenuToggle">
-                <i class="fas fa-bars"></i>
-            </button>
-            <a href="../html/vendor-registration.html" class="icon-user" title="User Profile"></a>
-            <a href="#" class="icon-bell" id="notificationBell" title="Notifications"></a>
-            <a href="../html/vendor-dashboard.html" class="vendor-portal-btn">Vendor Portal</a>
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-store"></i>
+                <span class="logo-text">
+                    <strong>PRICE MONITORING</strong>
+                    <small>TANZA PUBLIC MARKET</small>
+                </span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../html/landing.html" class="nav-link">Home</a></li>
+                <li><a href="../html/landing.html#blog" class="nav-link">Blog</a></li>
+                <li><a href="../html/landing.html#services" class="nav-link">Services</a></li>
+                <li><a href="../html/vendor-dashboard.html" class="nav-link">Vendor Portal</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <div class="notification-container">
+                    <button class="notification-btn" id="notificationBtn" title="Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge" id="notificationBadge">3</span>
+                    </button>
+                </div>
+                <div class="user-profile">
+                    <span class="user-name">Price Monitor User</span>
+                    <img src="https://via.placeholder.com/32" alt="User" class="user-avatar">
+                </div>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </nav>
 
@@ -34,7 +50,10 @@
         <div class="mobile-nav-header">
             <div class="logo">
                 <i class="fas fa-store"></i>
-                <span>Tanza Market</span>
+                <span class="logo-text">
+                    <strong>PRICE MONITORING</strong>
+                    <small>TANZA PUBLIC MARKET</small>
+                </span>
             </div>
             <button class="mobile-close-btn" id="mobileCloseBtn">
                 <i class="fas fa-times"></i>
@@ -48,47 +67,6 @@
             <li><a href="../html/vendor-dashboard.html" id="mobileVendorPortal">Vendor Portal</a></li>
         </ul>
     </div>
-
-    <!-- Top Navigation -->
-    <nav class="top-nav">
-        <div class="nav-brand">
-            <i class="fas fa-chart-line"></i>
-            <button id="priceMonitorBtn" style="background:none;border:none;color:inherit;font:inherit;cursor:pointer;padding:0;margin:0;font-weight:600;font-size:1.1em;display:inline;">Price Monitor</button>
-    <script>
-    // Scroll to commodity list when Price Monitor is clicked
-    document.addEventListener('DOMContentLoaded', function() {
-        var btn = document.getElementById('priceMonitorBtn');
-        var catList = document.getElementById('commodityCategoryList');
-        if (btn && catList) {
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                catList.scrollIntoView({behavior:'smooth', block:'center'});
-                // Optionally, focus the first card for accessibility
-                var firstCard = catList.querySelector('.clickable-commodity');
-                if (firstCard) firstCard.focus();
-            });
-        }
-    });
-    </script>
-        </div>
-        <div class="nav-controls">
-            <div class="search-box">
-                <i class="fas fa-search"></i>
-                <input type="text" id="searchInput" placeholder="Search products...">
-            </div>
-            <div class="nav-actions">
-                <button class="mobile-menu-toggle" id="mobileMenuToggle" title="Menu">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <button class="refresh-btn" id="refreshBtn" title="Refresh Data">
-                    <i class="fas fa-sync-alt"></i>
-                </button>
-                <button class="filter-btn" id="filterBtn" title="Filter Options">
-                    <i class="fas fa-filter"></i>
-                </button>
-            </div>
-        </div>
-    </nav>
 
     <!-- Mobile Sidebar Overlay -->
     <div class="mobile-sidebar-overlay" id="mobileSidebarOverlay"></div>
@@ -203,45 +181,7 @@
         background: #f5f6fa;
     }
     </style>
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const commodityCards = document.querySelectorAll('.clickable-commodity');
-        const categoryList = document.getElementById('commodityCategoryList');
-        const toolbar = document.getElementById('toolbar');
-        const productsContainer = document.getElementById('productsContainer');
-        const sidebarFilters = document.querySelectorAll('.filter-item');
-        
-        // Handle commodity card clicks
-        commodityCards.forEach(card => {
-            card.addEventListener('click', function() {
-                const cat = card.getAttribute('data-category');
-                // Hide category list, show toolbar and products
-                if (categoryList) categoryList.style.display = 'none';
-                if (toolbar) toolbar.style.display = '';
-                if (productsContainer) productsContainer.style.display = '';
-                // Set the filter in JS (if dashboard class exists)
-                if (window.dashboardInstance && typeof window.dashboardInstance.updateCategoryFilter === 'function') {
-                    window.dashboardInstance.updateCategoryFilter(cat);
-                }
-            });
-        });
-        
-        // Handle sidebar category filter clicks
-        sidebarFilters.forEach(filter => {
-            filter.addEventListener('click', function() {
-                const cat = filter.getAttribute('data-category');
-                // Hide category list, show toolbar and products
-                if (categoryList) categoryList.style.display = 'none';
-                if (toolbar) toolbar.style.display = '';
-                if (productsContainer) productsContainer.style.display = '';
-                // Set the filter in JS (if dashboard class exists)
-                if (window.dashboardInstance && typeof window.dashboardInstance.updateCategoryFilter === 'function') {
-                    window.dashboardInstance.updateCategoryFilter(cat);
-                }
-            });
-        });
-    });
-    </script>
+   
             </div>
 
             <!-- Products Grid (hidden by default, shown on category click) -->
