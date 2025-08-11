@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Price Dashboard - Tanza Public Market</title>
+    <link rel="stylesheet" href="../css/price-dashboard-new.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="logo-text">
+                    <strong>TANZA PUBLIC MARKET</strong>
+                    <small>PRICE MONITORING</small>
+                </span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <div class="notification-container">
+                    <button class="notification-btn" id="notificationBtn" title="Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge" id="notificationBadge">3</span>
+                    </button>
+                    <div class="notification-dropdown" id="notificationDropdown">
+                        <div class="notification-header">
+                            <h3>Notifications</h3>
+                            <button class="mark-all-read" id="markAllRead">Mark all as read</button>
+                        </div>
+                        <div class="notification-list">
+                            <div class="notification-item unread" data-id="1">
+                                <div class="notification-icon price-alert">
+                                    <i class="fas fa-arrow-up"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <h4>Price Alert: Tomatoes</h4>
+                                    <p>Price increased by 15% in the last hour</p>
+                                    <span class="notification-time">2 minutes ago</span>
+                                </div>
+                            </div>
+                            <div class="notification-item unread" data-id="2">
+                                <div class="notification-icon supply-alert">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <h4>Low Supply Alert: Rice</h4>
+                                    <p>Only 5 vendors have rice available</p>
+                                    <span class="notification-time">15 minutes ago</span>
+                                </div>
+                            </div>
+                            <div class="notification-item unread" data-id="3">
+                                <div class="notification-icon market-update">
+                                    <i class="fas fa-info-circle"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <h4>Market Update</h4>
+                                    <p>New pricing data available for vegetables</p>
+                                    <span class="notification-time">1 hour ago</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="notification-footer">
+                            <a href="#" class="view-all-notifications">View All Notifications</a>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-outline" id="loginSignupBtn">Login / Sign Up</button>
+            </div>
+            <div class="hamburger" id="mobileMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar Overlay for Mobile -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Main Dashboard Container -->
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Categories</h2>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+            </div>
+            <div class="sidebar-content">
+                <div class="category-list">
+                    <div class="category-item active" data-category="all">
+                        <div class="category-icon">
+                            <i class="fas fa-th-large"></i>
+                        </div>
+                        <span class="category-name">All Categories</span>
+                        <span class="category-count" id="allCount">0</span>
+                    </div>
+                    <div class="category-item" data-category="fruits">
+                        <div class="category-icon">
+                            <i class="fas fa-apple-alt"></i>
+                        </div>
+                        <span class="category-name">Fruits</span>
+                        <span class="category-count" id="fruitsCount">0</span>
+                    </div>
+                    <div class="category-item" data-category="vegetables">
+                        <div class="category-icon">
+                            <i class="fas fa-carrot"></i>
+                        </div>
+                        <span class="category-name">Vegetables</span>
+                        <span class="category-count" id="vegetablesCount">0</span>
+                    </div>
+                    <div class="category-item" data-category="meats">
+                        <div class="category-icon">
+                            <i class="fas fa-drumstick-bite"></i>
+                        </div>
+                        <span class="category-name">Meats</span>
+                        <span class="category-count" id="meatsCount">0</span>
+                    </div>
+                    <div class="category-item" data-category="poultry">
+                        <div class="category-icon">
+                            <i class="fas fa-egg"></i>
+                        </div>
+                        <span class="category-name">Poultry</span>
+                        <span class="category-count" id="poultryCount">0</span>
+                    </div>
+                    <div class="category-item" data-category="dairy">
+                        <div class="category-icon">
+                            <i class="fas fa-cheese"></i>
+                        </div>
+                        <span class="category-name">Dairy</span>
+                        <span class="category-count" id="dairyCount">0</span>
+                    </div>
+                    <div class="category-item" data-category="rice">
+                        <div class="category-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <span class="category-name">Rice</span>
+                        <span class="category-count" id="riceCount">0</span>
+                    </div>
+                </div>
+                
+                <!-- Price Filter -->
+                <div class="price-filter">
+                    <h3>Price Range</h3>
+                    <div class="price-inputs">
+                        <div class="input-group">
+                            <label for="minPrice">Min Price</label>
+                            <input type="number" id="minPrice" placeholder="₱0" min="0" step="0.01">
+                        </div>
+                        <div class="input-group">
+                            <label for="maxPrice">Max Price</label>
+                            <input type="number" id="maxPrice" placeholder="₱1000" min="0" step="0.01">
+                        </div>
+                    </div>
+                    <button class="apply-filter-btn" id="applyFilter">
+                        <i class="fas fa-filter"></i>
+                        Apply Filter
+                    </button>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <h3>Quick Actions</h3>
+                    <div class="action-buttons">
+                        <button class="action-btn" id="refreshBtn">
+                            <i class="fas fa-sync-alt"></i>
+                            Refresh Prices
+                        </button>
+                        <button class="action-btn" id="exportBtn">
+                            <i class="fas fa-download"></i>
+                            Export Data
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Search and Toolbar -->
+            <div class="content-header">
+                <div class="search-section">
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Search products...">
+                        <button class="search-btn" id="searchBtn">Search</button>
+                    </div>
+                </div>
+                <div class="toolbar">
+                    <div class="toolbar-left">
+                        <h1 id="pageTitle">All Categories</h1>
+                        <span class="product-count" id="productCount">0 products found</span>
+                    </div>
+                    <div class="toolbar-right">
+                        <div class="sort-options">
+                            <select id="sortSelect">
+                                <option value="name">Sort by Name</option>
+                                <option value="price-low">Price: Low to High</option>
+                                <option value="price-high">Price: High to Low</option>
+                                <option value="updated">Recently Updated</option>
+                            </select>
+                        </div>
+                        <div class="view-toggle">
+                            <button class="view-btn active" data-view="grid" title="Grid View">
+                                <i class="fas fa-th"></i>
+                            </button>
+                            <button class="view-btn" data-view="list" title="List View">
+                                <i class="fas fa-list"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Categories Overview -->
+            <div class="categories-overview">
+                <h2>Browse by Category</h2>
+                <div class="categories-grid">
+                    <div class="category-card" data-category="all">
+                        <div class="category-card-icon">
+                            <i class="fas fa-th-large"></i>
+                        </div>
+                        <h3>All Categories</h3>
+                        <p class="category-description">Browse all available products</p>
+                        <span class="category-product-count">16 products</span>
+                    </div>
+                    <div class="category-card" data-category="fruits">
+                        <div class="category-card-icon">
+                            <i class="fas fa-apple-alt"></i>
+                        </div>
+                        <h3>Fruits</h3>
+                        <p class="category-description">Fresh seasonal fruits</p>
+                        <span class="category-product-count">3 products</span>
+                    </div>
+                    <div class="category-card" data-category="vegetables">
+                        <div class="category-card-icon">
+                            <i class="fas fa-carrot"></i>
+                        </div>
+                        <h3>Vegetables</h3>
+                        <p class="category-description">Farm fresh vegetables</p>
+                        <span class="category-product-count">3 products</span>
+                    </div>
+                    <div class="category-card" data-category="meats">
+                        <div class="category-card-icon">
+                            <i class="fas fa-drumstick-bite"></i>
+                        </div>
+                        <h3>Meats</h3>
+                        <p class="category-description">Fresh meat and seafood</p>
+                        <span class="category-product-count">5 products</span>
+                    </div>
+                    <div class="category-card" data-category="poultry">
+                        <div class="category-card-icon">
+                            <i class="fas fa-egg"></i>
+                        </div>
+                        <h3>Poultry</h3>
+                        <p class="category-description">Chicken and poultry products</p>
+                        <span class="category-product-count">1 product</span>
+                    </div>
+                    <div class="category-card" data-category="dairy">
+                        <div class="category-card-icon">
+                            <i class="fas fa-cheese"></i>
+                        </div>
+                        <h3>Dairy</h3>
+                        <p class="category-description">Milk and dairy products</p>
+                        <span class="category-product-count">2 products</span>
+                    </div>
+                    <div class="category-card" data-category="rice">
+                        <div class="category-card-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <h3>Rice</h3>
+                        <p class="category-description">Various rice varieties</p>
+                        <span class="category-product-count">2 products</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="products-section">
+                <div class="products-container" id="productsContainer">
+                    <!-- Sample Products (will be populated dynamically) -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="../img/tomato.jpg" alt="Tomato" onerror="this.src='https://via.placeholder.com/200x150/4CAF50/white?text=Tomato'">
+                            <div class="product-status available">Available</div>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Fresh Tomato</h3>
+                            <div class="product-price">
+                                <span class="current-price">₱35.00</span>
+                                <span class="unit">per kg</span>
+                            </div>
+                            <div class="price-change positive">
+                                <i class="fas fa-arrow-up"></i>
+                                +5.2%
+                            </div>
+                            <div class="product-meta">
+                                <span class="category">Vegetables</span>
+                                <span class="last-updated">Updated 2 hours ago</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="../img/banana.jpg" alt="Banana" onerror="this.src='https://via.placeholder.com/200x150/4CAF50/white?text=Banana'">
+                            <div class="product-status available">Available</div>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Banana (Lakatan)</h3>
+                            <div class="product-price">
+                                <span class="current-price">₱80.00</span>
+                                <span class="unit">per kg</span>
+                            </div>
+                            <div class="price-change negative">
+                                <i class="fas fa-arrow-down"></i>
+                                -2.1%
+                            </div>
+                            <div class="product-meta">
+                                <span class="category">Fruits</span>
+                                <span class="last-updated">Updated 1 hour ago</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="../img/chicken.jpg" alt="Chicken" onerror="this.src='https://via.placeholder.com/200x150/4CAF50/white?text=Chicken'">
+                            <div class="product-status available">Available</div>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Whole Chicken</h3>
+                            <div class="product-price">
+                                <span class="current-price">₱180.00</span>
+                                <span class="unit">per kg</span>
+                            </div>
+                            <div class="price-change stable">
+                                <i class="fas fa-minus"></i>
+                                0.0%
+                            </div>
+                            <div class="product-meta">
+                                <span class="category">Poultry</span>
+                                <span class="last-updated">Updated 30 minutes ago</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="../img/rice.jpg" alt="Rice" onerror="this.src='https://via.placeholder.com/200x150/4CAF50/white?text=Rice'">
+                            <div class="product-status available">Available</div>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Premium Rice</h3>
+                            <div class="product-price">
+                                <span class="current-price">₱50.00</span>
+                                <span class="unit">per kg</span>
+                            </div>
+                            <div class="price-change positive">
+                                <i class="fas fa-arrow-up"></i>
+                                +1.8%
+                            </div>
+                            <div class="product-meta">
+                                <span class="category">Rice</span>
+                                <span class="last-updated">Updated 45 minutes ago</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="../img/milk.jpg" alt="Milk" onerror="this.src='https://via.placeholder.com/200x150/4CAF50/white?text=Milk'">
+                            <div class="product-status available">Available</div>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Fresh Milk</h3>
+                            <div class="product-price">
+                                <span class="current-price">₱65.00</span>
+                                <span class="unit">per liter</span>
+                            </div>
+                            <div class="price-change stable">
+                                <i class="fas fa-minus"></i>
+                                0.0%
+                            </div>
+                            <div class="product-meta">
+                                <span class="category">Dairy</span>
+                                <span class="last-updated">Updated 1 hour ago</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="../img/pork.jpg" alt="Pork" onerror="this.src='https://via.placeholder.com/200x150/4CAF50/white?text=Pork'">
+                            <div class="product-status available">Available</div>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Pork Liempo</h3>
+                            <div class="product-price">
+                                <span class="current-price">₱280.00</span>
+                                <span class="unit">per kg</span>
+                            </div>
+                            <div class="price-change positive">
+                                <i class="fas fa-arrow-up"></i>
+                                +3.5%
+                            </div>
+                            <div class="product-meta">
+                                <span class="category">Meats</span>
+                                <span class="last-updated">Updated 20 minutes ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination-section">
+                <div class="pagination">
+                    <button class="page-btn prev-btn" id="prevBtn" disabled>
+                        <i class="fas fa-chevron-left"></i>
+                        Previous
+                    </button>
+                    <div class="page-numbers" id="pageNumbers">
+                        <span class="page-number active">1</span>
+                        <span class="page-number">2</span>
+                        <span class="page-number">3</span>
+                        <span class="page-dots">...</span>
+                        <span class="page-number">10</span>
+                    </div>
+                    <button class="page-btn next-btn" id="nextBtn">
+                        Next
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div class="pagination-info">
+                    <span>Showing 1-6 of 60 products</span>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Product Details Modal -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2 id="modalProductName">Product Details</h2>
+                <button class="modal-close" id="closeProductModal">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Product details will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading State -->
+    <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>Loading products...</p>
+        </div>
+    </div>
+
+    <script src="../js/price-dashboard-new.js"></script>
+</body>
+</html>
