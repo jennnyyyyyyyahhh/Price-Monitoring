@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Tanza Market</title>
+    <link rel="stylesheet" href="../css/admin-new.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <span class="logo-text">
+                    <strong>ADMIN DASHBOARD</strong>
+                    <small>TANZA PUBLIC MARKET</small>
+                </span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../html/landing-new.html" class="nav-link">Home</a></li>
+                <li><a href="../html/landing-new.html#about" class="nav-link">About</a></li>
+                <li><a href="../html/landing-new.html#services" class="nav-link">Services</a></li>
+                <li><a href="../html/landing-new.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <div class="notification-container">
+                    <button class="notification-btn" id="adminNotificationBtn" title="Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge" id="adminNotificationBadge">5</span>
+                    </button>
+                </div>
+                <div class="user-profile">
+                    <span class="user-name">Admin User</span>
+                    <img src="https://via.placeholder.com/32" alt="Admin" class="user-avatar">
+                </div>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="vendor-logo">TANZA MARKET</div>
+                <div class="vendor-name">Admin Dashboard</div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+            </div>
+            <div class="sidebar-menu">
+                <a href="#" class="menu-item active" data-section="dashboard" data-tooltip="Dashboard">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="menu-item" data-section="survey-form" data-tooltip="Survey Form">
+                    <i class="fas fa-poll"></i>
+                    <span>Survey Form</span>
+                </a>
+                <a href="#" class="menu-item" data-section="vendor-management" data-tooltip="Vendor Management">
+                    <i class="fas fa-store"></i>
+                    <span>Vendor Management</span>
+                </a>
+                <a href="#" class="menu-item" data-section="stall-management" data-tooltip="Stall Management">
+                    <i class="fas fa-warehouse"></i>
+                    <span>Stall Management</span>
+                </a>
+                <a href="#" class="menu-item" data-section="vendor-registration" data-tooltip="Vendor Registration Request">
+                    <i class="fas fa-user-plus"></i>
+                    <span>Vendor Registration Request</span>
+                </a>
+                <a href="#" class="menu-item" data-section="survey-management" data-tooltip="Survey Management">
+                    <i class="fas fa-clipboard-list"></i>
+                    <span>Survey Management</span>
+                </a>
+                <a href="#" class="menu-item" data-section="calamity-event" data-tooltip="Calamity Event">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span>Calamity Event</span>
+                </a>
+                <a href="#" class="menu-item" data-section="user-management" data-tooltip="User Management">
+                    <i class="fas fa-users"></i>
+                    <span>User Management</span>
+                </a>
+                <a href="#" class="menu-item" data-section="reports" data-tooltip="Reports">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Reports</span>
+                </a>
+            </div>
+            <div class="sidebar-footer">
+                <a href="#" class="logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="topbar">
+                <!-- Topbar content can be added here if needed -->
+            </div>
+
+            <!-- Dashboard Section -->
+            <div class="content-section active" id="dashboard-section">
+                <div class="section-header">
+                    <h2>Dashboard Overview</h2>
+                    <p>Welcome to the admin dashboard</p>
+                </div>
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>Total Vendors</h3>
+                            <p class="stat-number">45</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-warehouse"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>Total Stalls</h3>
+                            <p class="stat-number">120</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>Active Users</h3>
+                            <p class="stat-number">89</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-clipboard-list"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>Surveys</h3>
+                            <p class="stat-number">8</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="recent-activities">
+                    <h3>Recent Activities</h3>
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-user-plus"></i>
+                            </div>
+                            <div class="activity-details">
+                                <h4>New Vendor Registration</h4>
+                                <p>Maria Santos submitted a vendor registration request</p>
+                                <small>2 hours ago</small>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-poll"></i>
+                            </div>
+                            <div class="activity-details">
+                                <h4>Survey Completed</h4>
+                                <p>Market satisfaction survey received 15 new responses</p>
+                                <small>4 hours ago</small>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="activity-details">
+                                <h4>Calamity Event Update</h4>
+                                <p>Weather alert system activated for heavy rain warning</p>
+                                <small>1 day ago</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Survey Form Section -->
+            <div class="content-section" id="survey-form-section">
+                <div class="section-header">
+                    <h2>Survey Form</h2>
+                    <p>Create and manage customer surveys</p>
+                </div>
+                <div class="form-container">
+                    <h3>Create New Survey</h3>
+                    <p>Survey form functionality coming soon...</p>
+                </div>
+            </div>
+
+            <!-- Vendor Management Section -->
+            <div class="content-section" id="vendor-management-section">
+                <div class="section-header">
+                    <h2>Vendor Management</h2>
+                    <p>Manage registered vendors and their details</p>
+                </div>
+                <div class="table-container">
+                    <p>Vendor management functionality coming soon...</p>
+                </div>
+            </div>
+
+            <!-- Stall Management Section -->
+            <div class="content-section" id="stall-management-section">
+                <div class="section-header">
+                    <h2>Stall Management</h2>
+                    <p>Manage market stalls and assignments</p>
+                </div>
+                <div class="table-container">
+                    <p>Stall management functionality coming soon...</p>
+                </div>
+            </div>
+
+            <!-- Vendor Registration Section -->
+            <div class="content-section" id="vendor-registration-section">
+                <div class="section-header">
+                    <h2>Vendor Registration Requests</h2>
+                    <p>Review and approve new vendor applications</p>
+                </div>
+                <div class="table-container">
+                    <p>Vendor registration requests functionality coming soon...</p>
+                </div>
+            </div>
+
+            <!-- Survey Management Section -->
+            <div class="content-section" id="survey-management-section">
+                <div class="section-header">
+                    <h2>Survey Management</h2>
+                    <p>Manage existing surveys and view responses</p>
+                </div>
+                <div class="table-container">
+                    <p>Survey management functionality coming soon...</p>
+                </div>
+            </div>
+
+            <!-- Calamity Event Section -->
+            <div class="content-section" id="calamity-event-section">
+                <div class="section-header">
+                    <h2>Calamity Event Management</h2>
+                    <p>Manage emergency alerts and calamity events</p>
+                </div>
+                <div class="alert-container">
+                    <p>Calamity event management functionality coming soon...</p>
+                </div>
+            </div>
+
+            <!-- User Management Section -->
+            <div class="content-section" id="user-management-section">
+                <div class="section-header">
+                    <h2>User Management</h2>
+                    <p>Manage system users and permissions</p>
+                </div>
+                <div class="table-container">
+                    <p>User management functionality coming soon...</p>
+                </div>
+            </div>
+
+            <!-- Reports Section -->
+            <div class="content-section" id="reports-section">
+                <div class="section-header">
+                    <h2>Reports</h2>
+                    <p>Generate and view system reports</p>
+                </div>
+                <div class="reports-container">
+                    <p>Reports functionality coming soon...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/admin-new.js"></script>
+</body>
+</html>
