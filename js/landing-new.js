@@ -592,19 +592,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Floating Submit Report Button functionality
     const submitReportBtn = document.getElementById('submitReportBtn');
+    const reportModal = document.getElementById('reportModal');
+    const closeReportModal = document.getElementById('closeReportModal');
+    const reportForm = document.getElementById('reportForm');
+    const fileUploadArea = document.getElementById('fileUploadArea');
+    const reportImageInput = document.getElementById('reportImage');
+    const filePreview = document.getElementById('filePreview');
+    const previewImage = document.getElementById('previewImage');
+    const removeFileBtn = document.getElementById('removeFile');
 
     if (submitReportBtn) {
         submitReportBtn.addEventListener('click', function() {
-            // Handle submit report action
             console.log('Submit Report button clicked from landing page');
-            
-            // You can add your submit report functionality here
-            // For now, show a simple alert
-            alert('Submit Report functionality!\n\nThis could:\n• Open a report submission form\n• Redirect to vendor dashboard\n• Open a modal for quick reporting');
-            
-            // Example: Redirect to vendor dashboard
-            // window.location.href = 'vendor-dashboard.html';
-            // or showReportModal();
+            if (reportModal) {
+                reportModal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
         });
         
         // Add some visual feedback on hover
@@ -614,6 +617,119 @@ document.addEventListener('DOMContentLoaded', function() {
         
         submitReportBtn.addEventListener('mouseleave', function() {
             this.style.transform = 'translateY(0) scale(1)';
+        });
+    }
+
+    // Close report modal
+    if (closeReportModal) {
+        closeReportModal.addEventListener('click', function() {
+            reportModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+    }
+
+    // Close modal when clicking outside
+    if (reportModal) {
+        reportModal.addEventListener('click', function(e) {
+            if (e.target === reportModal) {
+                reportModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+    }
+
+    // File upload functionality
+    if (fileUploadArea && reportImageInput) {
+        fileUploadArea.addEventListener('click', function() {
+            reportImageInput.click();
+        });
+
+        fileUploadArea.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            this.style.borderColor = '#4CAF50';
+            this.style.background = '#f0f8f0';
+        });
+
+        fileUploadArea.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            this.style.borderColor = '#ccc';
+            this.style.background = '#fafafa';
+        });
+
+        fileUploadArea.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.style.borderColor = '#ccc';
+            this.style.background = '#fafafa';
+            
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleFileSelection(files[0]);
+            }
+        });
+
+        reportImageInput.addEventListener('change', function(e) {
+            if (e.target.files.length > 0) {
+                handleFileSelection(e.target.files[0]);
+            }
+        });
+    }
+
+    // Remove file
+    if (removeFileBtn) {
+        removeFileBtn.addEventListener('click', function() {
+            reportImageInput.value = '';
+            filePreview.style.display = 'none';
+            fileUploadArea.style.display = 'block';
+        });
+    }
+
+    // Handle file selection
+    function handleFileSelection(file) {
+        if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewImage.src = e.target.result;
+                filePreview.style.display = 'block';
+                fileUploadArea.style.display = 'none';
+            };
+            reader.readAsDataURL(file);
+        } else {
+            alert('Please select a valid image file (PNG, JPG, JPEG)');
+        }
+    }
+
+    // Handle report form submission
+    if (reportForm) {
+        reportForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('reportName').value;
+            const email = document.getElementById('reportEmail').value;
+            const description = document.getElementById('reportDescription').value;
+            const imageFile = reportImageInput.files[0];
+            
+            // Simple validation
+            if (!name || !email || !description) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
+            // Simulate report submission
+            alert('Report submitted successfully!\n\nThank you for your feedback. We will review your report and take appropriate action.');
+            
+            // Reset form and close modal
+            reportForm.reset();
+            filePreview.style.display = 'none';
+            fileUploadArea.style.display = 'block';
+            reportModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            
+            console.log('Report submitted:', {
+                name: name,
+                email: email,
+                description: description,
+                hasImage: !!imageFile
+            });
         });
     }
 });

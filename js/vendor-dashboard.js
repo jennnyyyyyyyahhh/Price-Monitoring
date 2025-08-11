@@ -1,3 +1,81 @@
+// Cleaning Request Modal Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    var cleaningModal = document.getElementById('cleaningModal');
+    var openBtn = document.querySelector('.request-cleaning-btn');
+    var closeBtn = cleaningModal ? cleaningModal.querySelector('.close') : null;
+    var form = cleaningModal ? cleaningModal.querySelector('.cleaning-form') : null;
+
+    // Open modal
+    if (openBtn && cleaningModal) {
+        openBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            cleaningModal.style.display = 'block';
+        });
+    }
+
+    // Close modal
+    if (closeBtn && cleaningModal) {
+        closeBtn.addEventListener('click', function() {
+            cleaningModal.style.display = 'none';
+            // Reset menu item active state when modal is closed
+            const menuItems = document.querySelectorAll('.menu-item');
+            menuItems.forEach(i => i.classList.remove('active'));
+            // Set dashboard as active again
+            const dashboardItem = document.querySelector('.menu-item[data-section="dashboard"]');
+            if (dashboardItem) {
+                dashboardItem.classList.add('active');
+                // Show dashboard section
+                const dashboardSection = document.getElementById('dashboard-section');
+                if (dashboardSection) {
+                    dashboardSection.classList.add('active');
+                }
+            }
+        });
+    }
+
+    // Close modal when clicking outside modal content
+    window.addEventListener('click', function(event) {
+        if (event.target === cleaningModal) {
+            cleaningModal.style.display = 'none';
+            // Reset menu item active state when modal is closed
+            const menuItems = document.querySelectorAll('.menu-item');
+            menuItems.forEach(i => i.classList.remove('active'));
+            // Set dashboard as active again
+            const dashboardItem = document.querySelector('.menu-item[data-section="dashboard"]');
+            if (dashboardItem) {
+                dashboardItem.classList.add('active');
+                // Show dashboard section
+                const dashboardSection = document.getElementById('dashboard-section');
+                if (dashboardSection) {
+                    dashboardSection.classList.add('active');
+                }
+            }
+        }
+    });
+
+    // Handle form submission
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Cleaning request submitted!');
+            cleaningModal.style.display = 'none';
+            form.reset();
+            // Reset menu item active state when form is submitted
+            const menuItems = document.querySelectorAll('.menu-item');
+            menuItems.forEach(i => i.classList.remove('active'));
+            // Set dashboard as active again
+            const dashboardItem = document.querySelector('.menu-item[data-section="dashboard"]');
+            if (dashboardItem) {
+                dashboardItem.classList.add('active');
+                // Show dashboard section
+                const dashboardSection = document.getElementById('dashboard-section');
+                if (dashboardSection) {
+                    dashboardSection.classList.add('active');
+                }
+            }
+        });
+    }
+});
 // Vendor Dashboard JS
 
 // Sidebar toggle functionality
@@ -67,11 +145,21 @@ menuItems.forEach(item => {
         const sectionName = this.getAttribute('data-section');
         console.log('Menu item clicked:', sectionName); // Debug log
         
-        if (sectionName) {
-            // Update active menu item
-            menuItems.forEach(i => i.classList.remove('active'));
-            this.classList.add('active');
-            
+        // Update active menu item
+        menuItems.forEach(i => i.classList.remove('active'));
+        this.classList.add('active');
+        
+        if (sectionName === 'cleaning-request') {
+            // Handle cleaning request modal
+            const cleaningModal = document.getElementById('cleaningModal');
+            if (cleaningModal) {
+                cleaningModal.style.display = 'block';
+            }
+            // Hide all content sections when modal is opened
+            contentSections.forEach(section => {
+                section.classList.remove('active');
+            });
+        } else if (sectionName) {
             // Hide all content sections
             contentSections.forEach(section => {
                 section.classList.remove('active');

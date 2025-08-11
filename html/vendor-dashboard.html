@@ -75,12 +75,45 @@
                     <i class="fas fa-clipboard-list"></i>
                     <span>Submit Survey Response</span>
                 </a>
+                <a href="#" class="menu-item" data-section="cleaning-request" data-tooltip="Request Cleaning">
+                    <i class="fas fa-broom"></i>
+                    <span>Request Cleaning</span>
+                </a>
             </div>
             <div class="sidebar-footer">
                 <a href="#" class="logout">
                     <i class="fas fa-sign-out-alt"></i>
                     <span>Logout</span>
                 </a>
+            </div>
+        </div>
+
+        <!-- Cleaning Request Modal -->
+        <div id="cleaningModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="document.getElementById('cleaningModal').style.display='none'">&times;</span>
+                <h2>Request Cleaning</h2>
+                <form class="cleaning-form">
+                    <div class="form-group">
+                        <label for="cleaningName">Name</label>
+                        <input type="text" id="cleaningName" name="cleaningName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="stallNumber">Stall Number</label>
+                        <input type="text" id="stallNumber" name="stallNumber" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactNumber">Contact Number</label>
+                        <input type="tel" id="contactNumber" name="contactNumber" required>
+                    </div>
+                    <div class="modal-buttons">
+                        <button type="submit" class="submit-cleaning-btn">Submit Request</button>
+                        <a href="tel:09171234567" class="call-now-modal-btn">
+                            <i class="fas fa-phone-alt"></i>
+                            <span>CALL NOW</span>
+                        </a>
+                    </div>
+                </form>
             </div>
         </div>
 
