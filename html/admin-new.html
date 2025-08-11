@@ -110,79 +110,115 @@
             <div class="content-section active" id="dashboard-section">
                 <div class="section-header">
                     <h2>Dashboard Overview</h2>
-                    <p>Welcome to the admin dashboard</p>
+                    <p>Welcome, Admin!</p>
                 </div>
+                
+                <!-- Dashboard Stats Cards -->
                 <div class="dashboard-stats">
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div class="stat-details">
+                    <div class="stat-card blue">
+                        <div class="stat-content">
                             <h3>Total Vendors</h3>
-                            <p class="stat-number">45</p>
+                            <p class="stat-number">150</p>
                         </div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-warehouse"></i>
-                        </div>
-                        <div class="stat-details">
-                            <h3>Total Stalls</h3>
-                            <p class="stat-number">120</p>
+                    <div class="stat-card green">
+                        <div class="stat-content">
+                            <h3>Active Listings</h3>
+                            <p class="stat-number">850</p>
                         </div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <div class="stat-details">
-                            <h3>Active Users</h3>
-                            <p class="stat-number">89</p>
+                    <div class="stat-card orange">
+                        <div class="stat-content">
+                            <h3>Pending Surveys</h3>
+                            <p class="stat-number">12</p>
                         </div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-clipboard-list"></i>
-                        </div>
-                        <div class="stat-details">
-                            <h3>Surveys</h3>
-                            <p class="stat-number">8</p>
+                    <div class="stat-card red">
+                        <div class="stat-content">
+                            <h3>Price Anomalies</h3>
+                            <p class="stat-number">3</p>
                         </div>
                     </div>
                 </div>
-                <div class="recent-activities">
-                    <h3>Recent Activities</h3>
-                    <div class="activity-list">
-                        <div class="activity-item">
-                            <div class="activity-icon">
-                                <i class="fas fa-user-plus"></i>
+
+                <!-- Chart Section -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3>Weekly Price Survey Completion Rate</h3>
+                    </div>
+                    <div class="chart-content">
+                        <div class="chart-bars">
+                            <div class="chart-bar">
+                                <div class="bar" style="height: 80%" data-value="80%"></div>
+                                <span class="bar-label">Week 1</span>
+                                <span class="bar-value">80%</span>
                             </div>
-                            <div class="activity-details">
-                                <h4>New Vendor Registration</h4>
-                                <p>Maria Santos submitted a vendor registration request</p>
-                                <small>2 hours ago</small>
+                            <div class="chart-bar">
+                                <div class="bar" style="height: 65%" data-value="65%"></div>
+                                <span class="bar-label">Week 2</span>
+                                <span class="bar-value">65%</span>
+                            </div>
+                            <div class="chart-bar">
+                                <div class="bar" style="height: 90%" data-value="90%"></div>
+                                <span class="bar-label">Week 3</span>
+                                <span class="bar-value">90%</span>
+                            </div>
+                            <div class="chart-bar">
+                                <div class="bar" style="height: 70%" data-value="70%"></div>
+                                <span class="bar-label">Week 4</span>
+                                <span class="bar-value">70%</span>
+                            </div>
+                            <div class="chart-bar">
+                                <div class="bar" style="height: 50%" data-value="50%"></div>
+                                <span class="bar-label">Week 5</span>
+                                <span class="bar-value">50%</span>
                             </div>
                         </div>
-                        <div class="activity-item">
-                            <div class="activity-icon">
-                                <i class="fas fa-poll"></i>
-                            </div>
-                            <div class="activity-details">
-                                <h4>Survey Completed</h4>
-                                <p>Market satisfaction survey received 15 new responses</p>
-                                <small>4 hours ago</small>
-                            </div>
-                        </div>
-                        <div class="activity-item">
-                            <div class="activity-icon">
-                                <i class="fas fa-exclamation-triangle"></i>
-                            </div>
-                            <div class="activity-details">
-                                <h4>Calamity Event Update</h4>
-                                <p>Weather alert system activated for heavy rain warning</p>
-                                <small>1 day ago</small>
-                            </div>
-                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activities Table -->
+                <div class="recent-activities-table">
+                    <div class="table-header">
+                        <h3>Recent Activities</h3>
+                    </div>
+                    <div class="table-content">
+                        <table class="activities-table">
+                            <thead>
+                                <tr>
+                                    <th>Time</th>
+                                    <th>Activity</th>
+                                    <th>User</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>10:30 AM</td>
+                                    <td>Updated price for Tomatoes</td>
+                                    <td>MAO Staff 1</td>
+                                </tr>
+                                <tr>
+                                    <td>09:45 AM</td>
+                                    <td>New vendor registered: "Aling Nena's Produce"</td>
+                                    <td>Admin</td>
+                                </tr>
+                                <tr>
+                                    <td>Yesterday</td>
+                                    <td>Flagged price anomaly: Pork Belly</td>
+                                    <td>MAO Staff 2</td>
+                                </tr>
+                                <tr>
+                                    <td>2 days ago</td>
+                                    <td>Generated monthly report</td>
+                                    <td>Admin</td>
+                                </tr>
+                                <tr>
+                                    <td>3 days ago</td>
+                                    <td>Completed survey for Fish Section</td>
+                                    <td>MAO Staff 1</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
