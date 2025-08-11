@@ -117,6 +117,299 @@
             </div>
         </div>
 
+        <!-- Survey Modal -->
+        <div id="surveyModal" class="modal survey-modal">
+            <div class="modal-content survey-modal-content">
+                <div class="survey-modal-header">
+                    <h1>Harvest Price Survey</h1>
+                    <p>Cultivating Fair Markets Together</p>
+                    <span class="close survey-modal-close" id="surveyModalClose">&times;</span>
+                </div>
+                <div class="survey-modal-body" id="surveyModalBody">
+                    <div class="survey-form-content">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        
+                        <div class="page-indicator" id="pageIndicator">
+                            Page 1 of 2 - Basic Information
+                        </div>
+                        
+                        <div class="success-message" id="successMessage">
+                            ✅ Great! Your information has been saved successfully.
+                        </div>
+                        
+                        <!-- PAGE 1: Basic Information -->
+                        <div class="form-page active" id="page1">
+                            <div class="form-tips">
+                                <h3>📋 Quick Tips for Filling Out This Form</h3>
+                                <ul>
+                                    <li>Fields marked with <span class="required">*</span> are required</li>
+                                    <li>You can add multiple items in each category</li>
+                                    <li>Hover over buttons for helpful tooltips</li>
+                                    <li>Your progress is automatically saved as you go</li>
+                                    <li>Use the "Clear Fields" button to start over if needed</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="form-section">
+                                <h2 class="section-title">
+                                    <span class="category-icon">🏡</span>
+                                    Basic Information
+                                </h2>
+                                
+                                <div class="form-group">
+                                    <label for="barangay">Village/Farmstead <span class="required">*</span></label>
+                                    <select id="barangay" required>
+                                        <option value="">Select your village/farmstead</option>
+                                        <option value="Amaya I">Amaya I</option>
+                                        <option value="Amaya II">Amaya II</option>
+                                        <option value="Amaya III">Amaya III</option>
+                                        <option value="Amaya IV">Amaya IV</option>
+                                        <option value="Amaya V">Amaya V</option>
+                                        <option value="Amaya VI">Amaya VI</option>
+                                        <option value="Amaya VII">Amaya VII</option>
+                                        <option value="Amaya VIII">Amaya VIII</option>
+                                        <option value="Amaya IX">Amaya IX</option>
+                                        <option value="Amaya X">Amaya X</option>
+                                        <option value="Bagtas">Bagtas</option>
+                                        <option value="Biga">Biga</option>
+                                        <option value="Bucal">Bucal</option>
+                                        <option value="Bunga">Bunga</option>
+                                        <option value="Capipisa">Capipisa</option>
+                                        <option value="Daang Amaya I">Daang Amaya I</option>
+                                        <option value="Daang Amaya II">Daang Amaya II</option>
+                                        <option value="Daang Amaya III">Daang Amaya III</option>
+                                        <option value="Halayhay">Halayhay</option>
+                                        <option value="Julugan I">Julugan I</option>
+                                        <option value="Julugan II">Julugan II</option>
+                                        <option value="Julugan III">Julugan III</option>
+                                        <option value="Julugan IV">Julugan IV</option>
+                                        <option value="Julugan V">Julugan V</option>
+                                        <option value="Julugan VI">Julugan VI</option>
+                                        <option value="Julugan VII">Julugan VII</option>
+                                        <option value="Julugan VIII">Julugan VIII</option>
+                                        <option value="Lambingan">Lambingan</option>
+                                        <option value="Mulawin">Mulawin</option>
+                                        <option value="Natipuan">Natipuan</option>
+                                        <option value="Paradahan I">Paradahan I</option>
+                                        <option value="Paradahan II">Paradahan II</option>
+                                        <option value="Poblacion I">Poblacion I</option>
+                                        <option value="Poblacion II">Poblacion II</option>
+                                        <option value="Poblacion III">Poblacion III</option>
+                                        <option value="Poblacion IV">Poblacion IV</option>
+                                        <option value="Sahud-Ulan">Sahud-Ulan</option>
+                                        <option value="Santol">Santol</option>
+                                        <option value="Tanza Proper">Tanza Proper</option>
+                                        <option value="Tres Cruses">Tres Cruses</option>
+                                        <option value="Other">Other (Please specify in business name)</option>
+                                    </select>
+                                    <div class="error-message" id="barangayError">Please select your village or farmstead</div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="ownerName">Farmer/Owner's Name</label>
+                                    <input type="text" id="ownerName" placeholder="Enter the farmer's or owner's name (optional)">
+                                    <div class="help-text">This field is optional but helps us personalize the survey</div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="businessName">Farm/Business Name <span class="required">*</span></label>
+                                    <input type="text" id="businessName" placeholder="Enter your farm or business name" required>
+                                    <div class="error-message" id="businessNameError">Please enter your farm or business name</div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="businessType">Your Role in the Market <span class="required">*</span></label>
+                                    <select id="businessType" required>
+                                        <option value="">Select your market role</option>
+                                        <option value="Direct Farmer">Direct Farmer (I grow and sell my own products)</option>
+                                        <option value="Middleman/Trader">Middleman/Trader (I buy from farmers and sell in markets)</option>
+                                        <option value="Retailer">Retailer (I buy wholesale and sell retail)</option>
+                                        <option value="Processor">Processor (I process raw materials into finished products)</option>
+                                        <option value="Cooperative Member">Cooperative Member (I sell through a cooperative)</option>
+                                        <option value="Family Business">Family Business (Multiple family members involved)</option>
+                                        <option value="Other">Other (Please specify in business name)</option>
+                                    </select>
+                                    <div class="help-text">Choose the option that best describes how you sell your products</div>
+                                    <div class="error-message" id="businessTypeError">Please select your market role</div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="supplySource">Where did you get your products? <span class="required">*</span></label>
+                                    <input type="text" id="supplySource" placeholder="e.g., Tanza Public Market, My Farm in Amaya, Cavite Distributor" required>
+                                    <div class="help-text">Please specify the **location** or primary source of your products.</div>
+                                    <div class="error-message" id="supplySourceError">Please enter your supply source</div>
+                                </div>
+                            </div>
+                            
+                            <div class="navigation-buttons">
+                                <button class="nav-btn btn-danger" onclick="clearForm()">
+                                    🧹 Clear All Fields
+                                </button>
+                                <button class="nav-btn" onclick="nextPage()">
+                                    Next: Product Categories ➡️
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- PAGE 2: Product Categories -->
+                        <div class="form-page" id="page2">
+                            <!-- Golden Grains & Staples -->
+                            <div class="form-section">
+                                <h2 class="section-title">
+                                    <span class="category-icon">🌾</span>
+                                    Rice and Grains
+                                </h2>
+                                <div class="tooltip">
+                                    <button class="btn-secondary" onclick="addItem('rice')">
+                                        ➕ Add Rice/Grains Product
+                                    </button>
+                                    <span class="tooltiptext">Click to add rice, corn, or other grain products you sell</span>
+                                </div>
+                                <div id="rice-list" class="saved-items-container">
+                                    <div class="empty-state" id="rice-empty">
+                                        No rice or grain products added yet. Click the button above to add one.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Lowland Garden Harvest -->
+                            <div class="form-section">
+                                <h2 class="section-title">
+                                    <span class="category-icon">🥬</span>
+                                    Lowland Vegetables 
+                                </h2>
+                                <div class="tooltip">
+                                    <button class="btn-secondary" onclick="addItem('lowland')">
+                                        ➕ Add Lowland Vegetable
+                                    </button>
+                                    <span class="tooltiptext">Add vegetables grown in lowland areas like tomatoes, eggplant, etc.</span>
+                                </div>
+                                <div id="lowland-list" class="saved-items-container">
+                                    <div class="empty-state" id="lowland-empty">
+                                        No lowland vegetables added yet. Click the button above to add one.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Highland Mountain Bounty -->
+                            <div class="form-section">
+                                <h2 class="section-title">
+                                    <span class="category-icon">🥕</span>
+                                    Highland Vegetables
+                                </h2>
+                                <div class="tooltip">
+                                    <button class="btn-secondary" onclick="addItem('highland')">
+                                        ➕ Add Highland Vegetable
+                                    </button>
+                                    <span class="tooltiptext">Add vegetables grown in highland/mountain areas like cabbage, carrots, etc.</span>
+                                </div>
+                                <div id="highland-list" class="saved-items-container">
+                                    <div class="empty-state" id="highland-empty">
+                                        No highland vegetables added yet. Click the button above to add one.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Fruits -->
+                            <div class="form-section">
+                                <h2 class="section-title">
+                                    <span class="category-icon">🍎</span>
+                                    Fruits
+                                </h2>
+                                <div class="tooltip">
+                                    <button class="btn-secondary" onclick="addItem('fruits')">
+                                        ➕ Add Fruit Product
+                                    </button>
+                                    <span class="tooltiptext">Add fresh fruits like banana, mango, papaya, etc.</span>
+                                </div>
+                                <div id="fruits-list" class="saved-items-container">
+                                    <div class="empty-state" id="fruits-empty">
+                                        No fruits added yet. Click the button above to add one.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Farmstead Livestock & Poultry -->
+                            <div class="form-section">
+                                <h2 class="section-title">
+                                    <span class="category-icon">🥩</span>
+                                    Farmstead Livestock & Poultry
+                                </h2>
+                                <div class="tooltip">
+                                    <button class="btn-secondary" onclick="addItem('meat')">
+                                        ➕ Add Meat/Poultry Product
+                                    </button>
+                                    <span class="tooltiptext">Add meat, poultry, eggs, and other livestock products</span>
+                                </div>
+                                <div id="meat-list" class="saved-items-container">
+                                    <div class="empty-state" id="meat-empty">
+                                        No meat or poultry products added yet. Click the button above to add one.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Fish  -->
+                            <div class="form-section">
+                                <h2 class="section-title">
+                                    <span class="category-icon">🐟</span>
+                                    Fish & Seafood
+                                </h2>
+                                <div class="tooltip">
+                                    <button class="btn-secondary" onclick="addItem('fish')">
+                                        ➕ Add Fish/Seafood Product
+                                    </button>
+                                    <span class="tooltiptext">Add fresh fish, dried fish, and other seafood products</span>
+                                </div>
+                                <div id="fish-list" class="saved-items-container">
+                                    <div class="empty-state" id="fish-empty">
+                                        No fish or seafood products added yet. Click the button above to add one.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Other Essential Provisions -->
+                            <div class="form-section">
+                                <h2 class="section-title">
+                                    <span class="category-icon">🛒</span>
+                                    Other Essential Provisions
+                                </h2>
+                                <div class="tooltip">
+                                    <button class="btn-secondary" onclick="addItem('other')">
+                                        ➕ Add Other Product
+                                    </button>
+                                    <span class="tooltiptext">Add sugar, cooking oil, and other essential food items</span>
+                                </div>
+                                <div id="other-list" class="saved-items-container">
+                                    <div class="empty-state" id="other-empty">
+                                        No other products added yet. Click the button above to add one.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="navigation-buttons">
+                                <button class="nav-btn btn-secondary" onclick="previousPage()">
+                                    ⬅️ Previous: Basic Information
+                                </button>
+                                <div class="tooltip">
+                                    <button class="nav-btn action-btn" onclick="submitForm()">
+                                        🎉 Submit Survey
+                                    </button>
+                                    <span class="tooltiptext">Submit your completed survey</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="loading" id="loadingIndicator">
+                            <div class="spinner"></div>
+                            <p>Submitting your survey data...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Main Content -->
         <div class="main-content">
             <div class="topbar">
