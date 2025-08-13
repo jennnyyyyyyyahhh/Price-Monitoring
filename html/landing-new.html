@@ -23,6 +23,7 @@
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#services" class="nav-link">Services</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="#" class="nav-link" id="feedbackBtn">Feedback</a></li>
             </ul>
             <div class="nav-buttons">
                 <div class="notification-container">
@@ -547,6 +548,130 @@
                         Submit Report
                     </button>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Feedback Modal -->
+    <div class="modal-overlay" id="feedbackModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2>Rate Our System</h2>
+                <button class="modal-close" id="closeFeedbackModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="feedback-content">
+                    <div class="feedback-intro">
+                        <i class="fas fa-star feedback-main-icon"></i>
+                        <h3>How would you rate your experience?</h3>
+                        <p>Your feedback helps us improve our price monitoring system</p>
+                    </div>
+                    
+                    <form id="feedbackForm" class="feedback-form">
+                        <div class="rating-section">
+                            <div class="star-rating">
+                                <input type="radio" name="rating" value="5" id="star5">
+                                <label for="star5" class="star">
+                                    <i class="fas fa-star"></i>
+                                </label>
+                                <input type="radio" name="rating" value="4" id="star4">
+                                <label for="star4" class="star">
+                                    <i class="fas fa-star"></i>
+                                </label>
+                                <input type="radio" name="rating" value="3" id="star3">
+                                <label for="star3" class="star">
+                                    <i class="fas fa-star"></i>
+                                </label>
+                                <input type="radio" name="rating" value="2" id="star2">
+                                <label for="star2" class="star">
+                                    <i class="fas fa-star"></i>
+                                </label>
+                                <input type="radio" name="rating" value="1" id="star1">
+                                <label for="star1" class="star">
+                                    <i class="fas fa-star"></i>
+                                </label>
+                            </div>
+                            <div class="rating-text" id="ratingText">
+                                <span>Click a star to rate</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="feedbackName">Name (Optional)</label>
+                            <div class="input-container">
+                                <i class="fas fa-user"></i>
+                                <input type="text" id="feedbackName" placeholder="Enter your name">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="feedbackEmail">Email (Optional)</label>
+                            <div class="input-container">
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" id="feedbackEmail" placeholder="Enter your email">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="feedbackComments">Additional Comments (Optional)</label>
+                            <div class="input-container">
+                                <i class="fas fa-comment"></i>
+                                <textarea id="feedbackComments" placeholder="Tell us more about your experience..." rows="4"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="feedback-categories">
+                            <h4>What did you like most? (Optional)</h4>
+                            <div class="category-checkboxes">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="categories" value="ease-of-use">
+                                    <span class="checkmark"></span>
+                                    Easy to use
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="categories" value="real-time-data">
+                                    <span class="checkmark"></span>
+                                    Real-time data
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="categories" value="design">
+                                    <span class="checkmark"></span>
+                                    Design & Layout
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="categories" value="mobile-friendly">
+                                    <span class="checkmark"></span>
+                                    Mobile friendly
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="categories" value="features">
+                                    <span class="checkmark"></span>
+                                    Useful features
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="categories" value="accuracy">
+                                    <span class="checkmark"></span>
+                                    Data accuracy
+                                </label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary feedback-submit-btn">
+                            <i class="fas fa-paper-plane"></i>
+                            Submit Feedback
+                        </button>
+                    </form>
+
+                    <!-- Thank You Message (Initially Hidden) -->
+                    <div class="feedback-thank-you" id="feedbackThankYou" style="display: none;">
+                        <div class="thank-you-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h3>Thank you for your feedback!</h3>
+                        <p>Your rating and comments help us improve our system for everyone.</p>
+                        <button type="button" class="btn btn-secondary" id="closeFeedbackThankYou">Close</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

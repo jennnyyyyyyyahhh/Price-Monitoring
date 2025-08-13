@@ -32,8 +32,43 @@
                     </button>
                 </div>
                 <div class="user-profile">
-                    <span class="user-name">Admin User</span>
-                    <img src="https://via.placeholder.com/32" alt="Admin" class="user-avatar">
+                    <div class="user-info" id="userProfileToggle">
+                        <span class="user-name">Admin User</span>
+                        <img src="https://via.placeholder.com/32" alt="Admin" class="user-avatar">
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </div>
+                    <div class="profile-dropdown" id="profileDropdown">
+                        <div class="dropdown-header">
+                            <img src="https://via.placeholder.com/60" alt="Admin Profile" class="profile-image">
+                            <div class="profile-info">
+                                <h4>Admin User</h4>
+                                <p>admin@tanzamarket.gov.ph</p>
+                            </div>
+                        </div>
+                        <div class="dropdown-menu">
+                            <a href="#" class="dropdown-item" data-section="view-profile">
+                                <i class="fas fa-user"></i>
+                                <span>View Profile</span>
+                            </a>
+                            <a href="#" class="dropdown-item" data-section="edit-profile">
+                                <i class="fas fa-edit"></i>
+                                <span>Edit Profile</span>
+                            </a>
+                            <a href="#" class="dropdown-item" data-section="change-password">
+                                <i class="fas fa-key"></i>
+                                <span>Change Password</span>
+                            </a>
+                            <a href="#" class="dropdown-item" data-section="account-settings">
+                                <i class="fas fa-cog"></i>
+                                <span>Account Settings</span>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item logout" id="logoutBtn">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span>Logout</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="hamburger">
@@ -241,8 +276,271 @@
                     <h2>Vendor Management</h2>
                     <p>Manage registered vendors and their details</p>
                 </div>
+                
+                <!-- Vendor Management Controls -->
+                <div class="vendor-controls">
+                    <div class="controls-left">
+                        <div class="search-container">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="vendorSearch" placeholder="Search vendors...">
+                        </div>
+                        <div class="filter-container">
+                            <select id="statusFilter">
+                                <option value="all">All Status</option>
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                                <option value="pending">Pending</option>
+                                <option value="suspended">Suspended</option>
+                            </select>
+                        </div>
+                        <div class="filter-container">
+                            <select id="categoryFilter">
+                                <option value="all">All Categories</option>
+                                <option value="vegetables">Vegetables</option>
+                                <option value="fruits">Fruits</option>
+                                <option value="meat">Meat & Poultry</option>
+                                <option value="seafood">Seafood</option>
+                                <option value="dairy">Dairy</option>
+                                <option value="grains">Rice & Grains</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="controls-right">
+                        <button class="btn btn-secondary" id="exportVendorsBtn">
+                            <i class="fas fa-download"></i>
+                            Export
+                        </button>
+                        <button class="btn btn-primary" id="addVendorBtn">
+                            <i class="fas fa-plus"></i>
+                            Add Vendor
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Vendor Statistics -->
+                <div class="vendor-stats">
+                    <div class="stat-item">
+                        <div class="stat-icon green">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h4>Active Vendors</h4>
+                            <p id="activeVendorCount">87</p>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon orange">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h4>Pending Approval</h4>
+                            <p id="pendingVendorCount">12</p>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon red">
+                            <i class="fas fa-ban"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h4>Suspended</h4>
+                            <p id="suspendedVendorCount">3</p>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon blue">
+                            <i class="fas fa-store"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h4>Total Vendors</h4>
+                            <p id="totalVendorCount">102</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vendors Table -->
                 <div class="table-container">
-                    <p>Vendor management functionality coming soon...</p>
+                    <div class="table-header">
+                        <h3>Vendor List</h3>
+                        <div class="table-actions">
+                            <button class="btn btn-outline" id="bulkActionsBtn">
+                                <i class="fas fa-tasks"></i>
+                                Bulk Actions
+                            </button>
+                        </div>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="vendors-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Business Name</th>
+                                    <th>Stall Number</th>
+                                    <th>Status</th>
+                                    <th>Registration Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="vendorsTableBody">
+                                <tr>
+                                    <td>
+                                        <div class="vendor-info">
+                                            <div>
+                                                <div class="vendor-name">Jenny Villaula</div>
+                                                <div class="vendor-contact">jenny.villaula@email.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Maria's Fresh Produce</td>
+                                    <td>A-15</td>
+                                    <td><span class="status-badge active">Active</span></td>
+                                    <td>Jan 15, 2024</td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="action-btn view" data-vendor-id="V001" title="View">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="action-btn edit" data-vendor-id="V001" title="Edit">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="action-btn delete" data-vendor-id="V001" title="Delete">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="vendor-info">
+                                            <div>
+                                                <div class="vendor-name">Juan Dela Cruz</div>
+                                                <div class="vendor-contact">juan.delacruz@email.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Juan's Meat Shop</td>
+                                    <td>B-08</td>
+                                    <td><span class="status-badge active">Active</span></td>
+                                    <td>Feb 03, 2024</td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="action-btn view" data-vendor-id="V002" title="View">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="action-btn edit" data-vendor-id="V002" title="Edit">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="action-btn delete" data-vendor-id="V002" title="Delete">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="vendor-info">
+                                            <div>
+                                                <div class="vendor-name">Ana Reyes</div>
+                                                <div class="vendor-contact">ana.reyes@email.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Ana's Fruit Stand</td>
+                                    <td>C-22</td>
+                                    <td><span class="status-badge pending">Pending</span></td>
+                                    <td>Aug 10, 2024</td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="action-btn view" data-vendor-id="V003" title="View">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="action-btn edit" data-vendor-id="V003" title="Edit">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="action-btn delete" data-vendor-id="V003" title="Delete">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="vendor-info">
+                                            <div>
+                                                <div class="vendor-name">Pedro Garcia</div>
+                                                <div class="vendor-contact">pedro.garcia@email.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Pedro's Seafood</td>
+                                    <td>D-05</td>
+                                    <td><span class="status-badge suspended">Suspended</span></td>
+                                    <td>Dec 20, 2023</td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="action-btn view" data-vendor-id="V004" title="View">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="action-btn edit" data-vendor-id="V004" title="Edit">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="action-btn delete" data-vendor-id="V004" title="Delete">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="vendor-info">
+                                            <div>
+                                                <div class="vendor-name">Lisa Fernandez</div>
+                                                <div class="vendor-contact">lisa.fernandez@email.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Lisa's Rice Store</td>
+                                    <td>E-12</td>
+                                    <td><span class="status-badge active">Active</span></td>
+                                    <td>Mar 08, 2024</td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="action-btn view" data-vendor-id="V005" title="View">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="action-btn edit" data-vendor-id="V005" title="Edit">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="action-btn delete" data-vendor-id="V005" title="Delete">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination-container">
+                    <div class="pagination-info">
+                        <span>Showing 1-5 of 102 vendors</span>
+                    </div>
+                    <div class="pagination-controls">
+                        <button class="pagination-btn" id="prevPage" disabled>
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <span class="page-numbers">
+                            <button class="page-btn active">1</button>
+                            <button class="page-btn">2</button>
+                            <button class="page-btn">3</button>
+                            <span class="page-dots">...</span>
+                            <button class="page-btn">21</button>
+                        </span>
+                        <button class="pagination-btn" id="nextPage">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -309,6 +607,510 @@
                 </div>
                 <div class="reports-container">
                     <p>Reports functionality coming soon...</p>
+                </div>
+            </div>
+
+            <!-- View Profile Section -->
+            <div class="content-section" id="view-profile-section">
+                <div class="section-header">
+                    <h2>View Profile</h2>
+                    <p>View your account information</p>
+                </div>
+                <div class="profile-container">
+                    <div class="profile-view">
+                        <div class="profile-avatar-section">
+                            <img src="https://via.placeholder.com/120" alt="Admin Profile" class="profile-avatar-large" id="adminProfilePreview">
+                            <button class="change-avatar-btn" id="changeAdminPhotoBtn">
+                                <i class="fas fa-camera"></i>
+                                Change Photo
+                            </button>
+                            <input type="file" id="adminPhotoInput" accept="image/*" style="display: none;">
+                        </div>
+                        <div class="profile-details">
+                            <div class="detail-row">
+                                <label>Full Name:</label>
+                                <span id="displayFullName">Admin User</span>
+                            </div>
+                            <div class="detail-row">
+                                <label>Email:</label>
+                                <span id="displayEmail">admin@tanzamarket.gov.ph</span>
+                            </div>
+                            <div class="detail-row">
+                                <label>Role:</label>
+                                <span>System Administrator</span>
+                            </div>
+                            <div class="detail-row">
+                                <label>Department:</label>
+                                <span id="displayDepartment">Municipal Agriculture Office</span>
+                            </div>
+                            <div class="detail-row">
+                                <label>Phone:</label>
+                                <span id="displayPhone">+63 912 345 6789</span>
+                            </div>
+                            <div class="detail-row">
+                                <label>Last Login:</label>
+                                <span>Today, 8:30 AM</span>
+                            </div>
+                            <div class="detail-row">
+                                <label>Account Created:</label>
+                                <span>January 15, 2024</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Edit Profile Section -->
+            <div class="content-section" id="edit-profile-section">
+                <div class="section-header">
+                    <h2>Edit Profile</h2>
+                    <p>Update your account information</p>
+                </div>
+                <div class="profile-container">
+                    <div class="profile-edit">
+                        <form id="profileEditForm">
+                            <div class="form-section">
+                                <h3>Personal Information</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="firstName">First Name</label>
+                                        <input type="text" id="firstName" name="firstName" value="Admin" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="lastName">Last Name</label>
+                                        <input type="text" id="lastName" name="lastName" value="User" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email Address</label>
+                                        <input type="email" id="email" name="email" value="admin@tanzamarket.gov.ph" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="phone">Phone Number</label>
+                                        <input type="tel" id="phone" name="phone" value="+63 912 345 6789">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-section">
+                                <h3>Work Information</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="department">Department</label>
+                                        <select id="department" name="department">
+                                            <option value="mao" selected>Municipal Agriculture Office</option>
+    
+                                            <option value="it-dept">IT Department</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="position">Position</label>
+                                        <input type="text" id="position" name="position" value="System Administrator">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-secondary" id="cancelEdit">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Change Password Section -->
+            <div class="content-section" id="change-password-section">
+                <div class="section-header">
+                    <h2>Change Password</h2>
+                    <p>Update your account password</p>
+                </div>
+                <div class="profile-container">
+                    <div class="password-change">
+                        <form id="changePasswordForm">
+                            <div class="form-group">
+                                <label for="currentPassword">Current Password</label>
+                                <div class="password-input">
+                                    <input type="password" id="currentPassword" name="currentPassword" required>
+                                    <button type="button" class="password-toggle" data-target="currentPassword">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="newPassword">New Password</label>
+                                <div class="password-input">
+                                    <input type="password" id="newPassword" name="newPassword" required>
+                                    <button type="button" class="password-toggle" data-target="newPassword">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                                <div class="password-requirements">
+                                    <p>Password must contain:</p>
+                                    <ul>
+                                        <li>At least 8 characters</li>
+                                        <li>One uppercase letter</li>
+                                        <li>One lowercase letter</li>
+                                        <li>One number</li>
+                                        <li>One special character</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmPassword">Confirm New Password</label>
+                                <div class="password-input">
+                                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                                    <button type="button" class="password-toggle" data-target="confirmPassword">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-secondary" id="cancelPasswordChange">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Change Password</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Account Settings Section -->
+            <div class="content-section" id="account-settings-section">
+                <div class="section-header">
+                    <h2>Account Settings</h2>
+                    <p>Manage your account preferences</p>
+                </div>
+                <div class="profile-container">
+                    <div class="account-settings">
+                        <form id="accountSettingsForm">
+                            <div class="form-section">
+                                <h3>Notification Preferences</h3>
+                                <div class="setting-group">
+                                    <div class="setting-item">
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="emailNotifications" checked>
+                                            <span class="slider"></span>
+                                        </label>
+                                        <div class="setting-info">
+                                            <h4>Email Notifications</h4>
+                                            <p>Receive email notifications for important updates</p>
+                                        </div>
+                                    </div>
+                                    <div class="setting-item">
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="smsNotifications">
+                                            <span class="slider"></span>
+                                        </label>
+                                        <div class="setting-info">
+                                            <h4>SMS Notifications</h4>
+                                            <p>Receive SMS notifications for urgent alerts</p>
+                                        </div>
+                                    </div>
+                                    <div class="setting-item">
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="systemAlerts" checked>
+                                            <span class="slider"></span>
+                                        </label>
+                                        <div class="setting-info">
+                                            <h4>System Alerts</h4>
+                                            <p>Receive in-app notifications for system events</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-section">
+                                <h3>Security Settings</h3>
+                                <div class="setting-group">
+                                    <div class="setting-item">
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="twoFactorAuth">
+                                            <span class="slider"></span>
+                                        </label>
+                                        <div class="setting-info">
+                                            <h4>Two-Factor Authentication</h4>
+                                            <p>Add an extra layer of security to your account</p>
+                                        </div>
+                                    </div>
+                                    <div class="setting-item">
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="sessionTimeout" checked>
+                                            <span class="slider"></span>
+                                        </label>
+                                        <div class="setting-info">
+                                            <h4>Auto Session Timeout</h4>
+                                            <p>Automatically logout after 30 minutes of inactivity</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-secondary" id="cancelSettings">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Save Settings</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Vendor Modal -->
+    <div class="modal-overlay" id="addVendorModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2>Add New Vendor</h2>
+                <button class="modal-close" id="closeAddVendorModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="addVendorForm">
+                    <div class="form-section">
+                        <h3>Personal Information</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="vendorFirstName">First Name *</label>
+                                <input type="text" id="vendorFirstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="vendorLastName">Last Name *</label>
+                                <input type="text" id="vendorLastName" name="lastName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="vendorEmail">Email Address *</label>
+                                <input type="email" id="vendorEmail" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="vendorPhone">Phone Number *</label>
+                                <input type="tel" id="vendorPhone" name="phone" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-section">
+                        <h3>Business Information</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="businessName">Business Name *</label>
+                                <input type="text" id="businessName" name="businessName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="businessCategory">Category *</label>
+                                <select id="businessCategory" name="category" required>
+                                    <option value="">Select Category</option>
+                                    <option value="vegetables">Vegetables</option>
+                                    <option value="fruits">Fruits</option>
+                                    <option value="meat">Meat & Poultry</option>
+                                    <option value="seafood">Seafood</option>
+                                    <option value="dairy">Dairy</option>
+                                    <option value="grains">Rice & Grains</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="stallNumber">Preferred Stall Number</label>
+                                <select id="stallNumber" name="stallNumber">
+                                    <option value="">Auto-assign</option>
+                                    <option value="A-01">A-01</option>
+                                    <option value="A-02">A-02</option>
+                                    <option value="B-01">B-01</option>
+                                    <option value="B-02">B-02</option>
+                                    <option value="C-01">C-01</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="vendorStatus">Status *</label>
+                                <select id="vendorStatus" name="status" required>
+                                    <option value="pending">Pending</option>
+                                    <option value="active">Active</option>
+                                    <option value="inactive">Inactive</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-section">
+                        <h3>Address Information</h3>
+                        <div class="form-grid">
+                            <div class="form-group full-width">
+                                <label for="vendorAddress">Complete Address</label>
+                                <textarea id="vendorAddress" name="address" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="cancelAddVendor">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Add Vendor</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Vendor Modal -->
+    <div class="modal-overlay" id="viewVendorModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2>Vendor Details</h2>
+                <button class="modal-close" id="closeViewVendorModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="vendor-details">
+                    <div class="vendor-header">
+                        <img src="https://via.placeholder.com/80" alt="Vendor" class="vendor-photo" id="viewVendorPhoto">
+                        <div class="vendor-basic-info">
+                            <h3 id="viewVendorName">Vendor Name</h3>
+                            <p id="viewVendorBusiness">Business Name</p>
+                            <span class="status-badge" id="viewVendorStatus">Active</span>
+                        </div>
+                    </div>
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <label>Vendor ID:</label>
+                            <span id="viewVendorId">V001</span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Email:</label>
+                            <span id="viewVendorEmailDetail">vendor@email.com</span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Phone:</label>
+                            <span id="viewVendorPhoneDetail">+63 123 456 7890</span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Category:</label>
+                            <span id="viewVendorCategory">Vegetables</span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Stall Number:</label>
+                            <span id="viewVendorStall">A-15</span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Registration Date:</label>
+                            <span id="viewVendorRegDate">Jan 15, 2024</span>
+                        </div>
+                        <div class="detail-item full-width">
+                            <label>Address:</label>
+                            <span id="viewVendorAddressDetail">Complete address here</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn btn-secondary" id="editFromView">Edit Vendor</button>
+                    <button class="btn btn-danger" id="deleteFromView">Delete Vendor</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Vendor Modal -->
+    <div class="modal-overlay" id="editVendorModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2>Edit Vendor</h2>
+                <button class="modal-close" id="closeEditVendorModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="editVendorForm">
+                    <input type="hidden" id="editVendorId" name="vendorId">
+                    <div class="form-section">
+                        <h3>Personal Information</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="editVendorFirstName">First Name *</label>
+                                <input type="text" id="editVendorFirstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="editVendorLastName">Last Name *</label>
+                                <input type="text" id="editVendorLastName" name="lastName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="editVendorEmail">Email Address *</label>
+                                <input type="email" id="editVendorEmail" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="editVendorPhone">Phone Number *</label>
+                                <input type="tel" id="editVendorPhone" name="phone" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-section">
+                        <h3>Business Information</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="editBusinessName">Business Name *</label>
+                                <input type="text" id="editBusinessName" name="businessName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="editBusinessCategory">Category *</label>
+                                <select id="editBusinessCategory" name="category" required>
+                                    <option value="vegetables">Vegetables</option>
+                                    <option value="fruits">Fruits</option>
+                                    <option value="meat">Meat & Poultry</option>
+                                    <option value="seafood">Seafood</option>
+                                    <option value="dairy">Dairy</option>
+                                    <option value="grains">Rice & Grains</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="editStallNumber">Stall Number</label>
+                                <select id="editStallNumber" name="stallNumber">
+                                    <option value="A-01">A-01</option>
+                                    <option value="A-02">A-02</option>
+                                    <option value="B-01">B-01</option>
+                                    <option value="B-02">B-02</option>
+                                    <option value="C-01">C-01</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="editVendorStatus">Status *</label>
+                                <select id="editVendorStatus" name="status" required>
+                                    <option value="pending">Pending</option>
+                                    <option value="active">Active</option>
+                                    <option value="inactive">Inactive</option>
+                                    <option value="suspended">Suspended</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-section">
+                        <h3>Address Information</h3>
+                        <div class="form-grid">
+                            <div class="form-group full-width">
+                                <label for="editVendorAddress">Complete Address</label>
+                                <textarea id="editVendorAddress" name="address" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="cancelEditVendor">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Update Vendor</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bulk Actions Modal -->
+    <div class="modal-overlay" id="bulkActionsModal">
+        <div class="modal-container small">
+            <div class="modal-header">
+                <h2>Bulk Actions</h2>
+                <button class="modal-close" id="closeBulkActionsModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="bulk-actions-content">
+                    <p>Select an action to perform on <span id="selectedVendorCount">0</span> selected vendor(s):</p>
+                    <div class="bulk-action-buttons">
+                        <button class="btn btn-success" id="bulkActivate">
+                            <i class="fas fa-check"></i>
+                            Activate
+                        </button>
+                        <button class="btn btn-warning" id="bulkSuspend">
+                            <i class="fas fa-pause"></i>
+                            Suspend
+                        </button>
+                        <button class="btn btn-secondary" id="bulkExport">
+                            <i class="fas fa-download"></i>
+                            Export
+                        </button>
+                        <button class="btn btn-danger" id="bulkDelete">
+                            <i class="fas fa-trash"></i>
+                            Delete
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

@@ -6,6 +6,7 @@
     <title>Price Dashboard - Tanza Public Market</title>
     <link rel="stylesheet" href="../css/price-dashboard-new.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <!-- Navigation Header -->
@@ -104,47 +105,47 @@
                         <span class="category-name">All Categories</span>
                         <span class="category-count" id="allCount">0</span>
                     </div>
-                    <div class="category-item" data-category="fruits">
+                    <div class="category-item" data-category="market-price">
                         <div class="category-icon">
-                            <i class="fas fa-apple-alt"></i>
+                            <i class="fas fa-store"></i>
                         </div>
-                        <span class="category-name">Fruits</span>
-                        <span class="category-count" id="fruitsCount">0</span>
+                        <span class="category-name">Market Price</span>
+                        <span class="category-count" id="marketCount">0</span>
                     </div>
-                    <div class="category-item" data-category="vegetables">
+                    <div class="category-item" data-category="alfamart">
                         <div class="category-icon">
-                            <i class="fas fa-carrot"></i>
+                            <i class="fas fa-shopping-basket"></i>
                         </div>
-                        <span class="category-name">Vegetables</span>
-                        <span class="category-count" id="vegetablesCount">0</span>
+                        <span class="category-name">Alfamart</span>
+                        <span class="category-count" id="alfamartCount">0</span>
                     </div>
-                    <div class="category-item" data-category="meats">
+                    <div class="category-item" data-category="puregold">
                         <div class="category-icon">
-                            <i class="fas fa-drumstick-bite"></i>
+                            <i class="fas fa-shopping-cart"></i>
                         </div>
-                        <span class="category-name">Meats</span>
-                        <span class="category-count" id="meatsCount">0</span>
+                        <span class="category-name">Puregold</span>
+                        <span class="category-count" id="puregoldCount">0</span>
                     </div>
-                    <div class="category-item" data-category="poultry">
+                    <div class="category-item" data-category="savemore">
                         <div class="category-icon">
-                            <i class="fas fa-egg"></i>
+                            <i class="fas fa-tags"></i>
                         </div>
-                        <span class="category-name">Poultry</span>
-                        <span class="category-count" id="poultryCount">0</span>
+                        <span class="category-name">Savemore</span>
+                        <span class="category-count" id="savemoreCount">0</span>
                     </div>
-                    <div class="category-item" data-category="dairy">
+                    <div class="category-item" data-category="sm-supermarket">
                         <div class="category-icon">
-                            <i class="fas fa-cheese"></i>
+                            <i class="fas fa-building"></i>
                         </div>
-                        <span class="category-name">Dairy</span>
-                        <span class="category-count" id="dairyCount">0</span>
+                        <span class="category-name">SM Supermarket</span>
+                        <span class="category-count" id="smCount">0</span>
                     </div>
-                    <div class="category-item" data-category="rice">
+                    <div class="category-item" data-category="price-trends">
                         <div class="category-icon">
-                            <i class="fas fa-seedling"></i>
+                            <i class="fas fa-chart-line"></i>
                         </div>
-                        <span class="category-name">Rice</span>
-                        <span class="category-count" id="riceCount">0</span>
+                        <span class="category-name">Price Trends</span>
+                        <span class="category-count" id="trendsCount">0</span>
                     </div>
                 </div>
                 
@@ -223,7 +224,7 @@
 
             <!-- Categories Overview -->
             <div class="categories-overview">
-                <h2>Browse by Category</h2>
+                <h2>Browse by Store</h2>
                 <div class="categories-grid">
                     <div class="category-card" data-category="all">
                         <div class="category-card-icon">
@@ -231,55 +232,228 @@
                         </div>
                         <h3>All Categories</h3>
                         <p class="category-description">Browse all available products</p>
-                        <span class="category-product-count">16 products</span>
+                        <span class="category-product-count">15 products</span>
                     </div>
-                    <div class="category-card" data-category="fruits">
+                    <div class="category-card" data-category="market-price">
                         <div class="category-card-icon">
-                            <i class="fas fa-apple-alt"></i>
+                            <i class="fas fa-store"></i>
                         </div>
-                        <h3>Fruits</h3>
-                        <p class="category-description">Fresh seasonal fruits</p>
+                        <h3>Market Price</h3>
+                        <p class="category-description">Local market prices</p>
+                        <span class="category-product-count">4 products</span>
+                    </div>
+                    <div class="category-card" data-category="alfamart">
+                        <div class="category-card-icon">
+                            <i class="fas fa-shopping-basket"></i>
+                        </div>
+                        <h3>Alfamart</h3>
+                        <p class="category-description">Convenience store prices</p>
                         <span class="category-product-count">3 products</span>
                     </div>
-                    <div class="category-card" data-category="vegetables">
+                    <div class="category-card" data-category="puregold">
                         <div class="category-card-icon">
-                            <i class="fas fa-carrot"></i>
+                            <i class="fas fa-shopping-cart"></i>
                         </div>
-                        <h3>Vegetables</h3>
-                        <p class="category-description">Farm fresh vegetables</p>
+                        <h3>Puregold</h3>
+                        <p class="category-description">Supermarket chain prices</p>
                         <span class="category-product-count">3 products</span>
                     </div>
-                    <div class="category-card" data-category="meats">
+                    <div class="category-card" data-category="savemore">
                         <div class="category-card-icon">
-                            <i class="fas fa-drumstick-bite"></i>
+                            <i class="fas fa-tags"></i>
                         </div>
-                        <h3>Meats</h3>
-                        <p class="category-description">Fresh meat and seafood</p>
-                        <span class="category-product-count">5 products</span>
+                        <h3>Savemore</h3>
+                        <p class="category-description">Discount store prices</p>
+                        <span class="category-product-count">3 products</span>
                     </div>
-                    <div class="category-card" data-category="poultry">
+                    <div class="category-card" data-category="sm-supermarket">
                         <div class="category-card-icon">
-                            <i class="fas fa-egg"></i>
+                            <i class="fas fa-building"></i>
                         </div>
-                        <h3>Poultry</h3>
-                        <p class="category-description">Chicken and poultry products</p>
-                        <span class="category-product-count">1 product</span>
-                    </div>
-                    <div class="category-card" data-category="dairy">
-                        <div class="category-card-icon">
-                            <i class="fas fa-cheese"></i>
-                        </div>
-                        <h3>Dairy</h3>
-                        <p class="category-description">Milk and dairy products</p>
+                        <h3>SM Supermarket</h3>
+                        <p class="category-description">Premium supermarket prices</p>
                         <span class="category-product-count">2 products</span>
                     </div>
-                    <div class="category-card" data-category="rice">
+                    <div class="category-card" data-category="price-trends">
                         <div class="category-card-icon">
-                            <i class="fas fa-seedling"></i>
+                            <i class="fas fa-chart-line"></i>
                         </div>
-                        <h3>Rice</h3>
-                        <p class="category-description">Various rice varieties</p>
-                        <span class="category-product-count">2 products</span>
+                        <h3>Price Trends</h3>
+                        <p class="category-description">Price analysis and trends</p>
+                        <span class="category-product-count">0 products</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Price Trends Visualization Section -->
+            <div class="price-trends-section">
+                <div class="trends-header">
+                    <h2>Price Trends Analysis</h2>
+                    <p>Historical price movements across different stores</p>
+                    <div class="trends-controls">
+                        <select id="trendsTimeRange">
+                            <option value="7">Last 7 Days</option>
+                            <option value="30" selected>Last 30 Days</option>
+                            <option value="90">Last 3 Months</option>
+                            <option value="365">Last Year</option>
+                        </select>
+                        <button class="btn btn-secondary" id="refreshTrends">
+                            <i class="fas fa-sync-alt"></i>
+                            Refresh Data
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Individual Store Trends Grid -->
+                <div class="trends-grid">
+                    <!-- Market Price Trends -->
+                    <div class="trend-container">
+                        <div class="trend-header">
+                            <div class="trend-title">
+                                <i class="fas fa-store"></i>
+                                <h3>Market Price Trends</h3>
+                            </div>
+                            <div class="trend-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">Avg Change</span>
+                                    <span class="stat-value positive">+2.4%</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Volatility</span>
+                                    <span class="stat-value">Medium</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="marketPriceChart" width="800" height="300"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Alfamart Trends -->
+                    <div class="trend-container">
+                        <div class="trend-header">
+                            <div class="trend-title">
+                                <i class="fas fa-shopping-basket"></i>
+                                <h3>Alfamart Price Trends</h3>
+                            </div>
+                            <div class="trend-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">Avg Change</span>
+                                    <span class="stat-value stable">0.0%</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Volatility</span>
+                                    <span class="stat-value">Low</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="alfamartChart" width="800" height="300"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Puregold Trends -->
+                    <div class="trend-container">
+                        <div class="trend-header">
+                            <div class="trend-title">
+                                <i class="fas fa-shopping-cart"></i>
+                                <h3>Puregold Price Trends</h3>
+                            </div>
+                            <div class="trend-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">Avg Change</span>
+                                    <span class="stat-value positive">+2.7%</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Volatility</span>
+                                    <span class="stat-value">Medium</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="puregoldChart" width="800" height="300"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Savemore Trends -->
+                    <div class="trend-container">
+                        <div class="trend-header">
+                            <div class="trend-title">
+                                <i class="fas fa-tags"></i>
+                                <h3>Savemore Price Trends</h3>
+                            </div>
+                            <div class="trend-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">Avg Change</span>
+                                    <span class="stat-value negative">-1.2%</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Volatility</span>
+                                    <span class="stat-value">Low</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="savemoreChart" width="800" height="300"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- SM Supermarket Trends -->
+                    <div class="trend-container">
+                        <div class="trend-header">
+                            <div class="trend-title">
+                                <i class="fas fa-building"></i>
+                                <h3>SM Supermarket Price Trends</h3>
+                            </div>
+                            <div class="trend-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">Avg Change</span>
+                                    <span class="stat-value positive">+1.8%</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Volatility</span>
+                                    <span class="stat-value">Low</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="smSupermarketChart" width="800" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comparison Chart -->
+                <div class="trend-container comparison-container">
+                    <div class="trend-header">
+                        <div class="trend-title">
+                            <i class="fas fa-chart-line"></i>
+                            <h3>Store Comparison Overview</h3>
+                        </div>
+                        <div class="trend-legend">
+                            <div class="legend-item">
+                                <span class="legend-color market-price"></span>
+                                <span>Market Price</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color alfamart"></span>
+                                <span>Alfamart</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color puregold"></span>
+                                <span>Puregold</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color savemore"></span>
+                                <span>Savemore</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color sm-supermarket"></span>
+                                <span>SM Supermarket</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="comparisonChart" width="800" height="400"></canvas>
                     </div>
                 </div>
             </div>
@@ -291,7 +465,6 @@
                     <div class="product-card">
                         <div class="product-image">
                             <img src="../img/tomato.jpg" alt="Tomato" onerror="this.src='https://via.placeholder.com/200x150/4CAF50/white?text=Tomato'">
-                            <div class="product-status available">Available</div>
                         </div>
                         <div class="product-info">
                             <h3 class="product-name">Fresh Tomato</h3>
@@ -304,7 +477,7 @@
                                 +5.2%
                             </div>
                             <div class="product-meta">
-                                <span class="category">Vegetables</span>
+                                <span class="category">Market Price</span>
                                 <span class="last-updated">Updated 2 hours ago</span>
                             </div>
                         </div>
@@ -313,7 +486,6 @@
                     <div class="product-card">
                         <div class="product-image">
                             <img src="../img/banana.jpg" alt="Banana" onerror="this.src='https://via.placeholder.com/200x150/4CAF50/white?text=Banana'">
-                            <div class="product-status available">Available</div>
                         </div>
                         <div class="product-info">
                             <h3 class="product-name">Banana (Lakatan)</h3>
@@ -326,7 +498,7 @@
                                 -2.1%
                             </div>
                             <div class="product-meta">
-                                <span class="category">Fruits</span>
+                                <span class="category">Market Price</span>
                                 <span class="last-updated">Updated 1 hour ago</span>
                             </div>
                         </div>
@@ -335,7 +507,6 @@
                     <div class="product-card">
                         <div class="product-image">
                             <img src="../img/chicken.jpg" alt="Chicken" onerror="this.src='https://via.placeholder.com/200x150/4CAF50/white?text=Chicken'">
-                            <div class="product-status available">Available</div>
                         </div>
                         <div class="product-info">
                             <h3 class="product-name">Whole Chicken</h3>
@@ -348,7 +519,7 @@
                                 0.0%
                             </div>
                             <div class="product-meta">
-                                <span class="category">Poultry</span>
+                                <span class="category">Market Price</span>
                                 <span class="last-updated">Updated 30 minutes ago</span>
                             </div>
                         </div>
@@ -357,7 +528,6 @@
                     <div class="product-card">
                         <div class="product-image">
                             <img src="../img/rice.jpg" alt="Rice" onerror="this.src='https://via.placeholder.com/200x150/4CAF50/white?text=Rice'">
-                            <div class="product-status available">Available</div>
                         </div>
                         <div class="product-info">
                             <h3 class="product-name">Premium Rice</h3>
@@ -370,7 +540,7 @@
                                 +1.8%
                             </div>
                             <div class="product-meta">
-                                <span class="category">Rice</span>
+                                <span class="category">Puregold</span>
                                 <span class="last-updated">Updated 45 minutes ago</span>
                             </div>
                         </div>
@@ -379,7 +549,6 @@
                     <div class="product-card">
                         <div class="product-image">
                             <img src="../img/milk.jpg" alt="Milk" onerror="this.src='https://via.placeholder.com/200x150/4CAF50/white?text=Milk'">
-                            <div class="product-status available">Available</div>
                         </div>
                         <div class="product-info">
                             <h3 class="product-name">Fresh Milk</h3>
@@ -392,7 +561,7 @@
                                 0.0%
                             </div>
                             <div class="product-meta">
-                                <span class="category">Dairy</span>
+                                <span class="category">Alfamart</span>
                                 <span class="last-updated">Updated 1 hour ago</span>
                             </div>
                         </div>
@@ -401,7 +570,6 @@
                     <div class="product-card">
                         <div class="product-image">
                             <img src="../img/pork.jpg" alt="Pork" onerror="this.src='https://via.placeholder.com/200x150/4CAF50/white?text=Pork'">
-                            <div class="product-status available">Available</div>
                         </div>
                         <div class="product-info">
                             <h3 class="product-name">Pork Liempo</h3>
@@ -414,7 +582,7 @@
                                 +3.5%
                             </div>
                             <div class="product-meta">
-                                <span class="category">Meats</span>
+                                <span class="category">Puregold</span>
                                 <span class="last-updated">Updated 20 minutes ago</span>
                             </div>
                         </div>

@@ -677,4 +677,113 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
+
+    // Feedback Modal Functionality
+    const feedbackBtn = document.getElementById('feedbackBtn');
+    const feedbackModal = document.getElementById('feedbackModal');
+    const closeFeedbackModal = document.getElementById('closeFeedbackModal');
+    const feedbackForm = document.getElementById('feedbackForm');
+    const feedbackThankYou = document.getElementById('feedbackThankYou');
+    const closeFeedbackThankYou = document.getElementById('closeFeedbackThankYou');
+    const ratingText = document.getElementById('ratingText');
+
+    // Rating text messages
+    const ratingMessages = {
+        1: "We're sorry to hear that! 😞",
+        2: "We'll work to improve! 😕",
+        3: "Thanks for the feedback! 🙂",
+        4: "Great to hear! 😊",
+        5: "Awesome! Thank you! 🌟"
+    };
+
+    // Open feedback modal
+    if (feedbackBtn) {
+        feedbackBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            feedbackModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        });
+    }
+
+    // Close feedback modal
+    if (closeFeedbackModal) {
+        closeFeedbackModal.addEventListener('click', function() {
+            feedbackModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            resetFeedbackForm();
+        });
+    }
+
+    // Close modal when clicking outside
+    if (feedbackModal) {
+        feedbackModal.addEventListener('click', function(e) {
+            if (e.target === feedbackModal) {
+                feedbackModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                resetFeedbackForm();
+            }
+        });
+    }
+
+    // Handle star rating
+    const starInputs = document.querySelectorAll('input[name="rating"]');
+    starInputs.forEach(input => {
+        input.addEventListener('change', function() {
+            const rating = this.value;
+            ratingText.innerHTML = `<span>${ratingMessages[rating]}</span>`;
+        });
+    });
+
+    // Handle feedback form submission
+    if (feedbackForm) {
+        feedbackForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Get form data
+            const rating = document.querySelector('input[name="rating"]:checked');
+            const name = document.getElementById('feedbackName').value;
+            const email = document.getElementById('feedbackEmail').value;
+            const comments = document.getElementById('feedbackComments').value;
+            const categories = Array.from(document.querySelectorAll('input[name="categories"]:checked'))
+                .map(cb => cb.value);
+
+            // Validate rating
+            if (!rating) {
+                alert('Please select a rating before submitting.');
+                return;
+            }
+
+            // Hide form and show thank you message
+            feedbackForm.style.display = 'none';
+            feedbackThankYou.style.display = 'block';
+
+            // Log feedback data (in real app, this would be sent to server)
+            console.log('Feedback submitted:', {
+                rating: rating.value,
+                name: name,
+                email: email,
+                comments: comments,
+                categories: categories
+            });
+        });
+    }
+
+    // Close thank you message
+    if (closeFeedbackThankYou) {
+        closeFeedbackThankYou.addEventListener('click', function() {
+            feedbackModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            resetFeedbackForm();
+        });
+    }
+
+    // Reset feedback form function
+    function resetFeedbackForm() {
+        if (feedbackForm) {
+            feedbackForm.reset();
+            feedbackForm.style.display = 'block';
+            feedbackThankYou.style.display = 'none';
+            ratingText.innerHTML = '<span>Click a star to rate</span>';
+        }
+    }
 });

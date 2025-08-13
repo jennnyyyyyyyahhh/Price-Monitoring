@@ -9,46 +9,43 @@ let searchQuery = '';
 
 // Sample product data
 const products = [
-    // Fruits
-    { id: 1, name: 'Fresh Apples', category: 'fruits', price: 120, unit: 'kg', change: '+5%', status: 'available', image: 'img/apple.jpg', lastUpdated: '2 hours ago' },
-    { id: 2, name: 'Bananas', category: 'fruits', price: 80, unit: 'kg', change: '-2%', status: 'available', image: 'img/banana.jpg', lastUpdated: '1 hour ago' },
-    { id: 3, name: 'Orange', category: 'fruits', price: 100, unit: 'kg', change: '0%', status: 'available', image: 'img/orange.jpg', lastUpdated: '3 hours ago' },
+    // Market Price
+    { id: 1, name: 'Fresh Apples', category: 'market-price', price: 120, unit: 'kg', change: '+5%', image: '../img/apple.jpg', lastUpdated: '2 hours ago' },
+    { id: 2, name: 'Bananas', category: 'market-price', price: 80, unit: 'kg', change: '-2%', image: '../img/banana.jpg', lastUpdated: '1 hour ago' },
+    { id: 3, name: 'Tomato', category: 'market-price', price: 60, unit: 'kg', change: '-3%', image: '../img/tomato.jpg', lastUpdated: '2 hours ago' },
+    { id: 4, name: 'Fresh Chicken', category: 'market-price', price: 280, unit: 'kg', change: '+3%', image: '../img/chicken.jpg', lastUpdated: '1 hour ago' },
     
-    // Vegetables
-    { id: 4, name: 'Cabbage', category: 'vegetables', price: 40, unit: 'kg', change: '+8%', status: 'available', image: 'img/cabbage.jpg', lastUpdated: '1 hour ago' },
-    { id: 5, name: 'Tomato', category: 'vegetables', price: 60, unit: 'kg', change: '-3%', status: 'available', image: 'img/tomato.jpg', lastUpdated: '2 hours ago' },
-    { id: 6, name: 'Onion', category: 'vegetables', price: 35, unit: 'kg', change: '+12%', status: 'available', image: 'img/onion.jpg', lastUpdated: '30 minutes ago' },
+    // Alfamart
+    { id: 5, name: 'Orange', category: 'alfamart', price: 100, unit: 'kg', change: '0%', image: '../img/orange.jpg', lastUpdated: '3 hours ago' },
+    { id: 6, name: 'Cabbage', category: 'alfamart', price: 40, unit: 'kg', change: '+8%', image: '../img/cabbage.jpg', lastUpdated: '1 hour ago' },
+    { id: 7, name: 'Fresh Milk', category: 'alfamart', price: 65, unit: 'liter', change: '0%', image: '../img/milk.jpg', lastUpdated: '4 hours ago' },
     
-    // Meats
-    { id: 7, name: 'Chicken', category: 'meats', price: 280, unit: 'kg', change: '+3%', status: 'available', image: 'img/chicken.jpg', lastUpdated: '1 hour ago' },
-    { id: 8, name: 'Pork', category: 'meats', price: 320, unit: 'kg', change: '-1%', status: 'available', image: 'img/pork.jpg', lastUpdated: '2 hours ago' },
+    // Puregold
+    { id: 8, name: 'Onion', category: 'puregold', price: 35, unit: 'kg', change: '+12%', image: '../img/onion.jpg', lastUpdated: '30 minutes ago' },
+    { id: 9, name: 'Pork', category: 'puregold', price: 320, unit: 'kg', change: '-1%',  image: '../img/pork.jpg', lastUpdated: '2 hours ago' },
+    { id: 10, name: 'White Rice', category: 'puregold', price: 45, unit: 'kg', change: '+1%', image: '../img/rice.jpg', lastUpdated: '5 hours ago' },
     
-    // Poultry
-    { id: 9, name: 'Fresh Chicken', category: 'poultry', price: 280, unit: 'kg', change: '+3%', status: 'available', image: 'img/chicken.jpg', lastUpdated: '1 hour ago' },
+    // Savemore
+    { id: 11, name: 'Cheese', category: 'savemore', price: 450, unit: 'kg', change: '+2%', image: '../img/cheese.jpg', lastUpdated: '3 hours ago' },
+    { id: 12, name: 'Brown Rice', category: 'savemore', price: 55, unit: 'kg', change: '0%', image: '../img/brown-rice.jpg', lastUpdated: '4 hours ago' },
+    { id: 13, name: 'Fresh Fish', category: 'savemore', price: 200, unit: 'kg', change: '+7%', image: '../img/fish.jpg', lastUpdated: '2 hours ago' },
     
-    // Dairy
-    { id: 10, name: 'Fresh Milk', category: 'dairy', price: 65, unit: 'liter', change: '0%', status: 'available', image: 'img/milk.jpg', lastUpdated: '4 hours ago' },
-    { id: 11, name: 'Cheese', category: 'dairy', price: 450, unit: 'kg', change: '+2%', status: 'available', image: 'img/cheese.jpg', lastUpdated: '3 hours ago' },
+    // SM Supermarket
+    { id: 14, name: 'Tilapia', category: 'sm-supermarket', price: 180, unit: 'kg', change: '+4%', image: '../img/tilapia.jpg', lastUpdated: '1 hour ago' },
+    { id: 15, name: 'Shrimp', category: 'sm-supermarket', price: 350, unit: 'kg', change: '-2%', image: '../img/shrimp.jpg', lastUpdated: '3 hours ago' },
     
-    // Rice
-    { id: 12, name: 'White Rice', category: 'rice', price: 45, unit: 'kg', change: '+1%', status: 'available', image: 'img/rice.jpg', lastUpdated: '5 hours ago' },
-    { id: 13, name: 'Brown Rice', category: 'rice', price: 55, unit: 'kg', change: '0%', status: 'available', image: 'img/brown-rice.jpg', lastUpdated: '4 hours ago' },
-    
-    // Fish
-    { id: 14, name: 'Fresh Fish', category: 'meats', price: 200, unit: 'kg', change: '+7%', status: 'available', image: 'img/fish.jpg', lastUpdated: '2 hours ago' },
-    { id: 15, name: 'Tilapia', category: 'meats', price: 180, unit: 'kg', change: '+4%', status: 'available', image: 'img/tilapia.jpg', lastUpdated: '1 hour ago' },
-    { id: 16, name: 'Shrimp', category: 'meats', price: 350, unit: 'kg', change: '-2%', status: 'available', image: 'img/shrimp.jpg', lastUpdated: '3 hours ago' }
+
 ];
 
 // Category data
 const categories = {
-    'all': { name: 'ALL CATEGORIES', icon: 'fas fa-th-large', count: products.length },
-    'fruits': { name: 'FRUITS', icon: 'fas fa-apple-alt', count: products.filter(p => p.category === 'fruits').length },
-    'vegetables': { name: 'VEGETABLES', icon: 'fas fa-carrot', count: products.filter(p => p.category === 'vegetables').length },
-    'meats': { name: 'MEATS', icon: 'fas fa-drumstick-bite', count: products.filter(p => p.category === 'meats').length },
-    'poultry': { name: 'POULTRY', icon: 'fas fa-egg', count: products.filter(p => p.category === 'poultry').length },
-    'dairy': { name: 'DAIRY', icon: 'fas fa-glass-whiskey', count: products.filter(p => p.category === 'dairy').length },
-    'rice': { name: 'RICE', icon: 'fas fa-seedling', count: products.filter(p => p.category === 'rice').length }
+    'all': { name: 'All Categories', icon: 'fas fa-th-large', count: products.length },
+    'market-price': { name: 'Market Price', icon: 'fas fa-store', count: products.filter(p => p.category === 'market-price').length },
+    'alfamart': { name: 'Alfamart', icon: 'fas fa-shopping-basket', count: products.filter(p => p.category === 'alfamart').length },
+    'puregold': { name: 'Puregold', icon: 'fas fa-shopping-cart', count: products.filter(p => p.category === 'puregold').length },
+    'savemore': { name: 'Savemore', icon: 'fas fa-tags', count: products.filter(p => p.category === 'savemore').length },
+    'sm-supermarket': { name: 'SM Supermarket', icon: 'fas fa-building', count: products.filter(p => p.category === 'sm-supermarket').length },
+    'price-trends': { name: 'Price Trends', icon: 'fas fa-chart-line', count: products.filter(p => p.category === 'price-trends').length }
 };
 
 // Notification data
@@ -73,7 +70,7 @@ const notifications = [
         id: 3,
         type: 'market-update',
         title: 'Market Report',
-        message: 'Weekly market analysis report is now available',
+        message: 'Weekly market analysis report is now  ble',
         time: '2 hours ago',
         unread: false
     }
@@ -364,7 +361,7 @@ function renderProducts() {
         <div class="product-card" data-product-id="${product.id}">
             <div class="product-image">
                 <img src="${product.image}" alt="${product.name}" onerror="this.src='img/cover.jpg'">
-                <div class="product-status ${product.status}">${product.status}</div>
+                
             </div>
             <div class="product-info">
                 <h3 class="product-name">${product.name}</h3>
@@ -812,3 +809,559 @@ handleResize();
 
 // Update main content margin on initialization
 updateMainContentMargin();
+
+// Price Trends Chart Functionality
+let charts = {};
+
+// Sample historical price data for charts
+const priceHistoryData = {
+    'market-price': {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+        datasets: [{
+            label: 'Average Price (₱)',
+            data: [85, 88, 92, 89, 91, 95, 98, 102],
+            borderColor: '#28a745',
+            backgroundColor: 'rgba(40, 167, 69, 0.1)',
+            tension: 0.4,
+            pointBackgroundColor: '#28a745',
+            pointBorderColor: '#28a745',
+            pointHoverBackgroundColor: '#1e7e34',
+            pointHoverBorderColor: '#1e7e34',
+            pointRadius: 6,
+            pointHoverRadius: 8,
+            borderWidth: 3
+        }]
+    },
+    'alfamart': {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+        datasets: [{
+            label: 'Average Price (₱)',
+            data: [75, 75, 76, 75, 75, 76, 75, 76],
+            borderColor: '#007bff',
+            backgroundColor: 'rgba(0, 123, 255, 0.1)',
+            tension: 0.4,
+            pointBackgroundColor: '#007bff',
+            pointBorderColor: '#007bff',
+            pointHoverBackgroundColor: '#0056b3',
+            pointHoverBorderColor: '#0056b3',
+            pointRadius: 6,
+            pointHoverRadius: 8,
+            borderWidth: 3
+        }]
+    },
+    'puregold': {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+        datasets: [{
+            label: 'Average Price (₱)',
+            data: [133, 135, 138, 142, 145, 147, 149, 152],
+            borderColor: '#ffc107',
+            backgroundColor: 'rgba(255, 193, 7, 0.1)',
+            tension: 0.4,
+            pointBackgroundColor: '#ffc107',
+            pointBorderColor: '#ffc107',
+            pointHoverBackgroundColor: '#e0a800',
+            pointHoverBorderColor: '#e0a800',
+            pointRadius: 6,
+            pointHoverRadius: 8,
+            borderWidth: 3
+        }]
+    },
+    'savemore': {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+        datasets: [{
+            label: 'Average Price (₱)',
+            data: [165, 163, 160, 158, 155, 153, 150, 148],
+            borderColor: '#dc3545',
+            backgroundColor: 'rgba(220, 53, 69, 0.1)',
+            tension: 0.4,
+            pointBackgroundColor: '#dc3545',
+            pointBorderColor: '#dc3545',
+            pointHoverBackgroundColor: '#c82333',
+            pointHoverBorderColor: '#c82333',
+            pointRadius: 6,
+            pointHoverRadius: 8,
+            borderWidth: 3
+        }]
+    },
+    'sm-supermarket': {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+        datasets: [{
+            label: 'Average Price (₱)',
+            data: [265, 268, 270, 272, 275, 278, 280, 283],
+            borderColor: '#6f42c1',
+            backgroundColor: 'rgba(111, 66, 193, 0.1)',
+            tension: 0.4,
+            pointBackgroundColor: '#6f42c1',
+            pointBorderColor: '#6f42c1',
+            pointHoverBackgroundColor: '#59359a',
+            pointHoverBorderColor: '#59359a',
+            pointRadius: 6,
+            pointHoverRadius: 8,
+            borderWidth: 3
+        }]
+    }
+};
+
+// Chart configuration
+const chartConfig = {
+    type: 'line',
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: false
+            },
+            tooltip: {
+                mode: 'index',
+                intersect: false,
+                backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                titleColor: '#fff',
+                bodyColor: '#fff',
+                borderColor: '#076b93',
+                borderWidth: 1,
+                cornerRadius: 8,
+                displayColors: true,
+                callbacks: {
+                    label: function(context) {
+                        return context.dataset.label + ': ₱' + context.parsed.y.toFixed(2);
+                    }
+                }
+            }
+        },
+        scales: {
+            x: {
+                display: true,
+                grid: {
+                    color: 'rgba(0, 0, 0, 0.1)',
+                    drawBorder: false
+                },
+                ticks: {
+                    color: '#6c757d',
+                    font: {
+                        size: 12
+                    }
+                }
+            },
+            y: {
+                display: true,
+                grid: {
+                    color: 'rgba(0, 0, 0, 0.1)',
+                    drawBorder: false
+                },
+                ticks: {
+                    color: '#6c757d',
+                    font: {
+                        size: 12
+                    },
+                    callback: function(value) {
+                        return '₱' + value.toFixed(0);
+                    }
+                }
+            }
+        },
+        elements: {
+            point: {
+                radius: 6,
+                hoverRadius: 8,
+                borderWidth: 2,
+                hoverBorderWidth: 3
+            },
+            line: {
+                borderWidth: 3,
+                fill: true
+            }
+        },
+        interaction: {
+            intersect: false,
+            mode: 'index'
+        },
+        animation: {
+            duration: 1000,
+            easing: 'easeInOutQuart'
+        }
+    }
+};
+
+// Initialize individual charts
+function initializeCharts() {
+    // Create gradient backgrounds
+    function createGradient(ctx, color) {
+        const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+        gradient.addColorStop(0, color);
+        gradient.addColorStop(1, color.replace('0.1', '0.01'));
+        return gradient;
+    }
+
+    // Market Price Chart
+    const marketCtx = document.getElementById('marketPriceChart');
+    if (marketCtx) {
+        const marketGradient = createGradient(marketCtx.getContext('2d'), 'rgba(40, 167, 69, 0.3)');
+        const marketData = { ...priceHistoryData['market-price'] };
+        marketData.datasets[0].backgroundColor = marketGradient;
+        
+        charts.marketPrice = new Chart(marketCtx, {
+            ...chartConfig,
+            data: marketData
+        });
+    }
+
+    // Alfamart Chart
+    const alfamartCtx = document.getElementById('alfamartChart');
+    if (alfamartCtx) {
+        const alfamartGradient = createGradient(alfamartCtx.getContext('2d'), 'rgba(0, 123, 255, 0.3)');
+        const alfamartData = { ...priceHistoryData['alfamart'] };
+        alfamartData.datasets[0].backgroundColor = alfamartGradient;
+        
+        charts.alfamart = new Chart(alfamartCtx, {
+            ...chartConfig,
+            data: alfamartData
+        });
+    }
+
+    // Puregold Chart
+    const puregoldCtx = document.getElementById('puregoldChart');
+    if (puregoldCtx) {
+        const puregoldGradient = createGradient(puregoldCtx.getContext('2d'), 'rgba(255, 193, 7, 0.3)');
+        const puregoldData = { ...priceHistoryData['puregold'] };
+        puregoldData.datasets[0].backgroundColor = puregoldGradient;
+        
+        charts.puregold = new Chart(puregoldCtx, {
+            ...chartConfig,
+            data: puregoldData
+        });
+    }
+
+    // Savemore Chart
+    const savemoreCtx = document.getElementById('savemoreChart');
+    if (savemoreCtx) {
+        const savemoreGradient = createGradient(savemoreCtx.getContext('2d'), 'rgba(220, 53, 69, 0.3)');
+        const savemoreData = { ...priceHistoryData['savemore'] };
+        savemoreData.datasets[0].backgroundColor = savemoreGradient;
+        
+        charts.savemore = new Chart(savemoreCtx, {
+            ...chartConfig,
+            data: savemoreData
+        });
+    }
+
+    // SM Supermarket Chart
+    const smCtx = document.getElementById('smSupermarketChart');
+    if (smCtx) {
+        const smGradient = createGradient(smCtx.getContext('2d'), 'rgba(111, 66, 193, 0.3)');
+        const smData = { ...priceHistoryData['sm-supermarket'] };
+        smData.datasets[0].backgroundColor = smGradient;
+        
+        charts.smSupermarket = new Chart(smCtx, {
+            ...chartConfig,
+            data: smData
+        });
+    }
+
+    // Comparison Chart
+    const comparisonCtx = document.getElementById('comparisonChart');
+    if (comparisonCtx) {
+        const ctx = comparisonCtx.getContext('2d');
+        
+        // Create gradients for each store
+        const marketGradient = ctx.createLinearGradient(0, 0, 0, 400);
+        marketGradient.addColorStop(0, 'rgba(40, 167, 69, 0.3)');
+        marketGradient.addColorStop(1, 'rgba(40, 167, 69, 0.01)');
+        
+        const alfamartGradient = ctx.createLinearGradient(0, 0, 0, 400);
+        alfamartGradient.addColorStop(0, 'rgba(0, 123, 255, 0.3)');
+        alfamartGradient.addColorStop(1, 'rgba(0, 123, 255, 0.01)');
+        
+        const puregoldGradient = ctx.createLinearGradient(0, 0, 0, 400);
+        puregoldGradient.addColorStop(0, 'rgba(255, 193, 7, 0.3)');
+        puregoldGradient.addColorStop(1, 'rgba(255, 193, 7, 0.01)');
+        
+        const savemoreGradient = ctx.createLinearGradient(0, 0, 0, 400);
+        savemoreGradient.addColorStop(0, 'rgba(220, 53, 69, 0.3)');
+        savemoreGradient.addColorStop(1, 'rgba(220, 53, 69, 0.01)');
+        
+        const smGradient = ctx.createLinearGradient(0, 0, 0, 400);
+        smGradient.addColorStop(0, 'rgba(111, 66, 193, 0.3)');
+        smGradient.addColorStop(1, 'rgba(111, 66, 193, 0.01)');
+        
+        charts.comparison = new Chart(comparisonCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+                datasets: [
+                    {
+                        label: 'Market Price',
+                        data: [85, 88, 92, 89, 91, 95, 98, 102],
+                        borderColor: '#28a745',
+                        backgroundColor: marketGradient,
+                        tension: 0.4,
+                        pointRadius: 6,
+                        pointHoverRadius: 8,
+                        borderWidth: 3,
+                        fill: true,
+                        pointBackgroundColor: '#28a745',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2
+                    },
+                    {
+                        label: 'Alfamart',
+                        data: [75, 75, 76, 75, 75, 76, 75, 76],
+                        borderColor: '#007bff',
+                        backgroundColor: alfamartGradient,
+                        tension: 0.4,
+                        pointRadius: 6,
+                        pointHoverRadius: 8,
+                        borderWidth: 3,
+                        fill: true,
+                        pointBackgroundColor: '#007bff',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2
+                    },
+                    {
+                        label: 'Puregold',
+                        data: [133, 135, 138, 142, 145, 147, 149, 152],
+                        borderColor: '#ffc107',
+                        backgroundColor: puregoldGradient,
+                        tension: 0.4,
+                        pointRadius: 6,
+                        pointHoverRadius: 8,
+                        borderWidth: 3,
+                        fill: true,
+                        pointBackgroundColor: '#ffc107',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2
+                    },
+                    {
+                        label: 'Savemore',
+                        data: [165, 163, 160, 158, 155, 153, 150, 148],
+                        borderColor: '#dc3545',
+                        backgroundColor: savemoreGradient,
+                        tension: 0.4,
+                        pointRadius: 6,
+                        pointHoverRadius: 8,
+                        borderWidth: 3,
+                        fill: true,
+                        pointBackgroundColor: '#dc3545',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2
+                    },
+                    {
+                        label: 'SM Supermarket',
+                        data: [265, 268, 270, 272, 275, 278, 280, 283],
+                        borderColor: '#6f42c1',
+                        backgroundColor: smGradient,
+                        tension: 0.4,
+                        pointRadius: 6,
+                        pointHoverRadius: 8,
+                        borderWidth: 3,
+                        fill: true,
+                        pointBackgroundColor: '#6f42c1',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            color: '#fff',
+                            padding: 20,
+                            usePointStyle: true,
+                            font: {
+                                size: 12,
+                                weight: '600'
+                            }
+                        }
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                        backgroundColor: 'rgba(0, 0, 0, 0.9)',
+                        titleColor: '#fff',
+                        bodyColor: '#fff',
+                        borderColor: 'rgba(255, 255, 255, 0.1)',
+                        borderWidth: 1,
+                        cornerRadius: 8,
+                        titleFont: { size: 14, weight: 'bold' },
+                        bodyFont: { size: 13 },
+                        padding: 12,
+                        displayColors: true
+                    }
+                },
+                scales: {
+                    x: {
+                        display: true,
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)',
+                            lineWidth: 1
+                        },
+                        ticks: {
+                            color: '#fff',
+                            font: {
+                                size: 11
+                            }
+                        }
+                    },
+                    y: {
+                        display: true,
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)',
+                            lineWidth: 1
+                        },
+                        ticks: {
+                            color: '#fff',
+                            font: {
+                                size: 11
+                            },
+                            callback: function(value) {
+                                return '₱' + value;
+                            }
+                        }
+                    }
+                },
+                animation: {
+                    duration: 1000,
+                    easing: 'easeInOutQuart'
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
+                }
+            }
+        });
+    }
+}
+
+// Refresh trends data
+function refreshTrendsData() {
+    // Show loading state
+    const refreshBtn = document.getElementById('refreshTrends');
+    if (refreshBtn) {
+        refreshBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Refreshing...';
+        refreshBtn.disabled = true;
+        
+        // Simulate API call
+        setTimeout(() => {
+            // Update chart data with new values
+            Object.keys(charts).forEach(chartKey => {
+                if (charts[chartKey] && chartKey !== 'comparison') {
+                    const data = charts[chartKey].data.datasets[0].data;
+                    // Add some random variation
+                    for (let i = 0; i < data.length; i++) {
+                        data[i] += (Math.random() - 0.5) * 10;
+                        data[i] = Math.max(0, Math.round(data[i]));
+                    }
+                    charts[chartKey].update();
+                }
+            });
+            
+            // Update comparison chart
+            if (charts.comparison) {
+                charts.comparison.data.datasets.forEach(dataset => {
+                    for (let i = 0; i < dataset.data.length; i++) {
+                        dataset.data[i] += (Math.random() - 0.5) * 8;
+                        dataset.data[i] = Math.max(0, Math.round(dataset.data[i]));
+                    }
+                });
+                charts.comparison.update();
+            }
+            
+            refreshBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Refresh Data';
+            refreshBtn.disabled = false;
+        }, 1500);
+    }
+}
+
+// Time range change handler
+function handleTimeRangeChange() {
+    const timeRange = document.getElementById('trendsTimeRange');
+    if (timeRange) {
+        timeRange.addEventListener('change', function() {
+            const selectedRange = this.value;
+            // Update labels based on selected time range
+            let newLabels = [];
+            
+            switch(selectedRange) {
+                case '7':
+                    newLabels = ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'];
+                    break;
+                case '30':
+                    newLabels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
+                    break;
+                case '90':
+                    newLabels = ['Jan', 'Feb', 'Mar'];
+                    break;
+                case '365':
+                    newLabels = ['Q1', 'Q2', 'Q3', 'Q4'];
+                    break;
+                default:
+                    newLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'];
+            }
+            
+            // Update all charts with new labels
+            Object.keys(charts).forEach(chartKey => {
+                if (charts[chartKey]) {
+                    charts[chartKey].data.labels = newLabels;
+                    // Adjust data points to match new labels
+                    charts[chartKey].data.datasets.forEach(dataset => {
+                        if (dataset.data.length !== newLabels.length) {
+                            // Resize data array to match labels
+                            if (dataset.data.length > newLabels.length) {
+                                dataset.data = dataset.data.slice(0, newLabels.length);
+                            } else {
+                                while (dataset.data.length < newLabels.length) {
+                                    const lastValue = dataset.data[dataset.data.length - 1];
+                                    dataset.data.push(lastValue + Math.round((Math.random() - 0.5) * 20));
+                                }
+                            }
+                        }
+                    });
+                    charts[chartKey].update();
+                }
+            });
+        });
+    }
+}
+
+// Initialize charts when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    // Ensure price trends section is visible
+    const priceTrendsSection = document.querySelector('.price-trends-section');
+    if (priceTrendsSection) {
+        priceTrendsSection.style.display = 'block';
+        priceTrendsSection.style.visibility = 'visible';
+    }
+    
+    // Ensure all trend containers are visible
+    const trendContainers = document.querySelectorAll('.trend-container');
+    trendContainers.forEach(container => {
+        container.style.display = 'block';
+        container.style.visibility = 'visible';
+    });
+    
+    // Ensure trends grid is visible
+    const trendsGrid = document.querySelector('.trends-grid');
+    if (trendsGrid) {
+        trendsGrid.style.display = 'grid';
+        trendsGrid.style.visibility = 'visible';
+    }
+    
+    // Wait for Chart.js to load
+    if (typeof Chart !== 'undefined') {
+        initializeCharts();
+        
+        // Add refresh button event listener
+        const refreshBtn = document.getElementById('refreshTrends');
+        if (refreshBtn) {
+            refreshBtn.addEventListener('click', refreshTrendsData);
+        }
+        
+        // Add time range change handler
+        handleTimeRangeChange();
+    }
+});

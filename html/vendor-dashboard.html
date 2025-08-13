@@ -88,35 +88,6 @@
             </div>
         </div>
 
-        <!-- Cleaning Request Modal -->
-        <div id="cleaningModal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="document.getElementById('cleaningModal').style.display='none'">&times;</span>
-                <h2>Request Cleaning</h2>
-                <form class="cleaning-form">
-                    <div class="form-group">
-                        <label for="cleaningName">Name</label>
-                        <input type="text" id="cleaningName" name="cleaningName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="stallNumber">Stall Number</label>
-                        <input type="text" id="stallNumber" name="stallNumber" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="contactNumber">Contact Number</label>
-                        <input type="tel" id="contactNumber" name="contactNumber" required>
-                    </div>
-                    <div class="modal-buttons">
-                        <button type="submit" class="submit-cleaning-btn">Submit Request</button>
-                        <a href="tel:09171234567" class="call-now-modal-btn">
-                            <i class="fas fa-phone-alt"></i>
-                            <span>CALL NOW</span>
-                        </a>
-                    </div>
-                </form>
-            </div>
-        </div>
-
         <!-- Survey Modal -->
         <div id="surveyModal" class="modal survey-modal">
             <div class="modal-content survey-modal-content">
@@ -434,15 +405,6 @@
                     </div>
                     <div class="stat-card">
                         <div class="stat-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <div class="stat-details">
-                            <h3>Price Updates</h3>
-                            <p class="stat-number">12</p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
                             <i class="fas fa-clipboard-list"></i>
                         </div>
                         <div class="stat-details">
@@ -465,11 +427,11 @@
                     <div class="activity-list">
                         <div class="activity-item">
                             <div class="activity-icon">
-                                <i class="fas fa-chart-line"></i>
+                                <i class="fas fa-store"></i>
                             </div>
                             <div class="activity-details">
-                                <h4>Price Updated</h4>
-                                <p>You updated prices for 5 products</p>
+                                <h4>Stall Updated</h4>
+                                <p>You updated your stall information and contact details</p>
                                 <small>2 hours ago</small>
                             </div>
                         </div>
@@ -724,67 +686,60 @@
                                 </div>
                             </div>
 
-                            <!-- Account Settings Section -->
-                            <div class="form-section">
-                                <h3 class="section-title">
-                                    <i class="fas fa-cog"></i>
-                                    Account Settings
-                                </h3>
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label for="username">Username</label>
-                                        <input type="text" id="username" name="username" value="johndoe_vendor" readonly>
-                                        <small class="field-hint">Username cannot be changed</small>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="accountStatus">Account Status</label>
-                                        <select id="accountStatus" name="accountStatus" disabled>
-                                            <option value="active" selected>Active</option>
-                                            <option value="inactive">Inactive</option>
-                                            <option value="suspended">Suspended</option>
-                                        </select>
-                                        <small class="field-hint">Managed by admin</small>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label for="memberSince">Member Since</label>
-                                        <input type="text" id="memberSince" name="memberSince" value="January 15, 2024" readonly>
-                                        <small class="field-hint">Account registration date</small>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="lastLogin">Last Login</label>
-                                        <input type="text" id="lastLogin" name="lastLogin" value="August 7, 2025 - 2:30 PM" readonly>
-                                        <small class="field-hint">Your last login time</small>
-                                    </div>
-                                </div>
-                            </div>
+ 
+            
 
-                            <!-- Form Actions -->
-                            <div class="form-actions">
-                                <button type="button" class="btn-secondary" id="resetFormBtn">
-                                    <i class="fas fa-undo"></i>
-                                    Reset Changes
-                                </button>
-                                <button type="submit" class="btn-primary" id="saveProfileBtn">
-                                    <i class="fas fa-save"></i>
-                                    Save Profile
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+            <!-- Change Password Section -->
+            <div class="content-section" id="change-password-section">
+                <div class="section-header">
+                    <h2>Change Password</h2>
+                    <p>Update your account password</p>
                 </div>
-
-                <!-- Success/Error Messages -->
-                <div class="message-container" id="messageContainer" style="display: none;">
-                    <div class="message success" id="successMessage">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Profile updated successfully!</span>
-                    </div>
-                    <div class="message error" id="errorMessage">
-                        <i class="fas fa-exclamation-circle"></i>
-                        <span>Error updating profile. Please try again.</span>
-                    </div>
+                
+                <div class="password-change-content">
+                    <form id="changePasswordForm" class="password-form">
+                        <div class="form-group">
+                            <label for="currentPasswordVendor">Current Password</label>
+                            <div class="password-input">
+                                <input type="password" id="currentPasswordVendor" name="currentPassword" required>
+                                <button type="button" class="password-toggle" data-target="currentPasswordVendor">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="newPasswordVendor">New Password</label>
+                            <div class="password-input">
+                                <input type="password" id="newPasswordVendor" name="newPassword" required>
+                                <button type="button" class="password-toggle" data-target="newPasswordVendor">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="password-requirements">
+                                <p>Password must contain:</p>
+                                <ul>
+                                    <li>At least 8 characters</li>
+                                    <li>One uppercase letter</li>
+                                    <li>One lowercase letter</li>
+                                    <li>One number</li>
+                                    <li>One special character</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPasswordVendor">Confirm New Password</label>
+                            <div class="password-input">
+                                <input type="password" id="confirmPasswordVendor" name="confirmPassword" required>
+                                <button type="button" class="password-toggle" data-target="confirmPasswordVendor">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn-secondary" id="cancelPasswordChange">Cancel</button>
+                            <button type="submit" class="btn-primary">Change Password</button>
+                        </div>
+                    </form>
                 </div>
             </div>
 
@@ -1447,6 +1402,106 @@
                         <div class="stat-item">
                             <div class="stat-number info">8</div>
                             <div class="stat-label">Announcements</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cleaning Request Section -->
+            <div class="content-section" id="cleaning-request-section">
+                <div class="section-header">
+                    <h2>Request Cleaning</h2>
+                    <p>Submit a cleaning request for your stall area</p>
+                </div>
+                
+                <div class="cleaning-request-content">
+                    <div class="cleaning-form-container">
+                        <form class="cleaning-form" id="cleaningRequestForm">
+                            <div class="form-section">
+                                <h3>Contact Information</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="cleaningVendorName">Full Name</label>
+                                        <input type="text" id="cleaningVendorName" name="vendorName" value="Jenny Cordero" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cleaningStallNumber">Stall Number</label>
+                                        <input type="text" id="cleaningStallNumber" name="stallNumber" value="A-45" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cleaningContactNumber">Contact Number</label>
+                                        <input type="tel" id="cleaningContactNumber" name="contactNumber" value="+63 912 345 6789" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cleaningEmailAddress">Email Address</label>
+                                        <input type="email" id="cleaningEmailAddress" name="emailAddress" value="jenny.cordero@example.com">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-section">
+                                <h3>Cleaning Request Details</h3>
+                                <div class="form-group">
+                                    <label for="cleaningType">Type of Cleaning</label>
+                                    <select id="cleaningType" name="cleaningType" required>
+                                        <option value="">Select cleaning type</option>
+                                        <option value="general">General Cleaning</option>
+                                        <option value="deep">Deep Cleaning</option>
+                                        <option value="maintenance">Maintenance Cleaning</option>
+                                        <option value="emergency">Emergency Cleaning</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="cleaningPriority">Priority Level</label>
+                                    <select id="cleaningPriority" name="priority" required>
+                                        <option value="">Select priority</option>
+                                        <option value="low">Low - Within 3 days</option>
+                                        <option value="medium">Medium - Within 24 hours</option>
+                                        <option value="high">High - Within 8 hours</option>
+                                        <option value="urgent">Urgent - ASAP</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="cleaningDescription">Description/Reason</label>
+                                    <textarea id="cleaningDescription" name="description" rows="4" placeholder="Please describe the cleaning needed, areas of concern, or specific requirements..." required></textarea>
+                                    <small class="field-hint">Be specific about the areas that need attention</small>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="cleaningPreferredTime">Preferred Time</label>
+                                    <select id="cleaningPreferredTime" name="preferredTime">
+                                        <option value="">Any time</option>
+                                        <option value="morning">Morning (6:00 AM - 12:00 PM)</option>
+                                        <option value="afternoon">Afternoon (12:00 PM - 6:00 PM)</option>
+                                        <option value="evening">Evening (6:00 PM - 10:00 PM)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="button" class="btn-secondary" id="resetCleaningForm">
+                                    <i class="fas fa-undo"></i>
+                                    Reset Form
+                                </button>
+                                <button type="submit" class="btn-primary" id="submitCleaningRequest">
+                                    <i class="fas fa-paper-plane"></i>
+                                    Submit Request
+                                </button>
+                            </div>
+                        </form>
+                        
+                        <div class="emergency-contact">
+                            <div class="emergency-header">
+                                <h3>Need Immediate Assistance?</h3>
+                                <p>For urgent cleaning emergencies, call directly</p>
+                            </div>
+                            <a href="tel:09171234567" class="emergency-call-btn">
+                                <i class="fas fa-phone-alt"></i>
+                                <span>Emergency Cleaning Hotline</span>
+                                <small>0917-123-4567</small>
+                            </a>
                         </div>
                     </div>
                 </div>

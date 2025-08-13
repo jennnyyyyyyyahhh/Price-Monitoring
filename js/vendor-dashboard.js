@@ -1,78 +1,13 @@
-// Cleaning Request Modal Functionality
+// Cleaning Request Form Functionality
 document.addEventListener('DOMContentLoaded', function() {
-    var cleaningModal = document.getElementById('cleaningModal');
-    var openBtn = document.querySelector('.request-cleaning-btn');
-    var closeBtn = cleaningModal ? cleaningModal.querySelector('.close') : null;
-    var form = cleaningModal ? cleaningModal.querySelector('.cleaning-form') : null;
-
-    // Open modal
-    if (openBtn && cleaningModal) {
-        openBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            cleaningModal.style.display = 'block';
-        });
-    }
-
-    // Close modal
-    if (closeBtn && cleaningModal) {
-        closeBtn.addEventListener('click', function() {
-            cleaningModal.style.display = 'none';
-            // Reset menu item active state when modal is closed
-            const menuItems = document.querySelectorAll('.menu-item');
-            menuItems.forEach(i => i.classList.remove('active'));
-            // Set dashboard as active again
-            const dashboardItem = document.querySelector('.menu-item[data-section="dashboard"]');
-            if (dashboardItem) {
-                dashboardItem.classList.add('active');
-                // Show dashboard section
-                const dashboardSection = document.getElementById('dashboard-section');
-                if (dashboardSection) {
-                    dashboardSection.classList.add('active');
-                }
-            }
-        });
-    }
-
-    // Close modal when clicking outside modal content
-    window.addEventListener('click', function(event) {
-        if (event.target === cleaningModal) {
-            cleaningModal.style.display = 'none';
-            // Reset menu item active state when modal is closed
-            const menuItems = document.querySelectorAll('.menu-item');
-            menuItems.forEach(i => i.classList.remove('active'));
-            // Set dashboard as active again
-            const dashboardItem = document.querySelector('.menu-item[data-section="dashboard"]');
-            if (dashboardItem) {
-                dashboardItem.classList.add('active');
-                // Show dashboard section
-                const dashboardSection = document.getElementById('dashboard-section');
-                if (dashboardSection) {
-                    dashboardSection.classList.add('active');
-                }
-            }
-        }
-    });
-
+    const cleaningForm = document.querySelector('#cleaning-request-section .cleaning-form');
+    
     // Handle form submission
-    if (form) {
-        form.addEventListener('submit', function(e) {
+    if (cleaningForm) {
+        cleaningForm.addEventListener('submit', function(e) {
             e.preventDefault();
             alert('Cleaning request submitted!');
-            cleaningModal.style.display = 'none';
-            form.reset();
-            // Reset menu item active state when form is submitted
-            const menuItems = document.querySelectorAll('.menu-item');
-            menuItems.forEach(i => i.classList.remove('active'));
-            // Set dashboard as active again
-            const dashboardItem = document.querySelector('.menu-item[data-section="dashboard"]');
-            if (dashboardItem) {
-                dashboardItem.classList.add('active');
-                // Show dashboard section
-                const dashboardSection = document.getElementById('dashboard-section');
-                if (dashboardSection) {
-                    dashboardSection.classList.add('active');
-                }
-            }
+            cleaningForm.reset();
         });
     }
 });
@@ -149,23 +84,13 @@ menuItems.forEach(item => {
         menuItems.forEach(i => i.classList.remove('active'));
         this.classList.add('active');
         
-        if (sectionName === 'cleaning-request') {
-            // Handle cleaning request modal
-            const cleaningModal = document.getElementById('cleaningModal');
-            if (cleaningModal) {
-                cleaningModal.style.display = 'block';
-            }
-            // Hide all content sections when modal is opened
-            contentSections.forEach(section => {
-                section.classList.remove('active');
-            });
-        } else if (sectionName) {
-            // Hide all content sections
-            contentSections.forEach(section => {
-                section.classList.remove('active');
-            });
-            
-            // Show the target section with a small delay for smooth transition
+        // Hide all content sections
+        contentSections.forEach(section => {
+            section.classList.remove('active');
+        });
+        
+        // Show the target section with a small delay for smooth transition
+        if (sectionName) {
             const targetSection = document.getElementById(sectionName + '-section');
             if (targetSection) {
                 setTimeout(() => {
@@ -773,3 +698,507 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+// Profile dropdown functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const profileDropdown = document.querySelector('.profile-dropdown');
+    const dropdownContent = document.querySelector('.dropdown-content');
+    
+    if (profileDropdown && dropdownContent) {
+        // Toggle dropdown when clicking on profile
+        profileDropdown.addEventListener('click', function(e) {
+            e.stopPropagation();
+            dropdownContent.classList.toggle('show');
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!profileDropdown.contains(e.target)) {
+                dropdownContent.classList.remove('show');
+            }
+        });
+        
+        // Handle dropdown menu item clicks
+        const dropdownItems = dropdownContent.querySelectorAll('a');
+        dropdownItems.forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const section = this.getAttribute('data-section');
+                
+                if (section) {
+                    // Close dropdown
+                    dropdownContent.classList.remove('show');
+                    
+                    // Update sidebar active state
+                    const menuItems = document.querySelectorAll('.menu-item');
+                    menuItems.forEach(i => i.classList.remove('active'));
+                    
+                    // Find and activate corresponding menu item
+                    const correspondingMenuItem = document.querySelector(`.menu-item[data-section="${section}"]`);
+                    if (correspondingMenuItem) {
+                        correspondingMenuItem.classList.add('active');
+                    }
+                    
+                    // Show the target section
+                    const contentSections = document.querySelectorAll('.content-section');
+                    contentSections.forEach(section => section.classList.remove('active'));
+                    
+                    const targetSection = document.getElementById(section + '-section');
+                    if (targetSection) {
+                        setTimeout(() => {
+                            targetSection.classList.add('active');
+                        }, 50);
+                    }
+                }
+            });
+        });
+    }
+});
+
+// Profile Management Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    initializeProfileManagement();
+});
+
+function initializeProfileManagement() {
+    // Initialize edit profile form
+    initializeEditProfileForm();
+    
+    // Initialize change password form
+    initializeChangePasswordForm();
+    
+    // Initialize account settings form
+    initializeAccountSettingsForm();
+    
+    // Initialize password toggles
+    initializePasswordToggles();
+    
+    // Initialize avatar change functionality
+    initializeAvatarChange();
+}
+
+// Edit Profile Form
+function initializeEditProfileForm() {
+    const editForm = document.getElementById('editProfileForm');
+    const cancelBtn = document.getElementById('cancelEditProfile');
+    
+    if (editForm) {
+        editForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            handleProfileUpdate(this);
+        });
+    }
+    
+    if (cancelBtn) {
+        cancelBtn.addEventListener('click', function() {
+            // Reset form to original values
+            editForm.reset();
+            // Optionally navigate back to view profile
+            showNotification('Changes cancelled', 'info');
+        });
+    }
+}
+
+// Change Password Form
+function initializeChangePasswordForm() {
+    const passwordForm = document.getElementById('changePasswordForm');
+    const cancelBtn = document.getElementById('cancelPasswordChange');
+    
+    if (passwordForm) {
+        passwordForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            handlePasswordChange(this);
+        });
+    }
+    
+    if (cancelBtn) {
+        cancelBtn.addEventListener('click', function() {
+            passwordForm.reset();
+            showNotification('Password change cancelled', 'info');
+        });
+    }
+}
+
+// Account Settings Form
+function initializeAccountSettingsForm() {
+    const settingsForm = document.getElementById('accountSettingsForm');
+    const cancelBtn = document.getElementById('cancelAccountSettings');
+    
+    if (settingsForm) {
+        settingsForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            handleSettingsUpdate(this);
+        });
+    }
+    
+    if (cancelBtn) {
+        cancelBtn.addEventListener('click', function() {
+            // Reset all toggles to default state
+            resetAccountSettings();
+            showNotification('Settings reset to defaults', 'info');
+        });
+    }
+    
+    // Initialize toggle switches
+    const toggleSwitches = document.querySelectorAll('#account-settings-section .toggle-switch input');
+    toggleSwitches.forEach(toggle => {
+        toggle.addEventListener('change', function() {
+            const settingName = this.id.replace('Vendor', '');
+            const isEnabled = this.checked;
+            
+            // Save setting immediately
+            handleSettingChange(settingName, isEnabled);
+            
+            // Show feedback
+            const settingLabel = this.closest('.setting-item').querySelector('h4').textContent;
+            showNotification(`${settingLabel} ${isEnabled ? 'enabled' : 'disabled'}`, 'success');
+        });
+    });
+}
+
+// Password Toggle Functionality
+function initializePasswordToggles() {
+    const passwordToggles = document.querySelectorAll('.password-toggle');
+    
+    passwordToggles.forEach(toggle => {
+        toggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('data-target');
+            const passwordInput = document.getElementById(targetId);
+            const icon = this.querySelector('i');
+            
+            if (passwordInput && passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else if (passwordInput) {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+    });
+}
+
+// Avatar Change Functionality
+function initializeAvatarChange() {
+    const changeAvatarBtns = document.querySelectorAll('.change-avatar-btn');
+    
+    changeAvatarBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Create file input
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.accept = 'image/*';
+            fileInput.style.display = 'none';
+            
+            fileInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        // Update all avatar images
+                        const avatars = document.querySelectorAll('.user-avatar, .profile-avatar-large');
+                        avatars.forEach(avatar => {
+                            avatar.src = e.target.result;
+                        });
+                        
+                        showNotification('Avatar updated successfully!', 'success');
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+            
+            document.body.appendChild(fileInput);
+            fileInput.click();
+            document.body.removeChild(fileInput);
+        });
+    });
+}
+
+// Handle Profile Update
+function handleProfileUpdate(form) {
+    const formData = new FormData(form);
+    const profileData = {};
+    
+    // Collect form data
+    for (let [key, value] of formData.entries()) {
+        profileData[key] = value;
+    }
+    
+    // Show loading
+    showLoadingSpinner(true);
+    
+    // Simulate API call
+    setTimeout(() => {
+        showLoadingSpinner(false);
+        
+        // Update profile display in view section
+        updateProfileDisplay(profileData);
+        
+        // Show success message
+        showNotification('Profile updated successfully!', 'success');
+        
+        // Optionally navigate to view profile
+        setTimeout(() => {
+            const viewProfileMenuItem = document.querySelector('.menu-item[data-section="view-profile"]');
+            if (viewProfileMenuItem) {
+                viewProfileMenuItem.click();
+            }
+        }, 1000);
+    }, 1500);
+}
+
+// Handle Password Change
+function handlePasswordChange(form) {
+    const formData = new FormData(form);
+    const currentPassword = formData.get('currentPassword');
+    const newPassword = formData.get('newPassword');
+    const confirmPassword = formData.get('confirmPassword');
+    
+    // Basic validation
+    if (newPassword !== confirmPassword) {
+        showNotification('New passwords do not match!', 'error');
+        return;
+    }
+    
+    if (newPassword.length < 8) {
+        showNotification('Password must be at least 8 characters long!', 'error');
+        return;
+    }
+    
+    // Show loading
+    showLoadingSpinner(true);
+    
+    // Simulate API call
+    setTimeout(() => {
+        showLoadingSpinner(false);
+        
+        // Clear form
+        form.reset();
+        
+        // Show success message
+        showNotification('Password changed successfully!', 'success');
+    }, 1500);
+}
+
+// Handle Settings Update
+function handleSettingsUpdate(form) {
+    // Show loading
+    showLoadingSpinner(true);
+    
+    setTimeout(() => {
+        showLoadingSpinner(false);
+        showNotification('Settings saved successfully!', 'success');
+    }, 1000);
+}
+
+// Handle Individual Setting Change
+function handleSettingChange(settingName, isEnabled) {
+    // Save to localStorage (in real app, this would be an API call)
+    const settings = JSON.parse(localStorage.getItem('vendorSettings') || '{}');
+    settings[settingName] = isEnabled;
+    localStorage.setItem('vendorSettings', JSON.stringify(settings));
+}
+
+// Reset Account Settings
+function resetAccountSettings() {
+    // Reset toggles to default state
+    const defaultSettings = {
+        emailNotifications: true,
+        smsNotifications: false,
+        pushNotifications: true,
+        profileVisibility: true,
+        dataShare: false,
+        sessionTimeout: true,
+        loginAlerts: true
+    };
+    
+    Object.keys(defaultSettings).forEach(setting => {
+        const toggle = document.getElementById(setting + 'Vendor');
+        if (toggle) {
+            toggle.checked = defaultSettings[setting];
+        }
+    });
+    
+    // Save to localStorage
+    localStorage.setItem('vendorSettings', JSON.stringify(defaultSettings));
+}
+
+// Update Profile Display
+function updateProfileDisplay(profileData) {
+    // Update view profile section
+    const detailRows = document.querySelectorAll('#view-profile-section .detail-row');
+    
+    detailRows.forEach(row => {
+        const label = row.querySelector('label').textContent;
+        const valueSpan = row.querySelector('span');
+        
+        if (label.includes('Full Name') && profileData.firstName && profileData.lastName) {
+            valueSpan.textContent = `${profileData.firstName} ${profileData.lastName}`;
+        } else if (label.includes('Email') && profileData.email) {
+            valueSpan.textContent = profileData.email;
+        } else if (label.includes('Business Name') && profileData.businessName) {
+            valueSpan.textContent = profileData.businessName;
+        } else if (label.includes('Phone') && profileData.phone) {
+            valueSpan.textContent = profileData.phone;
+        } else if (label.includes('Address') && profileData.address) {
+            valueSpan.textContent = profileData.address;
+        }
+    });
+    
+    // Update header user name
+    const userName = document.querySelector('.user-name');
+    if (userName && profileData.firstName) {
+        userName.textContent = profileData.firstName + ' ' + (profileData.lastName || '');
+    }
+}
+
+// Utility Functions
+function showNotification(message, type = 'info') {
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.innerHTML = `
+        <i class="fas fa-${getNotificationIcon(type)}"></i>
+        <span>${message}</span>
+        <button class="notification-close">
+            <i class="fas fa-times"></i>
+        </button>
+    `;
+    
+    // Add styles
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${getNotificationColor(type)};
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        z-index: 9999;
+        opacity: 0;
+        transform: translateX(100%);
+        transition: all 0.3s ease;
+        max-width: 300px;
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Animate in
+    setTimeout(() => {
+        notification.style.opacity = '1';
+        notification.style.transform = 'translateX(0)';
+    }, 100);
+    
+    // Close functionality
+    const closeBtn = notification.querySelector('.notification-close');
+    closeBtn.addEventListener('click', () => {
+        removeNotification(notification);
+    });
+    
+    // Auto remove after 5 seconds
+    setTimeout(() => {
+        removeNotification(notification);
+    }, 5000);
+}
+
+function removeNotification(notification) {
+    notification.style.opacity = '0';
+    notification.style.transform = 'translateX(100%)';
+    
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.parentNode.removeChild(notification);
+        }
+    }, 300);
+}
+
+function getNotificationIcon(type) {
+    const icons = {
+        'success': 'check-circle',
+        'error': 'exclamation-circle',
+        'warning': 'exclamation-triangle',
+        'info': 'info-circle'
+    };
+    return icons[type] || 'info-circle';
+}
+
+function getNotificationColor(type) {
+    const colors = {
+        'success': '#28a745',
+        'error': '#dc3545',
+        'warning': '#ffc107',
+        'info': '#17a2b8'
+    };
+    return colors[type] || '#17a2b8';
+}
+
+function showLoadingSpinner(show) {
+    let spinner = document.querySelector('.loading-spinner');
+    
+    if (show) {
+        if (!spinner) {
+            spinner = document.createElement('div');
+            spinner.className = 'loading-spinner';
+            spinner.innerHTML = `
+                <div class="spinner-overlay">
+                    <div class="spinner">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>Loading...</p>
+                    </div>
+                </div>
+            `;
+            
+            spinner.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 9999;
+            `;
+            
+            const spinnerContent = spinner.querySelector('.spinner');
+            spinnerContent.style.cssText = `
+                background: white;
+                padding: 2rem;
+                border-radius: 12px;
+                text-align: center;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            `;
+            
+            const icon = spinner.querySelector('i');
+            icon.style.cssText = `
+                font-size: 2rem;
+                color: var(--primary-color);
+                margin-bottom: 1rem;
+            `;
+            
+            const text = spinner.querySelector('p');
+            text.style.cssText = `
+                margin: 0;
+                color: #666;
+                font-weight: 600;
+            `;
+            
+            document.body.appendChild(spinner);
+        }
+        
+        spinner.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    } else {
+        if (spinner) {
+            spinner.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    }
+}
