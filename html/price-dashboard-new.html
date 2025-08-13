@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Price Dashboard - Tanza Public Market</title>
     <link rel="stylesheet" href="../css/price-dashboard-new.css">
+    <link rel="stylesheet" href="../css/export-modal.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -629,6 +630,120 @@
         </div>
     </div>
 
+    <!-- Export Data Modal -->
+    <div class="modal-overlay" id="exportModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2>Export Price Data</h2>
+                <button class="modal-close" id="closeExportModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="export-content">
+                    <div class="export-intro">
+                        <i class="fas fa-file-pdf export-icon"></i>
+                        <h3>Generate Price Report</h3>
+                        <p>Select the time period for your price data report</p>
+                    </div>
+                    
+                    <form id="exportForm" class="export-form">
+                        <div class="export-time-filter">
+                            <h4>Select Time Period</h4>
+                            <div class="time-filter-options">
+                                <label class="time-option">
+                                    <input type="radio" name="timeFilter" value="3days" checked>
+                                    <span class="filter-text">Last 3 Days</span>
+                                </label>
+                                <label class="time-option">
+                                    <input type="radio" name="timeFilter" value="7days">
+                                    <span class="filter-text">Last 7 Days</span>
+                                </label>
+                                <label class="time-option">
+                                    <input type="radio" name="timeFilter" value="2weeks">
+                                    <span class="filter-text">Last 2 Weeks</span>
+                                </label>
+                                <label class="time-option">
+                                    <input type="radio" name="timeFilter" value="1month">
+                                    <span class="filter-text">Last Month</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="export-options">
+                            <h4>Include in Report</h4>
+                            <div class="export-checkboxes">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="exportOptions" value="all-stores" checked>
+                                    <span class="checkmark"></span>
+                                    All Stores
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="exportOptions" value="price-trends">
+                                    <span class="checkmark"></span>
+                                    Price Trends
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="exportOptions" value="price-comparison">
+                                    <span class="checkmark"></span>
+                                    Price Comparison
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="exportOptions" value="charts">
+                                    <span class="checkmark"></span>
+                                    Charts & Graphs
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="export-format">
+                            <h4>File Format</h4>
+                            <div class="format-options">
+                                <label class="format-option active">
+                                    <input type="radio" name="format" value="pdf" checked>
+                                    <i class="fas fa-file-pdf"></i>
+                                    <span>PDF</span>
+                                </label>
+                                <label class="format-option">
+                                    <input type="radio" name="format" value="excel">
+                                    <i class="fas fa-file-excel"></i>
+                                    <span>Excel</span>
+                                </label>
+                                <label class="format-option">
+                                    <input type="radio" name="format" value="csv">
+                                    <i class="fas fa-file-csv"></i>
+                                    <span>CSV</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary export-submit-btn" id="generateReportBtn">
+                            <i class="fas fa-download"></i>
+                            Generate & Download Report
+                        </button>
+                    </form>
+                    
+                    <!-- Processing Animation (Initially Hidden) -->
+                    <div class="export-processing" id="exportProcessing" style="display: none;">
+                        <div class="processing-animation">
+                            <div class="spinner"></div>
+                        </div>
+                        <h3>Generating Your Report</h3>
+                        <p>This may take a few moments...</p>
+                    </div>
+                    
+                    <!-- Success Message (Initially Hidden) -->
+                    <div class="export-success" id="exportSuccess" style="display: none;">
+                        <div class="success-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h3>Report Generated Successfully!</h3>
+                        <p>Your download should begin automatically.</p>
+                        <button type="button" class="btn btn-secondary" id="closeExportSuccess">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Loading State -->
     <div class="loading-overlay" id="loadingOverlay" style="display: none;">
         <div class="loading-spinner">
@@ -638,5 +753,11 @@
     </div>
 
     <script src="../js/price-dashboard-new.js"></script>
+    <script src="../js/export-modal.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeExportModal();
+        });
+    </script>
 </body>
 </html>

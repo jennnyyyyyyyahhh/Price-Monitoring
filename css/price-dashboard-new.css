@@ -503,9 +503,9 @@ body {
 }
 
 .action-btn {
-    background: #f8f9fa;
+    background: #019d25;
     border: 1px solid #dee2e6;
-    color: #495057;
+    color: #ffffff;
     padding: 0.7rem;
     border-radius: 6px;
     cursor: pointer;
@@ -518,7 +518,7 @@ body {
 }
 
 .action-btn:hover {
-    background: #e9ecef;
+    background: #11d843;
     border-color: #4CAF50;
     color: #4CAF50;
 }

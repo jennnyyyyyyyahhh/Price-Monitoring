@@ -35,12 +35,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // Navbar background change on scroll
     const navbar = document.querySelector('.navbar');
     window.addEventListener('scroll', function() {
-        if (window.scrollY > 100) {
+        if (window.scrollY > 50) {
             navbar.classList.add('scrolled');
         } else {
             navbar.classList.remove('scrolled');
         }
     });
+    
+    // Initial check for navbar state (in case page is loaded scrolled down)
+    if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+    }
     
     // Form submission
     const contactForm = document.querySelector('.contact-form form');

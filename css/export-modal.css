@@ -1,0 +1,284 @@
+/* Export Modal Styles */
+.export-content {
+    padding: 0 1rem;
+}
+
+.export-intro {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.export-icon {
+    font-size: 3rem;
+    color: #e74c3c;
+    margin-bottom: 1rem;
+}
+
+.export-intro h3 {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.export-intro p {
+    color: #7f8c8d;
+    font-size: 1rem;
+}
+
+.export-form h4 {
+    margin-bottom: 1rem;
+    color: #2c3e50;
+    font-size: 1.1rem;
+}
+
+.export-time-filter {
+    margin-bottom: 1.5rem;
+}
+
+.time-filter-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.time-option {
+    background: #f5f5f5;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.time-option:hover {
+    background: #ecf0f1;
+    transform: translateY(-2px);
+}
+
+.time-option input[type="radio"] {
+    margin-right: 0.5rem;
+    accent-color: #4CAF50;
+}
+
+.filter-text {
+    font-weight: 500;
+    color: #333;
+}
+
+.time-option input[type="radio"]:checked + .filter-text {
+    color: #4CAF50;
+}
+
+.export-options {
+    margin-bottom: 1.5rem;
+}
+
+.export-checkboxes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+}
+
+.checkbox-label:hover {
+    background: #f5f5f5;
+}
+
+.checkbox-label input[type="checkbox"] {
+    margin-right: 0.5rem;
+    accent-color: #4CAF50;
+}
+
+.checkmark {
+    margin-right: 0.5rem;
+}
+
+.export-format {
+    margin-bottom: 2rem;
+}
+
+.format-options {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.format-option {
+    flex: 1;
+    min-width: 100px;
+    background: #f5f5f5;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.format-option:hover {
+    background: #ecf0f1;
+    transform: translateY(-2px);
+}
+
+.format-option.active {
+    background: #e8f5e9;
+    border-color: #4CAF50;
+}
+
+.format-option i {
+    display: block;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.format-option i.fa-file-pdf {
+    color: #e74c3c;
+}
+
+.format-option i.fa-file-excel {
+    color: #27ae60;
+}
+
+.format-option i.fa-file-csv {
+    color: #3498db;
+}
+
+.format-option input[type="radio"] {
+    display: none;
+}
+
+.export-submit-btn {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #4CAF50, #2E7D32);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.export-submit-btn:hover {
+    background: linear-gradient(135deg, #2E7D32, #1B5E20);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(46, 125, 50, 0.3);
+}
+
+.export-processing {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.processing-animation {
+    margin-bottom: 1.5rem;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #4CAF50;
+    border-radius: 50%;
+    margin: 0 auto;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.export-processing h3 {
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+}
+
+.export-processing p {
+    color: #7f8c8d;
+}
+
+.export-success {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.success-icon {
+    margin-bottom: 1.5rem;
+}
+
+.success-icon i {
+    font-size: 4rem;
+    color: #4CAF50;
+    animation: scaleIn 0.5s ease;
+}
+
+@keyframes scaleIn {
+    0% { transform: scale(0); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.export-success h3 {
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+}
+
+.export-success p {
+    color: #7f8c8d;
+    margin-bottom: 1.5rem;
+}
+
+.export-success .btn {
+    background: #f5f5f5;
+    color: #333;
+    border: 1px solid #ddd;
+    padding: 0.8rem 2rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.export-success .btn:hover {
+    background: #e0e0e0;
+}
+
+/* Responsive styles for the export modal */
+@media (max-width: 768px) {
+    .time-filter-options, 
+    .export-checkboxes {
+        grid-template-columns: 1fr;
+    }
+    
+    .format-options {
+        flex-direction: column;
+    }
+    
+    .format-option {
+        min-width: auto;
+    }
+    
+    .export-icon {
+        font-size: 2.5rem;
+    }
+    
+    .export-intro h3 {
+        font-size: 1.3rem;
+    }
+}
