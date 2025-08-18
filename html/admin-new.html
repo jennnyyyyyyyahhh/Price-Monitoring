@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Tanza Market</title>
     <link rel="stylesheet" href="../css/admin-new.css">
+    <link rel="stylesheet" href="../css/report-styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -606,7 +607,229 @@
                     <p>Generate and view system reports</p>
                 </div>
                 <div class="reports-container">
-                    <p>Reports functionality coming soon...</p>
+                    <!-- Report Filters and Controls -->
+                    <div class="report-controls">
+                        <div class="report-filters">
+                            <div class="filter-group">
+                                <label for="reportType">Report Type</label>
+                                <select id="reportType">
+                                    <option value="price-anomaly" selected>Price Anomaly Reports</option>
+                                    <option value="vendor-compliance">Vendor Compliance</option>
+                                    <option value="price-trends">Price Trends</option>
+                                    <option value="customer-feedback">Customer Feedback</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label for="reportDate">Date Range</label>
+                                <select id="reportDate">
+                                    <option value="today">Today</option>
+                                    <option value="week" selected>This Week</option>
+                                    <option value="month">This Month</option>
+                                    <option value="quarter">This Quarter</option>
+                                    <option value="custom">Custom Range</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label for="reportStatus">Status</label>
+                                <select id="reportStatus">
+                                    <option value="all" selected>All Status</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="investigating">Investigating</option>
+                                    <option value="resolved">Resolved</option>
+                                    <option value="dismissed">Dismissed</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Report buttons removed as requested -->
+                    </div>
+
+                    <!-- Report Stats -->
+                    <div class="report-stats">
+                        <div class="stat-item">
+                            <div class="stat-icon red">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="stat-details">
+                                <h4>New Reports</h4>
+                                <p>8</p>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon orange">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <div class="stat-details">
+                                <h4>Under Investigation</h4>
+                                <p>5</p>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon green">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="stat-details">
+                                <h4>Resolved</h4>
+                                <p>12</p>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon blue">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="stat-details">
+                                <h4>Total Reports</h4>
+                                <p>25</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Price Anomaly Reports Table -->
+                    <div class="table-container">
+                        <div class="table-header">
+                            <h3>Price Anomaly Reports</h3>
+                        </div>
+                        <div class="table-wrapper">
+                            <table class="reports-table">
+                                <thead>
+                                    <tr>
+                                        <th>Report ID</th>
+                                        <th>Date</th>
+                                        <th>Reporter</th>
+                                        <th>Product</th>
+                                        <th>Vendor</th>
+                                        <th>Reported Price</th>
+                                        <th>Expected Price</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="highlight-row">
+                                        <td>#PR-2025-0023</td>
+                                        <td>Aug 13, 2025</td>
+                                        <td>Pedro Penduko</td>
+                                        <td>Premium Rice</td>
+                                        <td>Lisa's Rice Store</td>
+                                        <td>₱85.00/kg</td>
+                                        <td>₱50.00/kg</td>
+                                        <td><span class="status-badge pending">Pending</span></td>
+                                        <td>
+                                            <div class="action-buttons">
+                                                <button class="action-btn view-btn" data-id="PR-2025-0023">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button class="action-btn assign-btn" data-id="PR-2025-0023">
+                                                    <i class="fas fa-user-check"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>#PR-2025-0022</td>
+                                        <td>Aug 12, 2025</td>
+                                        <td>Jonas Tomato</td>
+                                        <td>Tomatoes</td>
+                                        <td>Maria's Fresh Produce</td>
+                                        <td>₱65.00/kg</td>
+                                        <td>₱35.00/kg</td>
+                                        <td><span class="status-badge investigating">Investigating</span></td>
+                                        <td>
+                                            <div class="action-buttons">
+                                                <button class="action-btn view-btn" data-id="PR-2025-0022">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button class="action-btn assign-btn" data-id="PR-2025-0022">
+                                                    <i class="fas fa-user-check"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>#PR-2025-0021</td>
+                                        <td>Aug 10, 2025</td>
+                                        <td>Thea Banana</td>
+                                        <td>Chicken (Whole)</td>
+                                        <td>Juan's Meat Shop</td>
+                                        <td>₱220.00/kg</td>
+                                        <td>₱180.00/kg</td>
+                                        <td><span class="status-badge resolved">Resolved</span></td>
+                                        <td>
+                                            <div class="action-buttons">
+                                                <button class="action-btn view-btn" data-id="PR-2025-0021">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button class="action-btn report-btn" data-id="PR-2025-0021">
+                                                    <i class="fas fa-file-alt"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>#PR-2025-0020</td>
+                                        <td>Aug 08, 2025</td>
+                                        <td>Jenny Lechon</td>
+                                        <td>Pork Liempo</td>
+                                        <td>Juan's Meat Shop</td>
+                                        <td>₱320.00/kg</td>
+                                        <td>₱280.00/kg</td>
+                                        <td><span class="status-badge dismissed">Dismissed</span></td>
+                                        <td>
+                                            <div class="action-buttons">
+                                                <button class="action-btn view-btn" data-id="PR-2025-0020">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button class="action-btn report-btn" data-id="PR-2025-0020">
+                                                    <i class="fas fa-file-alt"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>#PR-2025-0019</td>
+                                        <td>Aug 07, 2025</td>
+                                        <td>Kyle John</td>
+                                        <td>Onions</td>
+                                        <td>Maria's Fresh Produce</td>
+                                        <td>₱55.00/kg</td>
+                                        <td>₱35.00/kg</td>
+                                        <td><span class="status-badge investigating">Investigating</span></td>
+                                        <td>
+                                            <div class="action-buttons">
+                                                <button class="action-btn view-btn" data-id="PR-2025-0019">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button class="action-btn assign-btn" data-id="PR-2025-0019">
+                                                    <i class="fas fa-user-check"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination-container">
+                        <div class="pagination-info">
+                            <span>Showing 1-5 of 25 reports</span>
+                        </div>
+                        <div class="pagination-controls">
+                            <button class="pagination-btn" id="prevReportPage" disabled>
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <span class="page-numbers">
+                                <button class="page-btn active">1</button>
+                                <button class="page-btn">2</button>
+                                <button class="page-btn">3</button>
+                                <span class="page-dots">...</span>
+                                <button class="page-btn">5</button>
+                            </span>
+                            <button class="pagination-btn" id="nextReportPage">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -1116,6 +1339,165 @@
         </div>
     </div>
 
+    <!-- View Report Modal -->
+    <div class="modal-overlay" id="viewReportModal">
+        <div class="modal-container large">
+            <div class="modal-header">
+                <h2>Price Anomaly Report Details</h2>
+                <button class="modal-close" id="closeViewReportModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="report-details">
+                    <!-- Report Status Banner -->
+                    <div class="report-status-banner pending">
+                        <div class="status-icon">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </div>
+                        <div class="status-content">
+                            <h3>Pending Review</h3>
+                            <p>This report requires immediate attention</p>
+                        </div>
+                        <div class="status-actions">
+                            <button class="btn btn-white" id="changeStatusBtn">
+                                <i class="fas fa-exchange-alt"></i>
+                                Change Status
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Report Information -->
+                    <div class="report-info-grid">
+                        <div class="report-column">
+                            <div class="report-section">
+                                <h3>Report Information</h3>
+                                <div class="info-item">
+                                    <label>Report ID:</label>
+                                    <span class="info-value">#PR-2025-0023</span>
+                                </div>
+                                <div class="info-item">
+                                    <label>Report Date:</label>
+                                    <span class="info-value">August 13, 2025 - 10:45 AM</span>
+                                </div>
+                                <div class="info-item">
+                                    <label>Status:</label>
+                                    <span class="status-badge pending">Pending</span>
+                                </div>
+                                <div class="info-item">
+                                    <label>Priority:</label>
+                                    <span class="priority-badge high">High</span>
+                                </div>
+                                <div class="info-item">
+                                    <label>Assigned To:</label>
+                                    <span class="info-value">Unassigned</span>
+                                </div>
+                            </div>
+
+                            <div class="report-section">
+                                <h3>Reporter Information</h3>
+                                <div class="info-item">
+                                    <label>Name:</label>
+                                    <span class="info-value">Maria Santos</span>
+                                </div>
+                                <div class="info-item">
+                                    <label>Email:</label>
+                                    <span class="info-value">maria.santos@email.com</span>
+                                </div>
+                                <div class="info-item">
+                                    <label>Phone:</label>
+                                    <span class="info-value">+63 912 345 6789</span>
+                                </div>
+                                <div class="info-item">
+                                    <label>User Type:</label>
+                                    <span class="info-value">Consumer</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="report-column">
+                            <div class="report-section">
+                                <h3>Price Information</h3>
+                                <div class="info-item">
+                                    <label>Product:</label>
+                                    <span class="info-value">Premium Rice</span>
+                                </div>
+                                <div class="info-item">
+                                    <label>Vendor:</label>
+                                    <span class="info-value">Lisa's Rice Store (Stall E-12)</span>
+                                </div>
+                                <div class="info-item">
+                                    <label>Reported Price:</label>
+                                    <span class="info-value price-anomaly">₱85.00/kg</span>
+                                </div>
+                                <div class="info-item">
+                                    <label>Expected Price:</label>
+                                    <span class="info-value">₱50.00/kg</span>
+                                </div>
+                                <div class="info-item">
+                                    <label>Price Difference:</label>
+                                    <span class="info-value price-difference">+₱35.00 (+70%)</span>
+                                </div>
+                                <div class="info-item">
+                                    <label>SRP (DTI):</label>
+                                    <span class="info-value">₱49.00 - ₱52.00/kg</span>
+                                </div>
+                            </div>
+
+                            <div class="report-section">
+                                <h3>Evidence</h3>
+                                <div class="evidence-container">
+                                    <div class="evidence-item">
+                                        <img src="../img/rice.jpg" alt="Price Tag Evidence" class="evidence-image">
+                                        <div class="evidence-caption">Price tag showing ₱85.00/kg</div>
+                                    </div>
+                                    <div class="evidence-item">
+                                        <img src="../img/receipt.jpg" alt="Receipt" class="evidence-image">
+                                        <div class="evidence-caption">Receipt from purchase on Aug 13, 2025</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Report Description -->
+                    <div class="report-section full-width">
+                        <h3>Report Description</h3>
+                        <div class="report-description">
+                            <p>I visited Lisa's Rice Store at Tanza Public Market today to buy premium rice, and I was shocked to see the price at ₱85.00 per kg. Just last week, I bought the same rice for ₱50.00 per kg. When I asked the vendor about the sudden price increase, she mentioned that there was a supply shortage due to recent typhoons, but I checked other stores nearby and they were still selling at ₱50-55 per kg.</p>
+                            <p>I believe this is a clear case of price gouging, especially since the DTI's SRP for premium rice is between ₱49.00 to ₱52.00 per kg. I've attached photos of the price tag and receipt as evidence. Please investigate this matter as this affects many consumers who rely on fair pricing at the public market.</p>
+                        </div>
+                    </div>
+
+                    <!-- Response and Actions -->
+                    <div class="report-action-container">
+                        <div class="response-section">
+                            <h3>Admin Response</h3>
+                            <textarea id="adminResponse" placeholder="Enter your response or investigation notes here..." rows="4"></textarea>
+                        </div>
+                        <div class="action-buttons-container">
+                            <button class="btn btn-success" id="resolveReportBtn">
+                                <i class="fas fa-check"></i>
+                                Resolve Report
+                            </button>
+                            <button class="btn btn-primary" id="investigateReportBtn">
+                                <i class="fas fa-search"></i>
+                                Mark as Investigating
+                            </button>
+                            <button class="btn btn-secondary" id="assignReportBtn">
+                                <i class="fas fa-user-plus"></i>
+                                Assign to Staff
+                            </button>
+                            <button class="btn btn-warning" id="dismissReportBtn">
+                                <i class="fas fa-times"></i>
+                                Dismiss Report
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="../js/admin-new.js"></script>
+    <script src="../js/report-handler.js"></script>
 </body>
 </html>
