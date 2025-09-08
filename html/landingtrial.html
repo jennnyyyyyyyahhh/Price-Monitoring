@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmFresh Market - Public Market Price Monitoring</title>
+<link rel="stylesheet" href="../css/landingtrial.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <!-- Logo Left Side -->
+                <div class="logo">
+                    <i class="fas fa-seedling"></i>
+                    <span>FarmFresh Market</span>
+                </div>
+                
+                <!-- Navigation Center -->
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#home" class="nav-link">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#weather" class="nav-link">WEATHER</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#about" class="nav-link">ABOUT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contact" class="nav-link">CONTACTS</a>
+                    </li>
+                </ul>
+                
+                <!-- Right Side Actions -->
+                <div class="nav-actions">
+                    <div class="notification-container">
+                        <i class="fas fa-bell notification-bell" id="notificationBell"></i>
+                        <span class="notification-badge" id="notificationBadge">5</span>
+                        <!-- Notification Dropdown -->
+                        <div class="notification-dropdown" id="notificationDropdown">
+                            <div class="notification-header">
+                                <h4>Market Price Alerts</h4>
+                                <span class="mark-read">Mark all as read</span>
+                            </div>
+                            <div class="notification-item">
+                                <i class="fas fa-arrow-down price-drop"></i>
+                                <div class="notification-content">
+                                    <p><strong>Fresh Tomatoes - Tanza Market</strong></p>
+                                    <small>Now ₱65/kg (was ₱85/kg) - Save 24% at Maria's Farm</small>
+                                </div>
+                            </div>
+                            <div class="notification-item">
+                                <i class="fas fa-arrow-down price-drop"></i>
+                                <div class="notification-content">
+                                    <p><strong>Local Rice - Farmer's Direct</strong></p>
+                                    <small>Now ₱48/kg (was ₱55/kg) - Save 13% from Laguna Farms</small>
+                                </div>
+                            </div>
+                            <div class="notification-item">
+                                <i class="fas fa-bell price-alert"></i>
+                                <div class="notification-content">
+                                    <p><strong>Organic Apples - Limited Stock</strong></p>
+                                    <small>₱95/kg - Only 10kg left at Public Market</small>
+                                </div>
+                            </div>
+                            <div class="notification-item">
+                                <i class="fas fa-arrow-down price-drop"></i>
+                                <div class="notification-content">
+                                    <p><strong>Ripe Bananas - Morning Harvest</strong></p>
+                                    <small>Now ₱35/kg (was ₱45/kg) - Fresh from Batangas Farms</small>
+                                </div>
+                            </div>
+                            <div class="notification-item">
+                                <i class="fas fa-arrow-down price-drop"></i>
+                                <div class="notification-content">
+                                    <p><strong>Carrots - Bulk Discount</strong></p>
+                                    <small>Now ₱50/kg (was ₱65/kg) - Highland Vegetables</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn-login" id="loginBtn">LOGIN / SIGNUP</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section" id="home">
+            <div class="hero-content">
+                <h1 class="hero-title">Tanza Public Market Price Monitor</h1>
+                <p class="hero-subtitle">Track fresh produce prices from local farmers and vendors. Get real-time alerts on the best deals from our community marketplace!</p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-text">Local Vendors</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-text">Market Updates</div>
+                    </div>
+                </div>
+                <div class="hero-buttons">
+                    <button class="btn-primary">Browse Market Prices</button>
+                    <button class="btn-secondary">Meet Our Farmers</button>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="price-drop-animation">
+                    <div class="price-card falling">
+                        <div class="product">🍅 Farm Tomatoes</div>
+                        <div class="vendor">Maria's Farm</div>
+                        <div class="old-price">₱85/kg</div>
+                        <div class="new-price">₱65/kg</div>
+                        <div class="savings">Save 24%</div>
+                    </div>
+                    <div class="price-card falling delay-1">
+                        <div class="product">🥬 Fresh Lettuce</div>
+                        <div class="vendor">Green Valley</div>
+                        <div class="old-price">₱55/kg</div>
+                        <div class="new-price">₱40/kg</div>
+                        <div class="savings">Save 27%</div>
+                    </div>
+                    <div class="price-card falling delay-2">
+                        <div class="product">🥕 Organic Carrots</div>
+                        <div class="vendor">Highland Farms</div>
+                        <div class="old-price">₱65/kg</div>
+                        <div class="new-price">₱50/kg</div>
+                        <div class="savings">Save 23%</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Live Price Drops Section -->
+        <section class="price-drops-section">
+            <h2 class="section-title">Fresh Market Deals Today</h2>
+            <div class="price-drops-grid">
+                <div class="price-drop-card hot-deal">
+                    <div class="deal-badge">FARMER'S PICK</div>
+                    <div class="product-image">
+                        <img src="../img/tomato.jpg" alt="Fresh Tomatoes" class="product-img">
+                    </div>
+                    <h3>Farm Fresh Tomatoes</h3>
+                    <div class="vendor-info">Maria's Organic Farm</div>
+                    <div class="price-info">
+                        <span class="old-price">₱85/kg</span>
+                        <span class="new-price">₱65/kg</span>
+                    </div>
+                    <div class="savings-badge">Save ₱20 (24%)</div>
+                    <div class="stock-info">Fresh Harvest - 25kg available</div>
+                </div>
+                
+                <div class="price-drop-card">
+                    <div class="product-image">
+                        <img src="../img/cabbage.jpg" alt="Fresh Lettuce" class="product-img">
+                    </div>
+                    <h3>Crisp Fresh Lettuce</h3>
+                    <div class="vendor-info">Green Valley Farms</div>
+                    <div class="price-info">
+                        <span class="old-price">₱55/kg</span>
+                        <span class="new-price">₱40/kg</span>
+                    </div>
+                    <div class="savings-badge">Save ₱15 (27%)</div>
+                    <div class="stock-info">Hydroponically Grown - 30+ heads</div>
+                </div>
+                
+                <div class="price-drop-card">
+                    <div class="product-image">
+                        <img src="../img/apple.jpg" alt="Organic Carrots" class="product-img">
+                    </div>
+                    <h3>Organic Carrots</h3>
+                    <div class="vendor-info">Highland Vegetables</div>
+                    <div class="price-info">
+                        <span class="old-price">₱65/kg</span>
+                        <span class="new-price">₱50/kg</span>
+                    </div>
+                    <div class="savings-badge">Save ₱15 (23%)</div>
+                    <div class="stock-info">Mountain Grown - 40kg available</div>
+                </div>
+                
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section">
+            <h2 class="section-title">Why Choose FarmFresh Market Monitor?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <h3>Local Market Alerts</h3>
+                    <p>Get notified about fresh produce prices from Tanza Public Market vendors and local farmers in real-time.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tractor"></i>
+                    </div>
+                    <h3>Farm-to-Market Tracking</h3>
+                    <p>Monitor prices directly from source farms to market stalls. Know when the freshest harvest arrives.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Organic & Fresh Focus</h3>
+                    <p>Specializing in organic and locally-grown produce with quality indicators and freshness ratings.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Community Marketplace</h3>
+                    <p>Connect with local farmers and vendors. Build relationships with your trusted produce suppliers.</p>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- Weather Section -->
+        <section class="weather-section" id="weather">
+            <h2 class="section-title">Weather & Harvest Impact</h2>
+            <div class="weather-cards">
+                <div class="weather-card today">
+                    <div class="weather-day">Today</div>
+                    <div class="weather-icon">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <div class="weather-temp">32°C</div>
+                    <div class="weather-condition">Sunny & Perfect</div>
+                    <div class="price-impact good">
+                        <i class="fas fa-leaf"></i>
+                        <span>Great Harvest</span>
+                    </div>
+                </div>
+                
+                <div class="weather-card">
+                    <div class="weather-day">Tomorrow</div>
+                    <div class="weather-icon">
+                        <i class="fas fa-cloud-rain"></i>
+                    </div>
+                    <div class="weather-temp">26°C</div>
+                    <div class="weather-condition">Light Showers</div>
+                    <div class="price-impact neutral">
+                        <i class="fas fa-seedling"></i>
+                        <span>Good for Crops</span>
+                    </div>
+                </div>
+                
+                <div class="weather-card">
+                    <div class="weather-day">Day After</div>
+                    <div class="weather-icon">
+                        <i class="fas fa-cloud-sun"></i>
+                    </div>
+                    <div class="weather-temp">29°C</div>
+                    <div class="weather-condition">Partly Cloudy</div>
+                    <div class="price-impact good">
+                        <i class="fas fa-tractor"></i>
+                        <span>Farming Weather</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about-section" id="about">
+            <h2 class="section-title">About Tanza Public Market Monitor</h2>
+            <div class="about-content">
+                <p>Connecting our community with fresh, local produce through transparent pricing. We bridge the gap between local farmers and consumers by providing real-time market information from Tanza Public Market and surrounding agricultural areas.</p>
+                
+                <div class="about-stats">
+                    <div class="about-stat">
+                        <div class="stat-icon">
+                            <i class="fas fa-store"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>50+ Market Vendors</h4>
+                            <p>Fresh produce from trusted local suppliers</p>
+                        </div>
+                    </div>
+                    
+                    <div class="about-stat">
+                        <div class="stat-icon">
+                            <i class="fas fa-tractor"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>25+ Partner Farms</h4>
+                            <p>Direct from farms in Cavite and nearby provinces</p>
+                        </div>
+                    </div>
+                    
+                    <div class="about-stat">
+                        <div class="stat-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>100% Fresh & Local</h4>
+                            <p>Supporting sustainable agriculture and local economy</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section" id="contact">
+            <h2 class="section-title">Connect With Our Market Community</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@tanza-market-monitor.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+63 919 123 4567</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Tanza Public Market, Cavite, Philippines</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Market Hours: 5:00 AM - 8:00 PM Daily</span>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <input type="text" placeholder="Your Name" class="form-input">
+                    <input type="email" placeholder="Your Email" class="form-input">
+                    <select class="form-input">
+                        <option>I'm a Customer</option>
+                        <option>I'm a Vendor</option>
+                        <option>I'm a Farmer</option>
+                        <option>Media Inquiry</option>
+                    </select>
+                    <textarea placeholder="Tell us about your farming or market needs..." class="form-textarea"></textarea>
+                    <button class="btn-primary">Join Our Community</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../js/landingtrial.js"></script>
+</body>
+</html>
